@@ -1,108 +1,208 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+### Table of contents:
 
-Welcome USER_NAME,
+[Purpose](#purpose)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+[User Stories](#user-stories) 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+[Design and UX](#design-and-ux) 
+* [Wireframes](#wireframes)
+* [Database model](#database-model)
 
-## Gitpod Reminders
+[Features](#features)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+[Technologies](#technologies)
 
-`python3 -m http.server`
+[Testing ](#testing)
+* [Code Validation](#code-validation)
+* [Browser Compatibility](#browser-compatibility)
+* [Performance Testing](#performance-testing)
+* [Manual Testing](#manual-testing)
+* [Automated Testing](#automated-testing)
+* [User Stories Testing](#user-stories-testing)
 
-A blue button should appear to click: _Make Public_,
+[Debugging and known bugs](#debugging-and-known-bugs)
 
-Another blue button should appear to click: _Open Browser_.
+[Deployment](#deployment)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+[Credits](#credits)
 
-A blue button should appear to click: _Make Public_,
+[Acknowledgements](#acknowledgements)
 
-Another blue button should appear to click: _Open Browser_.
+### Purpose
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+Live link:
+[]()
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+Screenshot:
+![]()
 
-------
+### User Stories
 
-## Release History
+**Theme**
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+A website to assist individuals in coming out as LGBTQ+.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+**Epic**
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+The website allows the user (creator) the ability to create a private page which can securely be sent to individuals (viewer). Only specified viewers can see the page, and the creator controls the content of the page. Content may include: personal photos/videos/text and educational/explanatory resources for viewers who may need them.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+**User stories**
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+* As a creator, I can securely sign into the website so that my information is kept private.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+* As a creator, I can create a private page with a personal photo, video or text so that I can personalise my coming-out.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+* As a creator, I can add resources to my page so that I can educate the viewer if needed.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+* As a creator, I can edit my page so that I can make changes if they are needed.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+* As a creator, I can securely share a page with specified viewers so that I can come out to them without being in the same physical space.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+* As a creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified viewer.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+* As a viewer/creator, I can sign in intuitively so that I can use the website easily.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+* As a viewer, I can view a creator’s page so that I can learn about the creator.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+* As a viewer, I can follow resource links so that I can learn more about the creator’s sexuality/gender identity and find out how to be supportive.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+* As a site owner, I can provide access to educational/explanatory resources that could be useful to creators and viewers so that the user does not have to do their own research if they don’t want to.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+* As a site owner, I can provide a secure and private platform so that creators can come out on their own terms.
 
-------
+### Design and UX
 
-## FAQ about the uptime script
+### Wireframes
 
-**Why have you added this script?**
+### Database model
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
 
-**How will this affect me?**
+### Features
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+Landing page - viewer and creator login links.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+Creator login page - email and password required.
 
-**So….?**
+Viewer login page - email, password and specific creator code required.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+Navigation bar - logo, login/logout, profile and resources.
 
-**Can I opt out?**
+Creator profile - personal page/s with associated code/s. Link to create new page.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+Viewer profile - page/s they have been given permission to view.
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+Resources page - card view of links to external resources.
 
-**Anything more?**
+Create new page - new form with accessible fields including title/author, photo/video/s, any extra text, any link/s, link to resources page, title for link, url for link. All fields are optional. Submit button and once submitted the page will have an edit button, both will have user feedback.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
 
----
+### Technologies
 
-Happy coding!
+Languages used:
+
+Python 3
+
+HTML5
+
+CSS
+
+Javascript
+
+Frameworks, Libraries and Programs Used:
+Django
+Cloudinary
+PostgreSQL
+
+GitHub - for hosting the site
+
+Heroku - for the deployment of the site
+
+Gitpod - for editing the files
+
+### Testing 
+
+### Code Validation
+
+[Python validator](http://pep8online.com/) - 
+
+[Javascript validator](https://jshint.com/) - 
+
+[HTML validator](https://validator.w3.org/) - 
+
+[CSS validator](https://jigsaw.w3.org/css-validator/) - 
+
+### Browser Compatibility
+
+Browser Compatibility checks were run using [BrowserStack](https://www.browserstack.com/) and my computer. The results are:
+
+Firefox - &#9745;
+
+Chrome - &#9745;
+
+Opera - &#9745;
+
+Safari - &#9745;
+
+Microsoft Edge - &#9745;
+
+### Performance Testing
+
+Performance testing was conducted using [Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools). The results are:
+
+![Lighthouse results]()
+
+### Manual Testing
+
+
+
+I conducted manual testing and recorded the results as follows:
+
+![Manual testing](assets/readme-files/images/manual-testing-rhubarb-witch.jpg)
+
+### Automated Testing
+
+### User Stories Testing
+
+### Debugging and known bugs
+
+### Deployment
+
+### Publishing
+
+The project was deployed using Heroku. The process is as follows:
+
+Once you have signed up to Heroku, on the top right of the dashboard there is a button labelled 'New'. This will open a dropdown; please select 'Create new app'. On the next page you can choose your region and a name for the project. Then click 'Create app'.
+
+On the next page there is a menu along the top. Navigate to 'Settings', where you will find the config vars. Scroll down to the section named 'Config vars' and click on the button labelled 'Reveal config vars'.
+
+CONFIG VAR INFO HERE AND CORRESPONDING GITPOD CHANGES NEEDED
+
+If you scroll back to the top of the page you will find the 'Deploy' tab, which has multiple options for deployment. I used Github for this project. When you click on the Github button a bar will come up for you to search for the repo you wish to connect to.
+
+Once you have connected, you have the option to deploy automatically (the app will update every time you push) or manually (update only when you choose). I chose automatic but you can do what suits you.
+
+After the first push/update, your app will be ready to go!
+
+### Forking and Cloning
+ 
+To save a copy of the code and work on it yourself, here are the steps for forking and cloning using Github:
+
+In the repository, click the 'Fork' button, which is on the top right-hand side, next to 'Star'.
+
+Github will automatically create a new repo, which is forked from the original. If you would like to clone it you have two options:
+
+Within the repository, click the 'Code' dropdown, which is located next to 'Add File' on the right (underneath the Settings tab); there is an option to download all files and save a copy locally.
+
+In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop and work from there.
+
+### Credits
+
+
+
+### Acknowledgements
+
+
