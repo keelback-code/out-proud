@@ -13,8 +13,8 @@ class Page(models.Model):  # can I call this page?
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fillthisin")
     text_content = models.TextField()
-    photo = CloudinaryField()
-    video = CloudinaryField()  # large, do I need both of these?
+    photo_content = CloudinaryField()
+    video_content = CloudinaryField()  # large, do I need both of these?
     link = models.TextField()
     date = models.DateTimeField(auto_now_add=True)  # used for displaying most recent first in creator profile
     status = models.IntegerField(choices=STATUS, default=0)
