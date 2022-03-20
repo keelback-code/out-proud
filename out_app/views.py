@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.views import generic
+from .models import Page
 
-# Create your views here.
+
+# view for creator's profile?
+class PageList(generic.ListView):
+    model = Page
+    queryset = Page.objects.order_by('-date')  # show draft and pub to creator
+    template_name = 'index.html'
+    paginate_by = 4
