@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
+    path('creator_profile', include('out_app.urls'), name='out_app.urls')  # needs to be changed to User.urls maybe?
 ]
