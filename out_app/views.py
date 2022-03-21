@@ -7,5 +7,5 @@ from .models import Page
 class PageList(generic.ListView):
     model = Page
     queryset = Page.objects.order_by('-date')  # show draft and pub to creator
-    template_name = 'index.html'
+    template_name = 'creator_profile.html'
     paginate_by = 3
