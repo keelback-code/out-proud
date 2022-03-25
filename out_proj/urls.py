@@ -23,5 +23,6 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     # path('creator_page/', include('blog.urls'), name='blog.urls')  # needs to be changed to User.urls maybe?
     # path('out_app/', include('out_app.urls')),
-    path('creator_profile/', CreatorView.as_view(), name='creator_profile'),  
+    path('creator_profile/', CreatorView.as_view(), name='creator_profile'),
+    path('creator_login/', include('allauth.urls')),
 ]
