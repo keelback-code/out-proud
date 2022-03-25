@@ -9,7 +9,7 @@ class Page(models.Model):  # can I call this page?
     """
     Class for modelling posts made by creators.
     """
-    page_code = models.SlugField(max_length=8, unique=True, primary_key=True)
+    slug = models.SlugField(max_length=8, unique=True, primary_key=True)
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fillthisin")
     text_content = models.TextField()
@@ -25,4 +25,3 @@ class Page(models.Model):  # can I call this page?
     def __str__(self):
         return self.title
         # do I need the title returned to me? should I be returning the page code as something instead?
-    
