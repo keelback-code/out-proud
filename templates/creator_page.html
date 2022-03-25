@@ -2,10 +2,13 @@
 
 {% block content %}
 
-<div>
+<h2>Creator blog page.</h2>
 
-        <h2>Creator blog page.</h2>
-    
+<div class="container-fluid">
+    <h2>{{ page.title }}</h2>
+    <div>
+        {{ page.text_content }}
+    </div>
 </div>
 
 {%endblock%}
