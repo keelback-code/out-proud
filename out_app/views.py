@@ -14,10 +14,14 @@ class CreatorView(generic.ListView):
 class CreatorPage(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Page.objects.filter(status=1)  # this only shows pub posts, appropriate? test and see
-        post = get_object_or_404(queryset, slug=slug)
+        queryset = Page.objects.filter(status=0)  # this only shows unpub posts, change
+        # queryset = Page.objects.order_by('-date')
+        page_view = get_object_or_404(queryset, slug=slug)
 
         return render(
             request,
             "creator_page.html",
+            {
+                "page_view": page_view
+            },
         )

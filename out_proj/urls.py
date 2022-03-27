@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from out_app.views import CreatorView
+# from out_app.views import CreatorView, CreatorPage
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('out_app.urls'), name='out_app.urls'),
     path('summernote/', include('django_summernote.urls')),
     # path('creator_page/', include('blog.urls'), name='blog.urls')  # needs to be changed to User.urls maybe?
-    # path('out_app/', include('out_app.urls')),
-    path('creator_profile/', CreatorView.as_view(), name='creator_profile'),
-    path('creator_login/', include('allauth.urls')),
+    # path('creator_profile/', CreatorView.as_view(), name='creator_profile'),
+    # path('<slug:slug>/', CreatorPage.as_view(), name='creator_page'),
+    path('accounts/', include('allauth.urls')),
 ]
