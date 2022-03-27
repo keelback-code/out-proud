@@ -25,5 +25,5 @@ urlpatterns = [
     # path('creator_page/', include('blog.urls'), name='blog.urls')  # needs to be changed to User.urls maybe?
     # path('creator_profile/', CreatorView.as_view(), name='creator_profile'),
     # path('<slug:slug>/', CreatorPage.as_view(), name='creator_page'),
-    path('accounts/', include('allauth.urls')),
+    path('account/', include('allauth.urls')),
 ]
