@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'django_summernote',
+    'crispy_forms',
     'out_app',
 ]
 
@@ -56,6 +57,8 @@ SITE_ID = 1
 
 LOGIN_REDIRECT = '/' # OR SOMEWHERE ELSE?
 LOGOUT_REDIRECT = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'  # video uses 4 but mentions 5, so I have chosen 3 since this is 3.2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -26,3 +26,16 @@ class Page(models.Model):  # can I call this page?
     def __str__(self):
         return self.title
         # do I need the title returned to me? should I be returning the page code as something instead?
+
+
+class Viewer(models.Model):
+    """
+    Class for viewer data.
+    """
+    viewer_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="page_creator", default='')
+    viewer_name = models.TextField(max_length=100, blank=True)
+    viewer_email = models.EmailField(max_length=100, blank=False)
+
+
+    def __str__(self):
+        return self.viewer_email
