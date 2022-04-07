@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Page
+from .forms import ViewerForm
 
 
 # view for creator's profile?
@@ -22,6 +23,23 @@ class CreatorPage(View):
             request,
             "creator_page.html",
             {
-                "page_view": page_view
+                "page_view": page_view,
+                "viewer_form": ViewerForm()
             },
         )
+
+
+# WIP class for form on own page for allowing viewers
+# class AllowViewer(View):
+
+#     def get(self, request, *args, **kwargs):
+#         queryset = ViewerForm.objects()
+#         viewer_form = get_object_or_404(queryset)
+
+#         return render(
+#                 request,
+#                 "allow_viewer.html",
+#                 {
+#                     "viewer_form": ViewerForm()
+#                 },
+#             )
