@@ -4,26 +4,39 @@
 
 {% load crispy_forms_tags %}
 
-<h2>Creator blog page.</h2>
+
 
 <div class="container-fluid col-md-4">
-    <!-- <h2>{{ page.title }}</h2>
+    <h2>Creator blog page.</h2>
     <div>
+        <h2>{{ page.title }}</h2>
         {{ page.text_content }}
-    </div> -->
-    <div>
-        <h4>Test allow viewer form here.</h4>
-        
 
-        <form method="post" style="margin: 1em;">
+        {% if user.is_authenticated %}
+
+        <form method="post">
+            {{ page_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-signup btn-md">Submit</button>
+        </form>
+
+        {% endif %}
+
+        <h4>Test allow viewer form here.</h4>
+
+        {% if user.is_authenticated %}
+
+        <form method="post">
             {{ viewer_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-signup btn-md">Submit</button>
         </form>
 
-        
+        {% endif %}
 
     </div>
 </div>
+
+
 
 {%endblock%}

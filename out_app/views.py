@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Page
-from .forms import ViewerForm
+from .forms import CreatorPageForm, ViewerForm
 
 
 # view for creator's profile?
@@ -16,7 +16,6 @@ class CreatorPage(View):
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Page.objects.filter(status=0)  # this only shows unpub posts, change
-        # queryset = Page.objects.order_by('-date')
         page_view = get_object_or_404(queryset, slug=slug)
 
         return render(
@@ -24,10 +23,24 @@ class CreatorPage(View):
             "creator_page.html",
             {
                 "page_view": page_view,
-                "viewer_form": ViewerForm()
+                "page_form": CreatorPageForm()
             },
         )
+    # the below may be solely for posting the allow viewer form, may need to move this
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Page.objects.filter(status=0)  # this only shows unpub posts, change
+        page_view = get_object_or_404(queryset, slug=slug)
 
+        page_form = CreatorPageForm(data=request.POST)
+
+        return render(
+            request,
+            "creator_page.html",
+            {
+                "page_view": page_view,
+                "page_form": CreatorPageForm()
+            },
+        )
 
 # WIP class for form on own page for allowing viewers
 # class AllowViewer(View):
@@ -40,6 +53,9 @@ class CreatorPage(View):
 #                 request,
 #                 "allow_viewer.html",
 #                 {
+                    # viewer form = viewer form here
 #                     "viewer_form": ViewerForm()
 #                 },
 #             )
+
+

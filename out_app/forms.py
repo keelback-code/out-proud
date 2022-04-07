@@ -1,6 +1,11 @@
-from .models import Viewer
+from .models import Page, Viewer
 from django import forms
 
+
+class CreatorPageForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = ('title', 'text_content', 'photo_content', 'video_content', 'link', 'status',)
 
 class ViewerForm(forms.ModelForm):
     class Meta:
