@@ -33,8 +33,8 @@ class Viewer(models.Model):
     Class for viewer data.
     """
     viewer_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="page_creator", default='')
-    viewer_name = models.TextField(max_length=100, blank=True)
-    viewer_email = models.EmailField(max_length=100, blank=False)
+    viewer_name = models.CharField(max_length=100)
+    viewer_email = models.EmailField(max_length=100)
 
 
     def __str__(self):

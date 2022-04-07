@@ -2,13 +2,28 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 <h2>Creator blog page.</h2>
 
-<div class="container-fluid">
+<div class="container-fluid col-md-4">
     <!-- <h2>{{ page.title }}</h2>
     <div>
         {{ page.text_content }}
     </div> -->
+    <div>
+        <h4>Test allow viewer form here.</h4>
+        
+
+        <form method="post" style="margin: 1em;">
+            {{ viewer_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-signup btn-md">Submit</button>
+        </form>
+
+        
+
+    </div>
 </div>
 
 {%endblock%}
