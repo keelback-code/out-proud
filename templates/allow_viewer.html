@@ -2,13 +2,22 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 <h2>Form to allow viewer.</h2>
 
 <div class="container-fluid">
-    <!-- <h2>{{ page.title }}</h2>
-    <div>
-        {{ page.text_content }}
-    </div> -->
+    <h4>Test allow viewer form here.</h4>
+
+    {% if user.is_authenticated %}
+
+    <form method="post">
+        {{ viewer_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-md">Submit</button>
+    </form>
+
+    {% endif %}
 </div>
 
 {%endblock%}
