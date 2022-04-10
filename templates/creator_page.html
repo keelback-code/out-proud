@@ -12,15 +12,16 @@
         <h2>{{ page.title }}</h2>
         {{ page.text_content }}
 
-        {% if user.is_authenticated %}
+        <!-- Add if user is auth code in here later, and end if after the form -->
 
         <form method="post">
+            <h4>test blog form</h4>
             {{ page_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-signup btn-md">Submit</button>
         </form>
 
-        {% endif %}
+        
 
 
 

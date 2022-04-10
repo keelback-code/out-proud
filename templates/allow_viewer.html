@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <h4>Test allow viewer form here.</h4>
 
-    {% if user.is_authenticated %}
+
 
     <form method="post">
         {{ viewer_form | crispy }}
@@ -17,7 +17,15 @@
         <button type="submit" class="btn btn-signup btn-md">Submit</button>
     </form>
 
-    {% endif %}
+    <script>
+        emailjs.send("service_0muuuls", "template_xx57dpj", {
+            from_name: "from placeholder",
+            to_name: "to placeholder",
+            message: "message placeholder",
+        });
+    </script>
+
+
 </div>
 
 {%endblock%}
