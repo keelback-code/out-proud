@@ -11,3 +11,8 @@ body {
 h1 {
     font-family: 'Pacifico', monospace, sans-serif;
 }
+
+a {
+    text-decoration: none;
+    color:rgb(82, 6, 153);
+}
