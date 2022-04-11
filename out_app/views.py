@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Page, Viewer
 from .forms import CreatorPageForm, ViewerForm
 
@@ -9,7 +9,7 @@ from .forms import CreatorPageForm, ViewerForm
 class CreatorView(generic.ListView):
     model = Page
     queryset = Page.objects.order_by('-date')  # show draft and pub to creator
-    template_name = 'creator_profile.html'
+    template_name = "creator_profile.html"
     paginate_by = 3
 
 # view for creator's page
@@ -43,8 +43,8 @@ class CreatorPage(View):
             },
         )
 
-# WIP class for form on own page for allowing viewers
-class AllowViewer(View):
+# WIP class for form on own page for allowing viewers, maybe try diff variables for class
+class AllowViewer(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         viewer_obj = get_object_or_404(Viewer)
@@ -71,3 +71,10 @@ class AllowViewer(View):
                     "viewer_form": ViewerForm()
                 },
             )
+
+# class Resources(generic.ListView):
+
+#     # template_name = "creator_profile.html"
+
+#     def resources(request):
+#         return render(request, "resources.html")
