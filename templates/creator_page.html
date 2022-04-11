@@ -16,11 +16,14 @@
 
         <form method="post">
             <h4>test blog form</h4>
+            <div>
+                <a href="{% url 'resources' %}">Suggested links</a>
+            </div>
             {{ page_form | crispy }}
             {% csrf_token %}
             <button type="submit" class="btn btn-signup btn-md">Submit</button>
         </form>
-
+        
         
 
 

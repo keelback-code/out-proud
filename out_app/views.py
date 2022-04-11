@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
+from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Page, Viewer
 from .forms import CreatorPageForm, ViewerForm
@@ -72,9 +73,10 @@ class AllowViewer(generic.ListView):
                 },
             )
 
-# class Resources(generic.ListView):
+class Resources(TemplateView):
 
-#     # template_name = "creator_profile.html"
+    template_name = "resources.html"
 
-#     def resources(request):
-#         return render(request, "resources.html")
+    # def resources(request):
+    #     return render(request, "resources.html")
+    
