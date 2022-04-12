@@ -8,11 +8,25 @@ body {
     font-family: 'Fredoka', monospace, sans-serif;
 }
 
-h1, .navbar-brand {
+h1, .resources-heading {
     font-family: 'Pacifico', monospace, sans-serif;
 }
 
 a {
     text-decoration: none;
     color:rgb(82, 6, 153);
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', monospace, sans-serif;
+}
+
+.navbar {
+    color: black;
+    font-size: 1.5em;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
 }
