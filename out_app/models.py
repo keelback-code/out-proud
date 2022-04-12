@@ -17,6 +17,7 @@ class Page(models.Model):
     photo_content = CloudinaryField(blank=True)
     video_content = CloudinaryField(blank=True)  # large, do I need both of these?
     link = models.TextField(blank=True)
+    link_title = models.CharField(max_length=250, blank=True)
     date = models.DateTimeField(auto_now_add=True)  # used for displaying most recent first in creator profile
     status = models.IntegerField(choices=STATUS, default=0)
 

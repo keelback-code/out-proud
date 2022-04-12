@@ -8,7 +8,7 @@ body {
     font-family: 'Fredoka', monospace, sans-serif;
 }
 
-h1 {
+h1, .navbar-brand {
     font-family: 'Pacifico', monospace, sans-serif;
 }
 
