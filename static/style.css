@@ -1,14 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400&family=Pacifico&display=swap');
 
-body {
-    background-color: beige;
-}
-
 * {
     font-family: 'Fredoka', monospace, sans-serif;
 }
 
-h1, .resources-heading {
+body {
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sticky footer from CSS Tricks https://css-tricks.com/couple-takes-sticky-footer/ */
+
+html, body {
+    height: 100%;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+/* End sticky footer */
+
+h1, .heading {
     font-family: 'Pacifico', monospace, sans-serif;
 }
 
@@ -19,6 +37,7 @@ a {
 
 .navbar-brand {
     font-family: 'Pacifico', monospace, sans-serif;
+    font-size: 3em;
 }
 
 .navbar {
@@ -29,4 +48,8 @@ a {
 .nav-link {
     text-decoration: none;
     color: black;
+}
+
+.nav-link:hover, a:hover {
+    color:rgb(82, 6, 153)
 }

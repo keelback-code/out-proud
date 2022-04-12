@@ -25,17 +25,22 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar navbar-brand" href="{% url 'landing_page' %}">Out.</a>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="nav">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar navbar-brand" href="{% url 'landing_page' %}" aria-label="Landing page.">Out.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                    <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_login' %}">Login</a>
@@ -48,8 +53,10 @@
                     <a class="nav-link" href="{% url 'resources' %}">Resources</a>
                 </li>
             </ul>
+
         </div>
     </nav>
+
 
     <!-- <div class="col-md-6 m-4">
         <h1>Out.</h1>
@@ -78,7 +85,7 @@
         </div>
     </div> -->
 
-    <main>
+    <main class="container" role="main">
         {% block content %}
 
         {% endblock content %}
@@ -86,6 +93,9 @@
 
     <!--bootstrap footer here-->
     <footer>
+        <div class="container m-4">
+            footer
+        </div>
 
     </footer>
 

@@ -14,7 +14,7 @@ class Page(models.Model):
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fillthisin")
     text_content = models.TextField()
-    photo_content = CloudinaryField(blank=True)
+    photo_content = CloudinaryField(blank=True, default='placeholder')
     video_content = CloudinaryField(blank=True)  # large, do I need both of these?
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)

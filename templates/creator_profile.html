@@ -2,54 +2,47 @@
 
 {% block content %}
 
-<h2>Creator profile</h2>
 
-<div class="container-fluid">
+
+<div class="container-fluid col-md-4">
+    <h2 class="heading">Creator profile</h2>
     <div class="row">
 
-        <div class="col-6 md-4">
-            <div class="row">
-                {% for page in page_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            {% if "placeholder" in page.card_image.url %}
-                            <img class="card-img-top" src="../media/images/placeholder-image.png"
-                                alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
-                            {% else %}
-                            <img class="card-img-top" src="{{ page.card_image.url }}"
-                                alt="User provided private image.">
-                            {% endif %}
-                            <div>
-                                <a href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
-                            </div>
-
-                        </div>
-                    </div>
-                        {% if forloop.counter|divisibleby:3 %}
-                        </div>
-                        <div class="row">
-                            {% endif %}
-                            {% endfor %}
-
-                        </div>
-                    </div>
-                </div>
-                {% if is_paginated %}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-                        {% endif %}
-                        {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
-                        {% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
+        {% for page in page_list %}
+        <div class="card" style="width: 20rem">
+            {% if 'placeholder' in page.photo_content.url %}
+            <img class="card-img-top" src="../media/images/placeholder-image.png"
+                alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
+            {% else %}
+            <img class="card-img-top" src="{{ page.photo_content.url }}" alt="User provided private image.">
+            {% endif %}
+            <div class="card-body">
+                <a href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
             </div>
+            {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+
+        {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
 
 
 
-            {%endblock%}
+    {%endblock%}
