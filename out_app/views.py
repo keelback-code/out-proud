@@ -79,4 +79,7 @@ class Resources(TemplateView):
 
     # def resources(request):
     #     return render(request, "resources.html")
-    
+
+class LandingPage(TemplateView):
+
+    template_name = "index.html"

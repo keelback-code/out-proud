@@ -25,10 +25,14 @@
 
 <body>
 
-    <!--bootstrap nav bar here-->
-    <div class="col-md-6 m-4">
+    <nav class="navbar navbar-expand-lg">
+        <h1><a class="navbar-brand" href="{% url 'landing_page' %}">Out.</a></h1>
+
+    </nav>
+
+    <!-- <div class="col-md-6 m-4">
         <h1>Out.</h1>
-    </div>
+    </div> -->
 
     <!-- <div class="container-fluid">
         <div class="row">
@@ -55,9 +59,7 @@
 
     <main>
         {% block content %}
-        <!--
-            link to landing page here
-        -->
+
         {% endblock content %}
     </main>
 

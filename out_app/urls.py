@@ -7,4 +7,5 @@ urlpatterns = [
     path('creator_page/<slug:slug>/', views.CreatorPage.as_view(), name='creator_page'),
     path('allow_viewer/', views.AllowViewer.as_view(), name='allow_viewer'),
     path('resources/', views.Resources.as_view(), name='resources'),
+    path('', views.LandingPage.as_view(), name='landing_page'),
 ]
