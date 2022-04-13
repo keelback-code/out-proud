@@ -19,7 +19,7 @@ class CreatorView(generic.ListView):
 class CreatorPage(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Page.objects.all  # this only shows unpub posts, change
+        queryset = Page.objects.all()  # this only shows unpub posts, change
         page_view = get_object_or_404(queryset, slug=slug)
 
         return render(

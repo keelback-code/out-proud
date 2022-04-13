@@ -10,7 +10,7 @@ class CreatorPageForm(forms.ModelForm):
 class ViewerForm(forms.ModelForm):
     class Meta:
         model = Viewer
-        fields = ('viewer_name', 'viewer_email',)
+        fields = ('viewer_name', 'viewer_email', 'viewer_creator',)
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user

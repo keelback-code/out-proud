@@ -12,7 +12,7 @@ class Page(models.Model):
     """
     slug = models.SlugField(max_length=8, unique=True, primary_key=True)
     title = models.CharField(max_length=250)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="fillthisin")
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator")
     text_content = models.TextField()
     photo_content = CloudinaryField(blank=True, default='placeholder')
     video_content = CloudinaryField(blank=True)  # large, do I need both of these?
@@ -33,10 +33,11 @@ class Viewer(models.Model):
     """
     Class for viewer data.
     """
-    viewer_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="page_creator", default='')
+    viewer_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creator", default='')
+    shown_name = models.CharField("My name (as it will appear to viewer)", max_length=100, default=viewer_creator)
     viewer_name = models.CharField(max_length=100)
     viewer_email = models.EmailField(max_length=100)
 
 
     def __str__(self):
-        return self.viewer_email
+        return self.viewer_name
