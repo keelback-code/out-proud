@@ -4,12 +4,9 @@
 
 {% load crispy_forms_tags %}
 
-<h2>Form to allow viewer.</h2>
 
-<div class="container-fluid">
-    <h4>Test allow viewer form here.</h4>
-
-
+<div class="container-fluid col-md-4">
+    <h2 class="heading">Form to allow viewer.</h2>
 
     <form method="post">
         {{ viewer_form | crispy }}
@@ -21,27 +18,16 @@
         emailjs.send("service_0muuuls", "template_xx57dpj", {
                 message: "placeholder message",
                 reply_to: "placeholder reply",
-                shown_name: {
-                    {
-                        shown_name
-                    }
-                },
-                viewer_name: {
-                    {
-                        viewer_name
-                    }
-                },
-                viewer_email: {
-                    {
-                        viewer_email
-                    }
-                },
+                shown_name: ViewerForm.shown_name.value,
+                viewer_name: ViewerForm.viewer_name.value,
+                viewer_email: ViewerForm.viewer_email.value
             })
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
             }, function (error) {
                 console.log('FAILED...', error);
             });
+        
     </script>
 
     <!-- <script>
