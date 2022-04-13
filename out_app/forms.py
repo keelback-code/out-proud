@@ -11,3 +11,7 @@ class ViewerForm(forms.ModelForm):
     class Meta:
         model = Viewer
         fields = ('viewer_name', 'viewer_email',)
+
+        def form_valid(self, form):
+            form.instance.created_by = self.request.user
+            return super().form_valid(form)

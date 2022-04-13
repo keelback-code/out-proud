@@ -17,7 +17,7 @@
             <img class="card-img-top" src="{{ page.photo_content.url }}" alt="User provided private image.">
             {% endif %}
             <div class="card-body">
-                <a href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
+                <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
             </div>
             {% if forloop.counter|divisibleby:3 %}
         </div>

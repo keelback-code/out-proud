@@ -64,6 +64,8 @@ The website allows the user (creator) the ability to create a private page which
 
 * As a viewer/creator, I can sign in intuitively so that I can use the website easily.
 
+* As a viewer/creator, I can navigate the website easily and intuitively.
+
 * As a viewer, I can view a creator’s page so that I can learn about the creator.
 
 * As a viewer, I can follow resource links so that I can learn more about the creator’s sexuality/gender identity and find out how to be supportive.

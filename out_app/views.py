@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
 from .models import Page, Viewer
 from .forms import CreatorPageForm, ViewerForm
 
@@ -17,7 +19,7 @@ class CreatorView(generic.ListView):
 class CreatorPage(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Page.objects.filter(status=0)  # this only shows unpub posts, change
+        queryset = Page.objects.all  # this only shows unpub posts, change
         page_view = get_object_or_404(queryset, slug=slug)
 
         return render(
@@ -45,33 +47,57 @@ class CreatorPage(View):
         )
 
 # WIP class for form on own page for allowing viewers, maybe try diff variables for class
-class AllowViewer(generic.ListView):
+class AllowViewer(View):
+
+    form_class = ViewerForm
+    initial = { "viewer_form": ViewerForm }
+    template_name = "allow_viewer.html"
 
     def get(self, request, *args, **kwargs):
-        viewer_obj = get_object_or_404(Viewer)
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, { "viewer_form": ViewerForm })
 
-        return render(
-                request,
-                "allow_viewer.html",
-                {
-                    "viewer_obj": viewer_obj,
-                    "viewer_form": ViewerForm()
-                },
-            )
-    
     def post(self, request, *args, **kwargs):
-        viewer_obj = get_object_or_404(Viewer)
-
-        viewer_form = ViewerForm(data=request.POST)
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
 
         return render(
-                request,
-                "allow_viewer.html",
-                {
-                    "viewer_obj": viewer_obj,
-                    "viewer_form": ViewerForm()
-                },
-            )
+            request, 
+            self.template_name, 
+            { 
+                "viewer_form": ViewerForm 
+            }
+        )
+
+
+
+    # def get(self, request, *args, **kwargs):
+    #     viewer_obj = get_object_or_404(Viewer)
+
+    #     return render(
+    #             request,
+    #             "allow_viewer.html",
+    #             {
+    #                 "viewer_obj": viewer_obj,
+    #                 "viewer_form": ViewerForm()
+    #             },
+    #         )
+    
+    # def post(self, request, *args, **kwargs):
+    #     viewer_obj = get_object_or_404(Viewer)
+
+    #     viewer_form = ViewerForm(data=request.POST)
+
+    #     return render(
+    #             request,
+    #             "allow_viewer.html",
+    #             {
+    #                 "viewer_obj": viewer_obj,
+    #                 "viewer_form": ViewerForm()
+    #             },
+    #         )
 
 class Resources(TemplateView):
 

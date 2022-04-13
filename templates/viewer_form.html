@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<h2>viewer_form test page</h2>
+
+<div class="container-fluid">
+    <h4>Test allow viewer form here.</h4>
+
+
+
+    <form method="post">
+        {{ viewer_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-md">Submit</button>
+    </form>
+
+    <script>
+        emailjs.send("service_0muuuls", "template_xx57dpj", {
+            from_name: "from placeholder",
+            to_name: "to placeholder",
+            message: "message placeholder",
+        });
+    </script>
+
+    <!-- <script>
+        emailjs.send("service_0muuuls", "template_xx57dpj", {
+                "from_name": contactForm.name.value,
+                "from_email": contactForm.emailaddress.value,
+                "project_request": contactForm.projectsummary.value
+            })
+            .then(
+                function (response) {
+                    console.log("SUCCESS", response);
+                },
+                function (error) {
+                    console.log("FAILED", error);
+                }
+            );
+        return false;
+    </script> -->
+
+
+</div>
+
+{%endblock%}
