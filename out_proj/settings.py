@@ -72,7 +72,7 @@ MESSAGE_TAGS = {
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'  # video uses 4 but mentions 5, so I have chosen 3 since this is 3.2
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

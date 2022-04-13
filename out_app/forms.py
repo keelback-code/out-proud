@@ -2,6 +2,7 @@ from .models import Page, Viewer
 from django import forms
 
 
+
 class CreatorPageForm(forms.ModelForm):
     class Meta:
         model = Page
@@ -10,7 +11,7 @@ class CreatorPageForm(forms.ModelForm):
 class ViewerForm(forms.ModelForm):
     class Meta:
         model = Viewer
-        fields = ('viewer_name', 'viewer_email', 'viewer_creator',)
+        fields = ('viewer_name', 'viewer_email', 'shown_name',)
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user

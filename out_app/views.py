@@ -8,6 +8,7 @@ from .models import Page, Viewer
 from .forms import CreatorPageForm, ViewerForm
 
 
+
 # view for creator's profile
 class CreatorView(generic.ListView):
     model = Page
@@ -15,7 +16,7 @@ class CreatorView(generic.ListView):
     template_name = "creator_profile.html"
     paginate_by = 3
 
-# view for creator's page
+# view for creator's page/view of form
 class CreatorPage(View):
 
     def get(self, request, slug, *args, **kwargs):
@@ -32,17 +33,27 @@ class CreatorPage(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        queryset = Page.objects.filter(status=0)  # this only shows unpub posts, change
+        queryset = Page.objects.all()  # this only shows unpub posts, change
         page_view = get_object_or_404(queryset, slug=slug)
 
         page_form = CreatorPageForm(data=request.POST)
+
+        if page_form.is_valid():
+            # page_form.instance.email = request.user.email
+            # page_form.instance.name = request.user.username
+            page = page_form.save(commit=False)
+            # page.post = post
+            page.save()
+        else:
+            page_form = CreatorPageForm()
+        
 
         return render(
             request,
             "creator_page.html",
             {
                 "page_view": page_view,
-                "page_form": CreatorPageForm()
+                "page_form": page_form
             },
         )
 
@@ -99,6 +110,47 @@ class AllowViewer(View):
     #             },
     #         )
 
+class CreatorPage(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Page.objects.all()  # this only shows unpub posts, change
+        page_view = get_object_or_404(queryset, slug=slug)
+
+        return render(
+            request,
+            "creator_page.html",
+            {
+                "page_view": page_view,
+                "page_form": CreatorPageForm()
+            },
+        )
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Page.objects.all()  # this only shows unpub posts, change
+        page_view = get_object_or_404(queryset, slug=slug)
+
+        page_form = CreatorPageForm(data=request.POST)
+
+        if page_form.is_valid():
+            # page_form.instance.email = request.user.email
+            # page_form.instance.name = request.user.username
+            page = page_form.save(commit=False)
+            # page.post = post
+            page.save()
+        else:
+            page_form = CreatorPageForm()
+        
+
+        return render(
+            request,
+            "creator_page.html",
+            {
+                "page_view": page_view,
+                "page_form": page_form
+            },
+        )
+
+        
 class Resources(TemplateView):
 
     template_name = "resources.html"
@@ -109,3 +161,8 @@ class Resources(TemplateView):
 class LandingPage(TemplateView):
 
     template_name = "index.html"
+
+
+class WritePage(TemplateView):
+
+    template_name = "write_page.html"

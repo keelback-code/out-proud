@@ -8,6 +8,10 @@
     <h2 class="heading">Creator profile</h2>
     <div class="row">
 
+        <div>
+            <a href="{% url 'write_page' %}">Link to write page</a>
+        </div>
+
         {% for page in page_list %}
         <div class="card" style="width: 20rem">
             {% if 'placeholder' in page.photo_content.url %}
@@ -16,9 +20,11 @@
             {% else %}
             <img class="card-img-top" src="{{ page.photo_content.url }}" alt="User provided private image.">
             {% endif %}
+
             <div class="card-body">
                 <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
             </div>
+
             {% if forloop.counter|divisibleby:3 %}
         </div>
         <div class="row">

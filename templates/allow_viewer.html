@@ -19,10 +19,29 @@
 
     <script>
         emailjs.send("service_0muuuls", "template_xx57dpj", {
-            from_name: "from placeholder",
-            to_name: "to placeholder",
-            message: "message placeholder",
-        });
+                message: "placeholder message",
+                reply_to: "placeholder reply",
+                shown_name: {
+                    {
+                        shown_name
+                    }
+                },
+                viewer_name: {
+                    {
+                        viewer_name
+                    }
+                },
+                viewer_email: {
+                    {
+                        viewer_email
+                    }
+                },
+            })
+            .then(function (response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function (error) {
+                console.log('FAILED...', error);
+            });
     </script>
 
     <!-- <script>

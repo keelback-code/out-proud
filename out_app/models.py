@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
+
 STATUS = ((0, "Draft"), (1, "Ready to Send"))
 
 
@@ -15,7 +16,7 @@ class Page(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator")
     text_content = models.TextField()
     photo_content = CloudinaryField(blank=True, default='placeholder')
-    video_content = CloudinaryField(blank=True)  # large, do I need both of these?
+    video_content = CloudinaryField(blank=True)
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)
     date = models.DateTimeField(auto_now_add=True)  # used for displaying most recent first in creator profile
