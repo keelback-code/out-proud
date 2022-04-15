@@ -15,14 +15,14 @@
         {% for page in page_list %}
         <div class="card" style="width: 20rem">
             {% if 'placeholder' in page.photo_content.url %}
-            <img class="card-img-top" src="../media/images/placeholder-image.png"
+            <img class="card-img-top" src="/media/images/placeholder-image.png"
                 alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
             {% else %}
             <img class="card-img-top" src="{{ page.photo_content.url }}" alt="User provided private image.">
             {% endif %}
 
             <div class="card-body">
-                <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
+                <a href="#">{{ page.title }} {{ page.status }}</a>
             </div>
 
             {% if forloop.counter|divisibleby:3 %}

@@ -5,81 +5,75 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from .models import Page, Viewer
-from .forms import CreatorPageForm, ViewerForm
+from .forms import WritePageForm, AllowViewerForm
+from .admin import PageAdmin, SummernotePageAdmin
 
 
 
 # view for creator's profile
 class CreatorView(generic.ListView):
     model = Page
-    queryset = Page.objects.order_by('-date')
     template_name = "creator_profile.html"
     paginate_by = 3
 
 # view for creator's page/view of form
-# class CreatorPage(View):
+# class WritePage(View):
 
-#     def get(self, request, slug, *args, **kwargs):
+#     def get(self, request, *args, **kwargs):
 #         queryset = Page.objects.all()  # this only shows unpub posts, change
-#         page_view = get_object_or_404(queryset, slug=slug)
+#         page_view = get_object_or_404(queryset)
 
-#         return render(
-#             request,
-#             "creator_page.html",
-#             {
-#                 "page_view": page_view,
-#                 "page_form": CreatorPageForm()
-#             },
-#         )
-
-#     def post(self, request, slug, *args, **kwargs):
+#     def post(self, request, *args, **kwargs):
 #         queryset = Page.objects.all()  # this only shows unpub posts, change
-#         page_view = get_object_or_404(queryset, slug=slug)
+#         page_view = get_object_or_404(queryset)
 
 #         page_form = CreatorPageForm(data=request.POST)
 
 #         if page_form.is_valid():
 #             # page_form.instance.email = request.user.email
 #             # page_form.instance.name = request.user.username
-#             page = page_form.save(commit=False)
+#             # page = page_form.save(commit=False)
+#             page = page_form.save()
 #             # page.post = post
-#             page.save()
+#             # page.save()
 #         else:
 #             page_form = CreatorPageForm()
         
 
 #         return render(
 #             request,
-#             "creator_page.html",
+#             "write_page.html",
 #             {
 #                 "page_view": page_view,
 #                 "page_form": page_form
 #             },
+#             HttpResponseRedirect('/creator_profile/')
 #         )
 
 
 class AllowViewer(View):
 
-    form_class = ViewerForm
-    initial = { "viewer_form": ViewerForm }
+    form_class = AllowViewerForm
+    initial = { "viewer_form": AllowViewerForm }
     template_name = "allow_viewer.html"
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, { "viewer_form": ViewerForm })
+        return render(request, self.template_name, { "viewer_form": AllowViewerForm })
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        if form.is_valid():
-            # <process form cleaned data>
-            return HttpResponseRedirect('/success/')
+        # if form.is_valid():
+        #     # <process form cleaned data>
+            
 
         return render(
             request, 
             self.template_name, 
             {
-                "viewer_form": ViewerForm 
-            }
+                "viewer_form": AllowViewerForm 
+            },
+            # return HttpResponseRedirect('/creator_profile/')
         )
 
 
@@ -112,26 +106,30 @@ class AllowViewer(View):
 
 class WritePage(View):
 
-    form_class = CreatorPageForm
-    initial = { "page_form": CreatorPageForm }
+    form_class = WritePageForm
+    initial = { "page_form": WritePageForm }
     template_name = "write_page.html"
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, { "page_form": CreatorPageForm })
+        return render(request, self.template_name, { "page_form": WritePageForm })
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            # <process form cleaned data>
-            return HttpResponseRedirect('/success/')
+            page = form.save()  # commit = False in these brackets?
+            page.save()
+        else:
+            page_form = WritePageForm
 
         return render(
             request, 
             self.template_name, 
             {
-                "page_form": CreatorPageForm 
-            }
+                "form": form,
+                "page_form": WritePageForm
+            },
+            HttpResponseRedirect('/creator_profile/')
         )
 
 

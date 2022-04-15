@@ -11,19 +11,15 @@ class Page(models.Model):
     """
     Class for modelling posts made by creators.
     """
-    slug = models.SlugField(max_length=8, unique=True, primary_key=True)
+    slug = models.SlugField(max_length=12, unique=True, primary_key=True)
     title = models.CharField(max_length=250)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator")
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator", default=User)
     text_content = models.TextField()
     photo_content = CloudinaryField(blank=True, default='placeholder')
     video_content = CloudinaryField(blank=True)
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)
-    date = models.DateTimeField(auto_now_add=True)  # used for displaying most recent first in creator profile
     status = models.IntegerField(choices=STATUS, default=0)
-
-    class Meta:
-        ordering = ['-date']
 
     def __str__(self):
         return self.title

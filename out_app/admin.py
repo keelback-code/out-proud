@@ -1,24 +1,30 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
+from django.utils.crypto import get_random_string
 from .models import Page
 
 
 @admin.register(Page)
-class PageAdmin(SummernoteModelAdmin):
+class SuperuserAdmin(admin.ModelAdmin):
     """
-    Class to model Summernote attributes.
+    Class to see pages in the backend.
     """
-    # prepopulated_fields = {'creator': ('User',)}
-    # prepopulated_fields = {'slug': (get_random_string,)}
+    list_display = ('title', 'status',)
+    list_filter = ('status',)
+
+
+class PageAdmin(admin.ModelAdmin):
+    """
+    Admin Class for pre-filling slugs.
+    """
+    model = Page
+    prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
+    prepopulated_fields = {'slug': (get_random_string,)}
+
+
+class SummernotePageAdmin(SummernoteModelAdmin):
+    """
+    Admin Class for specifying summernote fields.
+    """
+    model = Page
     summernote_fields = ('text_content')
-    # list_display = ('title', 'status', 'date')
-    # list_filter = ('status', 'date')
-
-
-# class PageAdmin(admin.ModelAdmin):
-#     """
-#     Admin Class for pre-filling slugs.
-#     """
-#     prepopulated_fields = {"slug": ("title",)}
-#     prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-#     # prepopulated_fields = {'slug': (get_random_string,)}   does this work this way?
