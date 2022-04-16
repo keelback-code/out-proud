@@ -22,7 +22,7 @@
 
                     <div class="card">
                         <div>
-                            <a href="#">{{ page.title }} {{ page.status }}</a>
+                            <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
                         </div>
                         <div>
                             {% if 'placeholder' in page.photo_content.url %}
