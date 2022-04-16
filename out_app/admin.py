@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.crypto import get_random_string
-from .models import Page
+from .models import Page, Viewer
 
 
 @admin.register(Page)
@@ -11,6 +11,12 @@ class SuperuserAdmin(admin.ModelAdmin):
     """
     list_display = ('title', 'status',)
     list_filter = ('status',)
+    # prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
+    
+    
+
+#@admin.register(Viewer)
+
 
 
 class PageAdmin(admin.ModelAdmin):
@@ -18,8 +24,8 @@ class PageAdmin(admin.ModelAdmin):
     Admin Class for pre-filling slugs.
     """
     model = Page
-    prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-    # prepopulated_fields = {'slug': (get_random_string,)}
+    # prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
+    prepopulated_fields = {'slug': (get_random_string(length=8))}
 
 
 # class SummernotePageAdmin(SummernoteModelAdmin):

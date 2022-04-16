@@ -6,7 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from .models import Page, Viewer
 from .forms import WritePageForm, AllowViewerForm
-from .admin import PageAdmin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 
 
 
@@ -15,40 +17,6 @@ class CreatorView(generic.ListView):
     model = Page
     template_name = "creator_profile.html"
     paginate_by = 3
-
-# view for creator's page/view of form
-# class WritePage(View):
-
-#     def get(self, request, *args, **kwargs):
-#         queryset = Page.objects.all()  # this only shows unpub posts, change
-#         page_view = get_object_or_404(queryset)
-
-#     def post(self, request, *args, **kwargs):
-#         queryset = Page.objects.all()  # this only shows unpub posts, change
-#         page_view = get_object_or_404(queryset)
-
-#         page_form = CreatorPageForm(data=request.POST)
-
-#         if page_form.is_valid():
-#             # page_form.instance.email = request.user.email
-#             # page_form.instance.name = request.user.username
-#             # page = page_form.save(commit=False)
-#             page = page_form.save()
-#             # page.post = post
-#             # page.save()
-#         else:
-#             page_form = CreatorPageForm()
-        
-
-#         return render(
-#             request,
-#             "write_page.html",
-#             {
-#                 "page_view": page_view,
-#                 "page_form": page_form
-#             },
-#             HttpResponseRedirect('/creator_profile/')
-#         )
 
 
 class AllowViewer(View):
@@ -78,32 +46,6 @@ class AllowViewer(View):
 
 
 
-    # def get(self, request, *args, **kwargs):
-    #     viewer_obj = get_object_or_404(Viewer)
-
-    #     return render(
-    #             request,
-    #             "allow_viewer.html",
-    #             {
-    #                 "viewer_obj": viewer_obj,
-    #                 "viewer_form": ViewerForm()
-    #             },
-    #         )
-    
-    # def post(self, request, *args, **kwargs):
-    #     viewer_obj = get_object_or_404(Viewer)
-
-    #     viewer_form = ViewerForm(data=request.POST)
-
-    #     return render(
-    #             request,
-    #             "allow_viewer.html",
-    #             {
-    #                 "viewer_obj": viewer_obj,
-    #                 "viewer_form": ViewerForm()
-    #             },
-    #         )
-
 # class WritePage(View):
 
 #     form_class = WritePageForm
@@ -116,9 +58,8 @@ class AllowViewer(View):
 #         return render(
 #             request,
 #             self.template_name,
-#             { 
-#                 "page": page,
-#                 "page_form": WritePageForm 
+#             {
+#                 "page_form": WritePageForm()
 #             },
 #         )
 
@@ -126,17 +67,16 @@ class AllowViewer(View):
 #         form = self.form_class(request.POST)
 #         if form.is_valid():
 #             page = WritePageForm.save(self)  # commit=False ?
-#             # page.save()
-            
+#             # page.user = request.user
+#             # page.save()           
 #         else:
-#             page = WritePageForm
+#             page = WritePageForm()
 
 #         return render(
 #             request, 
 #             self.template_name, 
 #             {
-#                 "page": page,
-#                 "page_form": WritePageForm
+#                 "page": page
 #             },
 #             HttpResponseRedirect('/creator_profile/')
 #         )
@@ -150,10 +90,11 @@ class WritePage(View):
             "write_page.html",
             {
                 "page_form": WritePageForm()
-            },
+            }
         )
 
     def post(self, request, *args, **kwargs):
+        
         page_form = WritePageForm(data=request.POST)
 
         if page_form.is_valid():
@@ -168,9 +109,8 @@ class WritePage(View):
             "creator_profile.html",
             {
                 "page_form": page_form
-            },
+            }
         )
-
 
         
 class Resources(TemplateView):
@@ -188,3 +128,4 @@ class LandingPage(TemplateView):
 class CreatorPage(TemplateView):
 
     template_name = "creator_page.html"
+
