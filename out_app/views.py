@@ -145,7 +145,6 @@ class AllowViewer(View):
 class WritePage(View):
 
     def get(self, request, *args, **kwargs):
-        
         return render(
             request,
             "write_page.html",
@@ -155,10 +154,12 @@ class WritePage(View):
         )
 
     def post(self, request, *args, **kwargs):
-
         page_form = WritePageForm(data=request.POST)
+
         if page_form.is_valid():
-            write_page = page_form.save()
+            write_page = page_form.save(commit=False)
+            write_page.user = request.user
+            write_page.save()
         else:
             page_form = WritePageForm()
         
@@ -166,7 +167,7 @@ class WritePage(View):
             request,
             "creator_profile.html",
             {
-                "write_page": write_page
+                "page_form": page_form
             },
         )
 
