@@ -22,7 +22,7 @@
             {% endif %}
 
             <div class="card-body">
-                <a href="#">{{ page.title }} {{ page.status }}</a>
+                <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
             </div>
 
             {% if forloop.counter|divisibleby:3 %}

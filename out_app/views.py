@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from .models import Page, Viewer
 from .forms import WritePageForm, AllowViewerForm
-from .admin import PageAdmin, SummernotePageAdmin
+from .admin import PageAdmin
 
 
 
@@ -104,34 +104,71 @@ class AllowViewer(View):
     #             },
     #         )
 
+# class WritePage(View):
+
+#     form_class = WritePageForm
+#     initial = { "page_form": WritePageForm }
+#     template_name = "write_page.html"
+
+#     def get(self, request, *args, **kwargs):
+#         form = self.form_class(initial=self.initial)
+        
+#         return render(
+#             request,
+#             self.template_name,
+#             { 
+#                 "page": page,
+#                 "page_form": WritePageForm 
+#             },
+#         )
+
+#     def post(self, request, *args, **kwargs):
+#         form = self.form_class(request.POST)
+#         if form.is_valid():
+#             page = WritePageForm.save(self)  # commit=False ?
+#             # page.save()
+            
+#         else:
+#             page = WritePageForm
+
+#         return render(
+#             request, 
+#             self.template_name, 
+#             {
+#                 "page": page,
+#                 "page_form": WritePageForm
+#             },
+#             HttpResponseRedirect('/creator_profile/')
+#         )
+
+
 class WritePage(View):
 
-    form_class = WritePageForm
-    initial = { "page_form": WritePageForm }
-    template_name = "write_page.html"
-
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, { "page_form": WritePageForm })
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            page = form.save()  # commit = False in these brackets?
-            page.save()
-        else:
-            page_form = WritePageForm
-
+        
         return render(
-            request, 
-            self.template_name, 
+            request,
+            "write_page.html",
             {
-                "form": form,
-                "page_form": WritePageForm
+                "page_form": WritePageForm()
             },
-            HttpResponseRedirect('/creator_profile/')
         )
 
+    def post(self, request, *args, **kwargs):
+
+        page_form = WritePageForm(data=request.POST)
+        if page_form.is_valid():
+            write_page = page_form.save()
+        else:
+            page_form = WritePageForm()
+        
+        return render(
+            request,
+            "creator_profile.html",
+            {
+                "write_page": write_page
+            },
+        )
 
 
         

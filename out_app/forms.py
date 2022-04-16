@@ -1,12 +1,18 @@
 from .models import Page, Viewer
 from django import forms
+from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+from django.utils.crypto import get_random_string
 
 
 
 class WritePageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ('title', 'text_content', 'photo_content', 'video_content', 'link', 'link_title', 'status',)
+        fields = ('creator', 'title', 'text_content', 'photo_content', 'video_content', 'link', 'link_title', 'status',)
+        foo = SummernoteTextField('text_content')
+        # use | safe when templating
+        # summernote_fields = ('text_content',)
+        prepopulated_fields = {'slug': (get_random_string,)}
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user

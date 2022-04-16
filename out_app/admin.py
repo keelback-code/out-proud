@@ -19,12 +19,12 @@ class PageAdmin(admin.ModelAdmin):
     """
     model = Page
     prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-    prepopulated_fields = {'slug': (get_random_string,)}
+    # prepopulated_fields = {'slug': (get_random_string,)}
 
 
-class SummernotePageAdmin(SummernoteModelAdmin):
-    """
-    Admin Class for specifying summernote fields.
-    """
-    model = Page
-    summernote_fields = ('text_content')
+# class SummernotePageAdmin(SummernoteModelAdmin):
+#     """
+#     Admin Class for specifying summernote fields.
+#     """
+#     model = Page
+#     summernote_fields = ('text_content')
