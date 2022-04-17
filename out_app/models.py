@@ -12,7 +12,7 @@ class Page(models.Model):
     """
     Class for modelling posts made by creators.
     """
-    slug = models.SlugField("Page code", unique=True, primary_key=True)
+    slug = models.SlugField("Page code", max_length=12, unique=True, primary_key=True)
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator", default=User)
     text_content = models.TextField()
@@ -33,5 +33,5 @@ class Viewer(models.Model):
     viewer_email = models.EmailField(max_length=100)
 
 
-    def __str__(self):
-        return self.viewer_name
+    # def __str__(self):
+    #     return self.viewer_name

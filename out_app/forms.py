@@ -13,11 +13,11 @@ class WritePageForm(forms.ModelForm):
         text_content = SummernoteTextField()
         # use | safe when templating summernote
         # summernote_fields = ('text_content',)
-        prepopulated_fields = {'slug': get_random_string}
+        # prepopulated_fields = {'slug': get_random_string}
 
-        # def form_valid(self, form):
-        #     form.instance.created_by = self.request.user
-        #     return super().form_valid(form)
+        def form_valid(self, form):
+            form.instance.created_by = self.request.user
+            return super().form_valid(form)
 
 class AllowViewerForm(forms.ModelForm):
     class Meta:

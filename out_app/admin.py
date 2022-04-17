@@ -19,13 +19,13 @@ class SuperuserAdmin(admin.ModelAdmin):
 
 
 
-class PageAdmin(admin.ModelAdmin):
-    """
-    Admin Class for pre-filling slugs.
-    """
-    model = Page
+# class PageAdmin(admin.ModelAdmin):
+#     """
+#     Admin Class for pre-filling slugs.
+#     """
+#     model = Page
     # prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-    prepopulated_fields = {'slug': (get_random_string(length=8))}
+    # prepopulated_fields = {'slug': (get_random_string)}
 
 
 # class SummernotePageAdmin(SummernoteModelAdmin):
