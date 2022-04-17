@@ -22,6 +22,9 @@ class Page(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
 
 
+    def __str__(self):
+        return self.creator
+
 class Viewer(models.Model):
     """
     Class for viewer data.
@@ -32,5 +35,5 @@ class Viewer(models.Model):
     viewer_email = models.EmailField(max_length=100)
 
 
-    # def __str__(self):
-    #     return self.viewer_name
+    def __str__(self):
+        return self.viewer_creator

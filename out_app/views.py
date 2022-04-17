@@ -114,6 +114,13 @@ class WritePage(View):
             }
         )
 
+
+class EditPage(UpdateView):
+    model = Page
+    fields = ['title', 'text_content', 'photo_content', 'link', 'link_title', 'status']
+    template_name = "edit_page.html"
+    success_url="/creator_profile"
+
         
 class Resources(TemplateView):
 

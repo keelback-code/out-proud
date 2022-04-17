@@ -12,6 +12,9 @@
         <h3>{{ page.title }}</h3>
         <p>{{ page.text_content | safe }}</p>
     </div>
+    <div>
+        <a href="{% url 'edit_page' page.slug %}">Edit page</a>
+    </div>
 </div>
 
 

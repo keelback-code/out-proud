@@ -34,7 +34,7 @@
                                 alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
                             {% else %}
                             
-                            <img class="card-img-top" src="{% cloudinary page.photo_content format='jpg' width=120 height=80 crop='fill' %}"
+                            <img class="card-img-top" src="{% cloudinary page.photo_content.url %}"
                                  alt="User provided private image.">
                             {% endif %}
                         </div>
