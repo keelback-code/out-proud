@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
+from cloudinary.forms import cl_init_js_callbacks
+from cloudinary.forms import CloudinaryFileField
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from .models import Page, Viewer
@@ -95,7 +97,7 @@ class WritePage(View):
 
     def post(self, request, *args, **kwargs):
         
-        page_form = WritePageForm(data=request.POST)
+        page_form = WritePageForm(request.POST, request.FILES)
 
         if page_form.is_valid():
             write_page = page_form.save(commit=False)

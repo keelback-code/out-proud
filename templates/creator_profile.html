@@ -4,6 +4,8 @@
 
 {% load static %}
 
+{% load cloudinary %}
+
 
 <div class="container-fluid">
     <h2 class="heading">Creator profile</h2>
@@ -16,7 +18,7 @@
         {% for page in page_list %}
 
         <div class="col-md-6">
-            <div class="row">
+            
 
                 <div class="card-body" style="width: 20rem">
 
@@ -32,11 +34,11 @@
                                 alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
                             {% else %}
                             
-                            <img class="card-img-top" src="{{ page.photo_content.url }}"
-                                alt="User provided private image.">
+                            <img class="card-img-top" src="{% cloudinary page.photo_content format='jpg' width=120 height=80 crop='fill' %}"
+                                 alt="User provided private image.">
                             {% endif %}
                         </div>
-                    </div>
+                    
                 </div>
 
             </div>

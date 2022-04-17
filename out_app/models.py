@@ -16,7 +16,7 @@ class Page(models.Model):
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="viewer_creator", default=User)
     text_content = models.TextField()
-    photo_content = CloudinaryField('image', blank=True)
+    photo_content = CloudinaryField(blank=True)
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
