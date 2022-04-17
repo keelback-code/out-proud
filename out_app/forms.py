@@ -9,7 +9,7 @@ from django.utils.crypto import get_random_string
 class WritePageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ('slug', 'creator', 'title', 'text_content', 'photo_content', 'video_content', 'link', 'link_title', 'status',)
+        fields = ('slug', 'creator', 'title', 'text_content', 'photo_content', 'link', 'link_title', 'status',)
         text_content = SummernoteTextField()
         # use | safe when templating summernote
         # summernote_fields = ('text_content',)
