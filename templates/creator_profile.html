@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% load static %}
 
 
 <div class="container-fluid">
@@ -25,10 +26,12 @@
                             <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
                         </div>
                         <div>
+                            
                             {% if 'placeholder' in page.photo_content.url %}
-                            <img class="card-img-top" src="../media/images/placeholder-image.png"
+                            <img class="card-img-top" src="{% static 'images/placeholder-image.png' %}"
                                 alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
                             {% else %}
+                            
                             <img class="card-img-top" src="{{ page.photo_content.url }}"
                                 alt="User provided private image.">
                             {% endif %}
