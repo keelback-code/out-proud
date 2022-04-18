@@ -5,17 +5,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from cloudinary.forms import cl_init_js_callbacks
 from cloudinary.forms import CloudinaryFileField
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
-from .models import Page, Viewer
-from .forms import WritePageForm, AllowViewerForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
-
+from django import forms
+from .models import Page, Viewer
+from .forms import WritePageForm, AllowViewerForm
 
 
 # view for creator's profile
 class CreatorView(generic.ListView):
+
     model = Page
     template_name = "creator_profile.html"
     paginate_by = 3
@@ -45,7 +44,6 @@ class AllowViewer(View):
             },
             # return HttpResponseRedirect('/creator_profile/')
         )
-
 
 
 # class WritePage(View):
@@ -117,7 +115,7 @@ class WritePage(View):
 
 class EditPage(UpdateView):
     model = Page
-    fields = ['title', 'text_content', 'photo_content', 'link', 'link_title', 'status']
+    fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
     template_name = "edit_page.html"
     success_url="/creator_profile"
 
@@ -128,6 +126,7 @@ class Resources(TemplateView):
 
     # def resources(request):
     #     return render(request, "resources.html")
+
 
 class LandingPage(TemplateView):
 

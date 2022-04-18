@@ -7,41 +7,31 @@
 {% load cloudinary %}
 
 
-<div class="container-fluid">
-    <h2 class="heading">Creator profile</h2>
-
-
-    <div>
-        <a href="{% url 'write_page' %}">Link to write page</a>
-    </div>
+<div class="container">
     <div class="row">
-        {% for page in page_list %}
+        
+            <h2 class="heading">Creator profile</h2>
+            <a href="{% url 'write_page' %}">Link to write page</a>
 
-        <div class="col-md-6">
-            
-
-                <div class="card-body" style="width: 20rem">
-
-
-                    <div class="card">
-                        <div>
-                            <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
-                        </div>
-                        <div>
-                            
-                            {% if 'placeholder' in page.photo_content.url %}
-                            <img class="card-img-top" src="{% static 'images/placeholder-image.png' %}"
-                                alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
-                            {% else %}
-                            
-                            <img class="card-img-top" src="{% cloudinary page.photo_content.url %}"
-                                 alt="User provided private image.">
-                            {% endif %}
-                        </div>
-                    
+            {% for page in page_list %}
+            <div class="col-6 col-md-4">
+            <div class="card-body" style="width: 20rem">
+                <div class="card">
+                    <div>
+                        <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
+                    </div>
+                    <div>
+                        {% if 'placeholder' in page.image.url %}
+                        <img class="card-img-top" src="{% static 'images/placeholder-image.png' %}"
+                            alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
+                        {% else %}
+                        <img class="card-img-top" src="{% cloudinary page.image.url %}"
+                            alt="User provided private image.">
+                        {% endif %}
+                    </div>
                 </div>
-
             </div>
+        </div>
 
             {% if forloop.counter|divisibleby:3 %}
 
@@ -52,11 +42,6 @@
 
         </div>
     </div>
-
-
-
-
-
 
     {% if is_paginated %}
     <nav aria-label="Page navigation">

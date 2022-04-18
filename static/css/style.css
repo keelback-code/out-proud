@@ -31,7 +31,7 @@ h1, .heading {
     font-family: 'Pacifico', monospace, sans-serif;
 }
 
-a {
+a, .page-link {
     text-decoration: none;
     color: #7f4d7e;
 }
