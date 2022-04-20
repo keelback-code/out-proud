@@ -25,15 +25,3 @@ class Page(models.Model):
     def __str__(self):
         return self.creator
 
-class Viewer(models.Model):
-    """
-    Class for viewer data.
-    """
-    related_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creator", default='')
-    shown_name = models.CharField("My name (as it will appear to viewer)", max_length=100)
-    viewer_name = models.CharField(max_length=100)
-    viewer_email = models.EmailField(max_length=100)
-
-
-    def __str__(self):
-        return self.viewer_creator

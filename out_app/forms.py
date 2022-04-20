@@ -1,4 +1,4 @@
-from .models import Page, Viewer
+from .models import Page, User
 from django import forms
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 from django.utils.crypto import get_random_string
@@ -21,8 +21,9 @@ class WritePageForm(forms.ModelForm):
 
 class AllowViewerForm(forms.ModelForm):
     class Meta:
-        model = Viewer
-        fields = ('viewer_name', 'viewer_email', 'shown_name',)
+        model = User
+        fields = ('first_name', 'email',)
+        # maybe not possible to give a shown name, will come back to this
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user

@@ -26,6 +26,8 @@
 
 [Credits](#credits)
 
+[Resources](#resources)
+
 [Acknowledgements](#acknowledgements)
 
 ### Purpose
@@ -115,9 +117,11 @@ CSS
 Javascript
 
 Frameworks, Libraries and Programs Used:
-Django
+Django/allauth/summernote
+Bootstrap
 Cloudinary
 PostgreSQL
+EmailJS
 
 GitHub - for hosting the site
 
@@ -200,6 +204,10 @@ Github will automatically create a new repo, which is forked from the original. 
 Within the repository, click the 'Code' dropdown, which is located next to 'Add File' on the right (underneath the Settings tab); there is an option to download all files and save a copy locally.
 
 In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop and work from there.
+
+### Resources
+
+Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks.
 
 ### Credits
 

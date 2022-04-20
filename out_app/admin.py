@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.crypto import get_random_string
-from .models import Page, Viewer
+from .models import Page, User
 
 
 @admin.register(Page)
