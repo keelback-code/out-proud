@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django import forms
-from .models import Page, ViewerAccess
+from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
 
 
@@ -20,66 +20,31 @@ class CreatorView(generic.ListView):
     paginate_by = 3
 
 
-class AllowViewer(View):
+# class AllowViewer(View):
 
-    form_class = AllowViewerForm
-    initial = { "viewer_form": AllowViewerForm }
-    template_name = "allow_viewer.html"
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, { "viewer_form": AllowViewerForm })
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        # if form.is_valid():
-        #     # <process form cleaned data>
-            
-
-        return render(
-            request, 
-            self.template_name, 
-            {
-                "viewer_form": AllowViewerForm 
-            },
-            # return HttpResponseRedirect('/creator_profile/')
-        )
-
-
-# class WritePage(View):
-
-#     form_class = WritePageForm
-#     initial = { "page_form": WritePageForm }
-#     template_name = "write_page.html"
+#     form_class = AllowViewerForm
+#     initial = { "viewer_form": AllowViewerForm }
+#     template_name = "allow_viewer.html"
 
 #     def get(self, request, *args, **kwargs):
 #         form = self.form_class(initial=self.initial)
-        
-#         return render(
-#             request,
-#             self.template_name,
-#             {
-#                 "page_form": WritePageForm()
-#             },
-#         )
+#         return render(request, self.template_name, { "viewer_form": AllowViewerForm })
 
 #     def post(self, request, *args, **kwargs):
 #         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             page = WritePageForm.save(self)  # commit=False ?
-#             # page.user = request.user
-#             # page.save()           
-#         else:
-#             page = WritePageForm()
+#         # if form.is_valid():
+#         #     # <process form cleaned data>
+            
 
 #         return render(
 #             request, 
 #             self.template_name, 
 #             {
-#                 "page": page
+#                 "viewer_form": AllowViewerForm 
 #             },
-#             HttpResponseRedirect('/creator_profile/')
+#             # return HttpResponseRedirect('/creator_profile/')
 #         )
+
 
 
 class WritePage(View):
@@ -113,27 +78,56 @@ class WritePage(View):
         )
 
 
+class AllowViewer(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            "allow_viewer.html",
+            {
+                "viewer_form": AllowViewerForm()
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        
+        viewer_form = AllowViewerForm(request.POST)
+
+        if viewer_form.is_valid():
+            form = viewer_form.save(commit=False)
+            form.user = request.user
+            form.save()
+        else:
+            viewer_form = AllowViewerForm()
+        
+        return render(
+            request,
+            "creator_profile.html",
+            {
+                "viewer_form": viewer_form
+            }
+        )
+
+
 class EditPage(UpdateView):
     model = Page
     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
     template_name = "edit_page.html"
     success_url="/creator_profile"
 
-        
-class Resources(TemplateView):
-
-    template_name = "resources.html"
-
-    # def resources(request):
-    #     return render(request, "resources.html")
-
-
-class LandingPage(TemplateView):
-
-    template_name = "index.html"
-
 
 class CreatorPage(TemplateView):
 
     template_name = "creator_page.html"
+
+        
+def resources(request):
+    return render(request, "resources.html")
+
+
+def landing_page(request):
+    return render(request, "index.html")
+
+
+
 
