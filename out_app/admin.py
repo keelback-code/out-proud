@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django_summernote.admin import SummernoteModelAdmin
-from django.utils.crypto import get_random_string
+# from django_summernote.admin import SummernoteModelAdmin
+# from django.utils.crypto import get_random_string
 from .models import Page, User
 
 
@@ -11,11 +11,8 @@ class SuperuserAdmin(admin.ModelAdmin):
     """
     list_display = ('title', 'status',)
     list_filter = ('status',)
-    # prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-    
-    
 
-#@admin.register(Viewer)
+
 
 
 

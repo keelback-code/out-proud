@@ -25,6 +25,7 @@ class AllowViewerForm(forms.ModelForm):
         fields = ('first_name', 'email',)
         # maybe not possible to give a shown name, will come back to this
 
+
         def form_valid(self, form):
             form.instance.created_by = self.request.user
             return super().form_valid(form)

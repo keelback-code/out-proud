@@ -21,6 +21,11 @@ class Page(models.Model):
     link_title = models.CharField(max_length=250, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
 
+    class Meta:
+        permissions = [
+            ("write_page", "Can create a page"),
+        ]
+
 
     def __str__(self):
         return self.creator
