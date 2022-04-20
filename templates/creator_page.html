@@ -4,9 +4,10 @@
 
 {% load cloudinary %}
 
-{% cloudinary page.photo_content format='jpg' width=120 height=80 crop='fill' %}
+{% cloudinary page.image.url %}
 
-<!-- if user is auth code here, add endif -->
+<!-- if user is auth code here, add endif
+if viewer email in db and connected to creator, then authenticated -->
 
 <div>
     <h2 class="heading">Creator blog page.</h2>
@@ -15,8 +16,11 @@
         <p>{{ page.text_content | safe }}</p>
     </div>
     <div>
-        <a href="{% url 'edit_page' page.slug %}">Edit page</a>
+        {{ page.title }} {{ page.status }}
     </div>
+    <!-- <div>
+        <a href="#">Edit page</a>
+    </div> -->
 </div>
 
 
