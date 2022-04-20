@@ -20,33 +20,6 @@ class CreatorView(generic.ListView):
     paginate_by = 3
 
 
-# class AllowViewer(View):
-
-#     form_class = AllowViewerForm
-#     initial = { "viewer_form": AllowViewerForm }
-#     template_name = "allow_viewer.html"
-
-#     def get(self, request, *args, **kwargs):
-#         form = self.form_class(initial=self.initial)
-#         return render(request, self.template_name, { "viewer_form": AllowViewerForm })
-
-#     def post(self, request, *args, **kwargs):
-#         form = self.form_class(request.POST)
-#         # if form.is_valid():
-#         #     # <process form cleaned data>
-            
-
-#         return render(
-#             request, 
-#             self.template_name, 
-#             {
-#                 "viewer_form": AllowViewerForm 
-#             },
-#             # return HttpResponseRedirect('/creator_profile/')
-#         )
-
-
-
 class WritePage(View):
 
     def get(self, request, *args, **kwargs):

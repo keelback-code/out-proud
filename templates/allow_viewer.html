@@ -17,17 +17,15 @@
     <script>
         emailjs.send("service_0muuuls", "template_xx57dpj", {
                 message: "placeholder message",
-                reply_to: "placeholder reply",
-                shown_name: ViewerForm.shown_name.value,
-                viewer_name: ViewerForm.viewer_name.value,
-                viewer_email: ViewerForm.viewer_email.value
+                shown_name: "shown_name",
+                first_name: "first_name",
+                email: "email",
             })
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
             }, function (error) {
                 console.log('FAILED...', error);
             });
-        
     </script>
 
     <!-- <script>

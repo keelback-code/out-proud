@@ -13,7 +13,8 @@ body {
 
 /* Sticky footer from CSS Tricks https://css-tricks.com/couple-takes-sticky-footer/ */
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -27,11 +28,13 @@ footer {
 
 /* End sticky footer */
 
-h1, .heading {
+h1,
+.heading {
     font-family: 'Pacifico', monospace, sans-serif;
 }
 
-a, .page-link {
+a,
+.page-link {
     text-decoration: none;
     color: #7f4d7e;
 }
@@ -51,6 +54,8 @@ a, .page-link {
     color: black;
 }
 
-.nav-link:hover, a:hover {
+.nav-link:hover,
+a:hover,
+.page-link:hover {
     color: #7f4d7e;
 }
