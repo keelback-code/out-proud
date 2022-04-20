@@ -103,10 +103,7 @@ class AllowViewer(View):
         return render(
             request,
             "creator_profile.html",
-            {
-                "viewer_form": viewer_form
-            }
-        )
+            )
 
 
 class EditPage(UpdateView):
