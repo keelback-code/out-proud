@@ -32,7 +32,7 @@ class ViewerAccess(models.Model):
     allowed_page = models.ForeignKey(Page, on_delete=models.CASCADE, verbose_name="Page code - this can be found on your profile page")
     shown_name = models.CharField("My name (as it will appear to viewer)", max_length=100)
     first_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100, primary_key=True)
 
 
     def __str__(self):
