@@ -18,6 +18,23 @@ class CreatorView(generic.ListView):
 
 
 class WritePage(View):
+
+    # def get_form(request):
+    #     form = WritePageForm()
+    #     return render(request, 'write_page.html', {'form': form})
+
+    # def post_new(request):
+    #     if request.method == "POST":
+    #         form = WritePageForm(request.POST, request.FILES)
+    #         if form.is_valid():
+    #             page = form.save()
+    #             # page.creator = request.user
+    #             # page.save()
+    #             return redirect('creator_page', slug=slug)
+    #     else:
+    #         form = WritePageForm()
+
+    #     return render(request, 'write_page.html', {'form': form})
     
     def get(self, request, *args, **kwargs):
         return render(
@@ -36,12 +53,13 @@ class WritePage(View):
             write_page = page_form.save(commit=False)
             write_page.user = request.user
             write_page.save()
+            return redirect('creator_profile')
         else:
             page_form = WritePageForm()
         
         return render(
             request,
-            "index.html",
+            "write_page.html",
             {
                 "page_form": page_form
             }
@@ -65,14 +83,13 @@ class AllowViewer(View):
 
         if viewer_form.is_valid():
             form = viewer_form.save(commit=False)
-            form.user = request.user
+            form.creator = request.user
             form.save()
         else:
             viewer_form = AllowViewerForm()
         
-        return render(
-            request,
-            "index.html",
+        return redirect(
+            "creator_profile",
             )
 
 

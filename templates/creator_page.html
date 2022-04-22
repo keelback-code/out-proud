@@ -6,8 +6,6 @@
 
 {% load cloudinary %}
 
-{% cloudinary page.image.url %}
-
 <!-- if user is auth code here, add endif
 if viewer email in db and connected to creator, then authenticated -->
 
@@ -24,6 +22,9 @@ if viewer email in db and connected to creator, then authenticated -->
     <div>
          {{ page.status }} 
     </div>
+
+    <img class="card-img-top" src="{% cloudinary page.image.url %}"
+                            alt="User provided private image.">
     <!-- <div>
         <a href="#">Edit page</a>
     </div> -->
