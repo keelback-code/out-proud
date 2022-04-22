@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% load static %}
+{% load crispy_forms_tags %}
 
 {% load cloudinary %}
 
@@ -11,16 +11,18 @@
 <!-- if user is auth code here, add endif
 if viewer email in db and connected to creator, then authenticated -->
 
+
 <div>
     <h2 class="heading">Creator blog page.</h2>
+    
     <div>
         <h3>{{ page.title }}</h3>
     </div>
     <div>
-        <p>{{ page.text_content | safe }}</p>
+        <p> {{ page.text_content | safe }} </p>
     </div>
     <div>
-        {{ page.title }}
+         {{ page.status }} 
     </div>
     <!-- <div>
         <a href="#">Edit page</a>

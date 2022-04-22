@@ -21,7 +21,7 @@
                         <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
                     </div>
                     <div>
-                        {% if 'placeholder' in page.image.url %}
+                        {% if 'placeholder' in page.image %}
                         <img class="card-img-top" src="{% static 'images/placeholder-image.png' %}"
                             alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
                         {% else %}

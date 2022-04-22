@@ -2,11 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
-from cloudinary.forms import cl_init_js_callbacks
-from cloudinary.forms import CloudinaryFileField
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
@@ -80,25 +76,25 @@ class AllowViewer(View):
 
 
 class EditPage(UpdateView):
-    model = Page
+    # model = Page
     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
     template_name = "edit_page.html"
     success_url="/creator_profile"
 
 
-def creator_page(request, slug):
-    model = Page
-    page = { "page" : Page }
-    slug = slug
-    # template_name = "creator_page.html"
+class CreatorPage(View):
 
-    return render(
-        request,
-        "creator_page.html",
-        {
-            "page": page
-        }
-    )
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Page.objects.all()
+        page = get_object_or_404(queryset, slug=slug)
+
+        return render(
+            request,
+            "creator_page.html",
+            {
+                "page": page
+            }
+        )
 
         
 def resources(request):

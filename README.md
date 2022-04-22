@@ -120,7 +120,7 @@ Frameworks, Libraries and Programs Used:
 Django/allauth/summernote
 Bootstrap
 Cloudinary
-PostgreSQL
+SQLite (default Django database)
 EmailJS
 
 GitHub - for hosting the site
