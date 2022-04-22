@@ -11,13 +11,14 @@ from .forms import WritePageForm, AllowViewerForm
 # view for creator's profile
 class CreatorView(generic.ListView):
 
-    model = Page
+    # model = Page
+    queryset = Page.objects.all()
     template_name = "creator_profile.html"
-    paginate_by = 3
+    paginate_by = 3   
 
 
 class WritePage(View):
-
+    
     def get(self, request, *args, **kwargs):
         return render(
             request,
@@ -40,7 +41,7 @@ class WritePage(View):
         
         return render(
             request,
-            "creator_profile.html",
+            "index.html",
             {
                 "page_form": page_form
             }
@@ -49,7 +50,7 @@ class WritePage(View):
 
 class AllowViewer(View):
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(
             request,
             "allow_viewer.html",
@@ -58,7 +59,7 @@ class AllowViewer(View):
             }
         )
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         
         viewer_form = AllowViewerForm(request.POST)
 
@@ -82,21 +83,32 @@ class EditPage(UpdateView):
     success_url="/creator_profile"
 
 
-class CreatorPage(View):
+# class CreatorPage(View):
 
-    def get(self, request, slug, *args, **kwargs):
-        queryset = Page.objects.all()
-        page = get_object_or_404(queryset, slug=slug)
+#     def get(self, request, slug, *args, **kwargs):
+#         queryset = Page.objects.all()
+#         page = get_object_or_404(queryset, slug=slug)
 
-        return render(
-            request,
-            "creator_page.html",
-            {
-                "page": page
-            }
-        )
+#         return render(
+#             request,
+#             "creator_page.html",
+#             {
+#                 "page": page
+#             }
+#         )
 
-        
+def creator_page(request, slug):
+    page = get_object_or_404(Page, slug=slug)
+
+    return render(
+        request,
+        "creator_page.html",
+        {
+            "page": page
+        }
+    )
+
+
 def resources(request):
     return render(request, "resources.html")
 
