@@ -75,7 +75,7 @@ class AllowViewer(View):
         
         return render(
             request,
-            "creator_profile.html",
+            "index.html",
             )
 
 
@@ -86,9 +86,19 @@ class EditPage(UpdateView):
     success_url="/creator_profile"
 
 
-class CreatorPage(TemplateView):
+def creator_page(request, slug):
+    model = Page
+    page = { "page" : Page }
+    slug = slug
+    # template_name = "creator_page.html"
 
-    template_name = "creator_page.html"
+    return render(
+        request,
+        "creator_page.html",
+        {
+            "page": page
+        }
+    )
 
         
 def resources(request):

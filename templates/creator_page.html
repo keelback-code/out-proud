@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
 {% load cloudinary %}
 
 {% cloudinary page.image.url %}
@@ -13,10 +15,12 @@ if viewer email in db and connected to creator, then authenticated -->
     <h2 class="heading">Creator blog page.</h2>
     <div>
         <h3>{{ page.title }}</h3>
+    </div>
+    <div>
         <p>{{ page.text_content | safe }}</p>
     </div>
     <div>
-        {{ page.title }} {{ page.status }}
+        {{ page.title }}
     </div>
     <!-- <div>
         <a href="#">Edit page</a>
