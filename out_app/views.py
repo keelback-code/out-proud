@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.views.generic import TemplateView
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django import forms
 from .models import Page, User, ViewerAccess
@@ -17,36 +16,17 @@ class CreatorView(generic.ListView):
     paginate_by = 3   
 
 
-class WritePage(View):
-
-    # def get_form(request):
-    #     form = WritePageForm()
-    #     return render(request, 'write_page.html', {'form': form})
-
-    # def post_new(request):
-    #     if request.method == "POST":
-    #         form = WritePageForm(request.POST, request.FILES)
-    #         if form.is_valid():
-    #             page = form.save()
-    #             # page.creator = request.user
-    #             # page.save()
-    #             return redirect('creator_page', slug=slug)
-    #     else:
-    #         form = WritePageForm()
-
-    #     return render(request, 'write_page.html', {'form': form})
+class WritePage(CreateView):
     
     def get(self, request, *args, **kwargs):
+
         return render(
             request,
             "write_page.html",
-            {
-                "page_form": WritePageForm()
-            }
+            {"page_form": WritePageForm}
         )
 
     def post(self, request, *args, **kwargs):
-        
         page_form = WritePageForm(request.POST, request.FILES)
 
         if page_form.is_valid():
@@ -94,46 +74,42 @@ class AllowViewer(View):
 
 
 # class EditPage(UpdateView):
-#     # model = Page
+#     model = Page
 #     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
 #     template_name = "edit_page.html"
-#     success_url="/creator_profile"
+#     success_url ="/"
 
-def edit_page(request, slug):
-    fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
-    obj = get_object_or_404(Page, slug=slug)
-    edit_form = WritePageForm(request.POST, request.FILES or None, instance = obj)
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         return super().form_valid(form)
 
-    if edit_form.is_valid():
-        edit_form.save()
-        return redirect(
-            "/"+slug
-            )
-    
-    # context["edit_form"] = edit_form
+class EditPage(View):
 
-    return render(
-        request, 
-        "edit_page.html", 
-        {
-            "edit_form": edit_form
-        }
-    )
+    def get(self, request, slug):
+        page_to_edit = Page.objects.get(slug=slug)
+        print(page_to_edit)
+        edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+        print(edit_form)
+        return render(
+            request,
+            "edit_page.html",
+            {"edit_form": WritePageForm}
+        )  
 
+    def post(self, request, slug):
+        if request.method == "POST":
+            page_to_edit = Page.objects.get(slug=slug)
+            print("reached post edit")
+            edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('creator_profile')
+        return render(
+            request,
+            "edit_page.html",
+            {"edit_form": edit_form}
+        ) 
 
-# class CreatorPage(View):
-
-#     def get(self, request, slug, *args, **kwargs):
-#         queryset = Page.objects.all()
-#         page = get_object_or_404(queryset, slug=slug)
-
-#         return render(
-#             request,
-#             "creator_page.html",
-#             {
-#                 "page": page
-#             }
-#         )
 
 def creator_page(request, slug):
     page = get_object_or_404(Page, slug=slug)
@@ -153,7 +129,4 @@ def resources(request):
 
 def landing_page(request):
     return render(request, "index.html")
-
-
-
 

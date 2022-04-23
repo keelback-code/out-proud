@@ -10,5 +10,6 @@ urlpatterns = [
     path('creator_page/<slug:slug>/', views.creator_page, name='creator_page'),
     path('allow_viewer/', views.AllowViewer.as_view(), name='allow_viewer'),
     path('resources/', views.resources, name='resources'),
-    path('creator_page/<slug:slug>/edit_page/', views.edit_page, name='edit_page'),
+    # path('creator_page/<slug:slug>/edit_view/', views.edit_view, name='edit_view'),
+    path('creator_page/<slug:slug>/edit_page/', views.EditPage.as_view(), name='edit_page'),
 ]
