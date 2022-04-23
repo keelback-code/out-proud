@@ -93,11 +93,32 @@ class AllowViewer(View):
             )
 
 
-class EditPage(UpdateView):
-    # model = Page
+# class EditPage(UpdateView):
+#     # model = Page
+#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
+#     template_name = "edit_page.html"
+#     success_url="/creator_profile"
+
+def edit_page(request, slug):
     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
-    template_name = "edit_page.html"
-    success_url="/creator_profile"
+    obj = get_object_or_404(Page, slug=slug)
+    edit_form = WritePageForm(request.POST, request.FILES or None, instance = obj)
+
+    if edit_form.is_valid():
+        edit_form.save()
+        return redirect(
+            "/"+slug
+            )
+    
+    # context["edit_form"] = edit_form
+
+    return render(
+        request, 
+        "edit_page.html", 
+        {
+            "edit_form": edit_form
+        }
+    )
 
 
 # class CreatorPage(View):

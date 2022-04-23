@@ -33,9 +33,3 @@ class SuperuserViewerAccessAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': (get_random_string)}
 
 
-# class SummernotePageAdmin(SummernoteModelAdmin):
-#     """
-#     Admin Class for specifying summernote fields.
-#     """
-#     model = Page
-#     summernote_fields = ('text_content')

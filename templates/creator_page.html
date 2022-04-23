@@ -25,9 +25,9 @@ if viewer email in db and connected to creator, then authenticated -->
 
     <img class="card-img-top" src="{% cloudinary page.image.url %}"
                             alt="User provided private image.">
-    <!-- <div>
-        <a href="#">Edit page</a>
-    </div> -->
+    <div>
+        <a href="{% url 'edit_page' page.slug %}">Edit page</a>
+    </div>
 </div>
 
 
