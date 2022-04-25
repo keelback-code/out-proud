@@ -7,6 +7,9 @@ from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
 
+from django.http import HttpResponse
+from cloudinary.forms import cl_init_js_callbacks  
+
 
 # view for creator's profile
 class CreatorView(generic.ListView):
@@ -127,3 +130,14 @@ def resources(request):
 def landing_page(request):
     return render(request, "index.html")
 
+
+# def upload(request):
+#   context = dict( cloudinary_form = WritePageForm())
+
+#   if request.method == 'POST':
+#     form = WritePageForm(request.POST, request.FILES)
+#     context['posted'] = form.instance
+#     if form.is_valid():
+#         form.save()
+
+#   return render(request, 'write_page.html', context)
