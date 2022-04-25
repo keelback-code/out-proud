@@ -14,7 +14,7 @@
             <div>
                 <a href="{% url 'resources' %}">Suggested links</a>
             </div>
-            {{ page_form | crispy }}
+            {{ edit_page_form | crispy }}
             {% csrf_token %}
             
             <button type="submit" class="btn btn-signup btn-md" value="Update">Submit</button>

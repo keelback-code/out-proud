@@ -121,33 +121,27 @@ class EditPage(View):
 
     def get(self, request, slug):
         page_to_edit = Page.objects.get(slug=slug)
-        print(page_to_edit)
-        edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
-        print(edit_form)
-        print("reached post get")
+        edit_page_form = WritePageForm(instance=page_to_edit)
         return render(
             request,
             "edit_page.html",
             {
-                "edit_form": edit_form
+                "edit_page_form": edit_page_form
             }
         )  
 
     def post(self, request, slug):
         if request.method == "POST":
             page_to_edit = Page.objects.get(slug=slug)
-            print("reached post edit")
-            edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
-            print(page_to_edit)
-            print(edit_form)
-            if edit_form.is_valid():
-                edit_form.save()
+            edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+            if edit_page_form.is_valid():
+                edit_page_form.save()
                 return redirect('creator_profile')
         return render(
             request,
             "edit_page.html",
             {
-                "edit_form": edit_form
+                "edit_page_form": edit_page_form
             }
         ) 
 
