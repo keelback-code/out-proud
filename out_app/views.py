@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# from django.views.generic import TemplateView, ListView
+# from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
@@ -16,7 +17,40 @@ class CreatorView(generic.ListView):
     paginate_by = 3   
 
 
-class WritePage(CreateView):
+# class CreatorPage(generic.DetailView):
+#     model = Page
+#     template_name = "creator_page.html"
+
+
+# class WritePage(LoginRequiredMixin, generic.CreateView):
+#     model = Page
+#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
+#     form_class = WritePageForm
+#     template_name = "write_page.html"
+
+#     def form_valid(self, form):
+#         form.instance.creator = self.request.user
+#         return super().form_valid(form)
+
+
+# class EditPage(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+#     model = Page
+#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
+#     form_class = WritePageForm
+#     template_name = "edit_page.html"
+#     success_url ="/"
+
+#     def form_valid(self, form):
+#         form.instance.creator = self.request.user
+#         return super().form_valid(form)
+    
+#     def test_func(self):
+#         post = self.get_object()
+#         if self.request.user == post.creator:
+#             return True
+#         return False
+
+class WritePage(generic.CreateView):
     
     def get(self, request, *args, **kwargs):
 
@@ -73,14 +107,14 @@ class AllowViewer(View):
             )
 
 
-# class EditPage(UpdateView):
+# class EditPage(generic.UpdateView):
 #     model = Page
 #     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
 #     template_name = "edit_page.html"
 #     success_url ="/"
 
 #     def form_valid(self, form):
-#         form.instance.author = self.request.user
+#         form.instance.creator = self.request.user
 #         return super().form_valid(form)
 
 class EditPage(View):
@@ -90,10 +124,13 @@ class EditPage(View):
         print(page_to_edit)
         edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
         print(edit_form)
+        print("reached post get")
         return render(
             request,
             "edit_page.html",
-            {"edit_form": WritePageForm}
+            {
+                "edit_form": edit_form
+            }
         )  
 
     def post(self, request, slug):
@@ -101,13 +138,17 @@ class EditPage(View):
             page_to_edit = Page.objects.get(slug=slug)
             print("reached post edit")
             edit_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+            print(page_to_edit)
+            print(edit_form)
             if edit_form.is_valid():
                 edit_form.save()
                 return redirect('creator_profile')
         return render(
             request,
             "edit_page.html",
-            {"edit_form": edit_form}
+            {
+                "edit_form": edit_form
+            }
         ) 
 
 
