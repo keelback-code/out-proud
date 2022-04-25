@@ -30,8 +30,8 @@ class ViewerAccess(models.Model):
     Class for assigning pages to viewers
     """
     allowed_page = models.ForeignKey(Page, on_delete=models.CASCADE, verbose_name="Page code - this can be found on your profile page")
-    shown_name = models.CharField("My name (as it will appear to viewer)", max_length=100)
-    first_name = models.CharField(max_length=100)
+    shown_name = models.CharField("Your name (as it will appear to viewer)", max_length=100)
+    first_name = models.CharField("The name of the viewer you are sending this to", max_length=100)
     email = models.EmailField(max_length=100, primary_key=True)
 
 

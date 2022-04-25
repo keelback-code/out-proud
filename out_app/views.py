@@ -17,39 +17,6 @@ class CreatorView(generic.ListView):
     paginate_by = 3   
 
 
-# class CreatorPage(generic.DetailView):
-#     model = Page
-#     template_name = "creator_page.html"
-
-
-# class WritePage(LoginRequiredMixin, generic.CreateView):
-#     model = Page
-#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
-#     form_class = WritePageForm
-#     template_name = "write_page.html"
-
-#     def form_valid(self, form):
-#         form.instance.creator = self.request.user
-#         return super().form_valid(form)
-
-
-# class EditPage(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
-#     model = Page
-#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
-#     form_class = WritePageForm
-#     template_name = "edit_page.html"
-#     success_url ="/"
-
-#     def form_valid(self, form):
-#         form.instance.creator = self.request.user
-#         return super().form_valid(form)
-    
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.creator:
-#             return True
-#         return False
-
 class WritePage(generic.CreateView):
     
     def get(self, request, *args, **kwargs):
@@ -99,6 +66,11 @@ class AllowViewer(View):
             form = viewer_form.save(commit=False)
             form.creator = request.user
             form.save()
+            send_mail(
+                request.POST['first_name'],
+                request.POST['email'],
+                request.POST['shown_name']
+            )
         else:
             viewer_form = AllowViewerForm()
         
@@ -106,16 +78,6 @@ class AllowViewer(View):
             "creator_profile",
             )
 
-
-# class EditPage(generic.UpdateView):
-#     model = Page
-#     fields = ['title', 'text_content', 'image', 'link', 'link_title', 'status']
-#     template_name = "edit_page.html"
-#     success_url ="/"
-
-#     def form_valid(self, form):
-#         form.instance.creator = self.request.user
-#         return super().form_valid(form)
 
 class EditPage(View):
 

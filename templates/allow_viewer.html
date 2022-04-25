@@ -8,14 +8,14 @@
 <div class="container-fluid col-md-4">
     <h2 class="heading">Form to allow viewer.</h2>
 
-    <form method="post">
+    <form class="viewer-form" method="post">
         {{ viewer_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-md">Submit</button>
     </form>
 
     <script>
-        emailjs.send("service_0muuuls", "template_xx57dpj", "#viewer_form")
+        emailjs.send("service_0muuuls", "template_xx57dpj", ".viewer-form")
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
             }, function (error) {
@@ -23,11 +23,11 @@
             });
     </script>
 
-    <!-- <script>
+    <script>
         emailjs.send("service_0muuuls", "template_xx57dpj", {
-                "from_name": contactForm.name.value,
-                "from_email": contactForm.emailaddress.value,
-                "project_request": contactForm.projectsummary.value
+                "first_name": viewer-form.name.value,
+                "email": viewer-form.email.value,
+                "shown_name": viewer-form.shown_name.value
             })
             .then(
                 function (response) {
@@ -38,7 +38,7 @@
                 }
             );
         return false;
-    </script> -->
+    </script>
 
 
 </div>
