@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load cloudinary %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-fluid col-md-4">
+    <h2 class="heading">Page to delete.</h2>
+    <div>
+
+        <!-- Add if user is auth code in here later, and end if after the form -->
+        <form method="post" action="{% url 'write_page' %}" enctype="multipart/form-data">
+            <h4>test delete blog form</h4>
+
+            {{ delete_form | crispy }}
+            {% csrf_token %}
+
+            <div>
+                <h4>Deletions are final.</h4>
+            </div>
+            <button type="submit" class="btn btn-signup btn-md">Delete</button>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+{%endblock%}

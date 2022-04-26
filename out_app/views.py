@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 # from django.views.generic import TemplateView, ListView
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
 
-from django.http import HttpResponse
-from cloudinary.forms import cl_init_js_callbacks  
+# from django.http import HttpResponse
+# from cloudinary.forms import cl_init_js_callbacks  
 
 
 # view for creator's profile
@@ -17,7 +17,8 @@ class CreatorView(generic.ListView):
     # model = Page
     queryset = Page.objects.all()
     template_name = "creator_profile.html"
-    paginate_by = 3   
+    paginate_by = 3
+    ordering = ['title']
 
 
 class WritePage(generic.CreateView):
@@ -112,6 +113,39 @@ class EditPage(View):
             }
         ) 
 
+class DeletePage(View):
+
+    def get(self, request, slug):
+        page_to_delete = Page.objects.get(slug=slug)
+        delete_form = WritePageForm(instance=page_to_delete)
+
+        return render(
+            request,
+            "delete_page.html",
+            {
+                "delete_form": delete_form
+            }
+        ) 
+
+
+    def post(self, request, slug):
+
+        if request.method == "POST":
+            page_to_delete = Page.objects.get(slug=slug)
+            delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
+            if delete_form.is_valid():
+                delete_form.delete()
+                return redirect('creator_profile')
+        return render(
+            request,
+            "delete_page.html",
+            {
+                "delete_form": delete_form
+            },
+            redirect('creator_profile')
+        ) 
+
+
 
 def creator_page(request, slug):
     page = get_object_or_404(Page, slug=slug)
@@ -123,6 +157,21 @@ def creator_page(request, slug):
             "page": page
         }
     )
+
+
+# def delete(request, slug):
+#     # delete_page = get_object_or_404(Page, slug=slug)
+#     delete_page = Page.objects.get(slug=slug)
+#     delete_page.delete()
+
+#     return render(
+#         request,
+#         "delete_page.html",
+#         {
+#             "delete_page": delete_page
+#         },
+#         redirect('creator_profile')
+#     )
 
 
 def resources(request):
