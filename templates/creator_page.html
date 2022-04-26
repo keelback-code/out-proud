@@ -2,8 +2,6 @@
 
 {% block content %}
 
-{% load crispy_forms_tags %}
-
 {% load cloudinary %}
 
 <!-- if user is auth code here, add endif
@@ -23,7 +21,7 @@ if viewer email in db and connected to creator, then authenticated -->
          {{ page.status }} 
     </div>
 
-    <img class="card-img-top" src="{% cloudinary page.image.url %}"
+    <img src="{% cloudinary page.image.url format='jpg' width=240 height=160 crop='fill' %}"
                             alt="User provided private image.">
     <div>
         <a href="{% url 'edit_page' page.slug %}">Edit page</a>

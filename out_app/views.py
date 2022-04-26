@@ -32,6 +32,7 @@ class WritePage(generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         page_form = WritePageForm(request.POST, request.FILES)
+        # images = cloudinary.uploader.upload(request.FILES['image'])
 
         if page_form.is_valid():
             write_page = page_form.save(commit=False)
@@ -46,6 +47,7 @@ class WritePage(generic.CreateView):
             "write_page.html",
             {
                 "page_form": page_form
+                # "images": image
             }
         )
 
@@ -130,14 +132,3 @@ def resources(request):
 def landing_page(request):
     return render(request, "index.html")
 
-
-# def upload(request):
-#   context = dict( cloudinary_form = WritePageForm())
-
-#   if request.method == 'POST':
-#     form = WritePageForm(request.POST, request.FILES)
-#     context['posted'] = form.instance
-#     if form.is_valid():
-#         form.save()
-
-#   return render(request, 'write_page.html', context)
