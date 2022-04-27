@@ -133,17 +133,19 @@ class DeletePage(View):
         if request.method == "POST":
             page_to_delete = Page.objects.get(slug=slug)
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
-            if delete_form.is_valid():
-                delete_form.delete()
-                return redirect('creator_profile')
-        return render(
-            request,
-            "delete_page.html",
-            {
-                "delete_form": delete_form
-            },
-            redirect('creator_profile')
-        ) 
+            # if delete_form.is_valid():
+            page_to_delete.delete()
+            return redirect('creator_profile')
+        # else:
+
+        #     return render(
+        #         request,
+        #         "delete_page.html",
+        #         {
+        #             "delete_form": delete_form
+        #         }
+        #         # redirect('creator_profile')
+        #     ) 
 
 
 
@@ -157,21 +159,6 @@ def creator_page(request, slug):
             "page": page
         }
     )
-
-
-# def delete(request, slug):
-#     # delete_page = get_object_or_404(Page, slug=slug)
-#     delete_page = Page.objects.get(slug=slug)
-#     delete_page.delete()
-
-#     return render(
-#         request,
-#         "delete_page.html",
-#         {
-#             "delete_page": delete_page
-#         },
-#         redirect('creator_profile')
-#     )
 
 
 def resources(request):

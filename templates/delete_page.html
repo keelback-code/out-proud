@@ -11,7 +11,7 @@
     <div>
 
         <!-- Add if user is auth code in here later, and end if after the form -->
-        <form method="post" action="{% url 'write_page' %}" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <h4>test delete blog form</h4>
 
             {{ delete_form | crispy }}
