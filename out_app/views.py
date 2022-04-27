@@ -105,13 +105,13 @@ class EditPage(View):
             if edit_page_form.is_valid():
                 edit_page_form.save()
                 return redirect('creator_profile')
-        return render(
-            request,
-            "edit_page.html",
-            {
-                "edit_page_form": edit_page_form
-            }
-        ) 
+        # return render(
+        #     request,
+        #     "edit_page.html",
+        #     {
+        #         "edit_page_form": edit_page_form
+        #     }
+        # ) 
 
 class DeletePage(View):
 
@@ -133,7 +133,6 @@ class DeletePage(View):
         if request.method == "POST":
             page_to_delete = Page.objects.get(slug=slug)
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
-            # if delete_form.is_valid():
             page_to_delete.delete()
             return redirect('creator_profile')
         # else:
