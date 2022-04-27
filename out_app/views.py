@@ -33,7 +33,6 @@ class WritePage(generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         page_form = WritePageForm(request.POST, request.FILES)
-        # images = cloudinary.uploader.upload(request.FILES['image'])
 
         if page_form.is_valid():
             write_page = page_form.save(commit=False)
@@ -72,11 +71,11 @@ class AllowViewer(View):
             form = viewer_form.save(commit=False)
             form.creator = request.user
             form.save()
-            send_mail(
-                request.POST['first_name'],
-                request.POST['email'],
-                request.POST['shown_name']
-            )
+            # send_mail(
+            #     request.POST['first_name'],
+            #     request.POST['email'],
+            #     request.POST['shown_name']
+            # )
         else:
             viewer_form = AllowViewerForm()
         
@@ -105,13 +104,8 @@ class EditPage(View):
             if edit_page_form.is_valid():
                 edit_page_form.save()
                 return redirect('creator_profile')
-        # return render(
-        #     request,
-        #     "edit_page.html",
-        #     {
-        #         "edit_page_form": edit_page_form
-        #     }
-        # ) 
+            else:
+                return redirect('creator_profile')
 
 class DeletePage(View):
 
@@ -135,17 +129,8 @@ class DeletePage(View):
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
             page_to_delete.delete()
             return redirect('creator_profile')
-        # else:
-
-        #     return render(
-        #         request,
-        #         "delete_page.html",
-        #         {
-        #             "delete_form": delete_form
-        #         }
-        #         # redirect('creator_profile')
-        #     ) 
-
+        else:
+            return redirect('creator_profile')
 
 
 def creator_page(request, slug):

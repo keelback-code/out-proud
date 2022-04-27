@@ -16,22 +16,22 @@
     </script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Email JS temporarily disabled -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
     </script>
     <script type="text/javascript">
         (function () {
             emailjs.init("z4V96jMbCXKPuaPWE");
         })();
-    </script>
+    </script> -->
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-md">
         <div>
             <a class="navbar navbar-brand" href="{% url 'landing_page' %}" aria-label="Landing page.">Out.</a>
         </div>
-        <div class="justify-content-end">
+        <div>
             <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mt-2 mt-md-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
