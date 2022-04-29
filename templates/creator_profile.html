@@ -21,11 +21,10 @@
                     </div>
                     <div>
                         {% if 'placeholder' in page.image %}
-                        <img class="card-img-top" src="{% static 'images/placeholder-image.png' %}"
+                        <img class="card-img-top" src="{% static 'media/placeholder-image.png' %}"
                             alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
                         {% else %}
-                        <img class="card-img-top" src="{% cloudinary page.image.url width=120 height=80 crop='fill' %}"
-                            alt="User provided private image.">
+                        <img class="card-img-top" src="{% cloudinary page.image.url width=120 height=80 crop='fill' %}" alt="User provided private image.">
                         {% endif %}
                     </div>
                 </div>

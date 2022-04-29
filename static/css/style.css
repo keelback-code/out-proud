@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400&family=Pacifico&display=swap');
 
+/* Universal style */
+
 * {
     font-family: 'Fredoka', monospace, sans-serif;
 }
@@ -8,6 +10,11 @@ body {
     background-color: #fefedf;
     display: flex;
     flex-direction: column;
+}
+
+h1,
+.heading {
+    font-family: 'Pacifico', monospace, sans-serif;
 }
 
 
@@ -28,16 +35,8 @@ footer {
 
 /* End sticky footer */
 
-h1,
-.heading {
-    font-family: 'Pacifico', monospace, sans-serif;
-}
 
-a,
-.page-link {
-    text-decoration: none;
-    color: #7f4d7e;
-}
+/* Navbar style */
 
 .navbar-brand {
     font-family: 'Pacifico', monospace, sans-serif;
@@ -56,6 +55,16 @@ a,
 
 .nav-link:hover,
 a:hover,
-.page-link:hover {
+.page-link:hover,
+.fullstop {
+    color: #7f4d7e;
+}
+
+
+/* Resources page style */
+
+a,
+.page-link {
+    text-decoration: none;
     color: #7f4d7e;
 }
