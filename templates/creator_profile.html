@@ -8,15 +8,15 @@
 
 <div class="text-center m-2">
     <h2 class="heading">Creator profile</h2>
-    <a href="{% url 'write_page' %}">New Page</a>
+    <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
     <br>
-    <a href="{% url 'allow_viewer' %}">Allow Viewer</a>
+    <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
 </div>
 
 <div class="container">
     <div class="row">
         {% for page in page_list %}
-            <div class="card col-sm" style="width: 18rem;">        
+            <div class="card col-sm m-2" style="width: 18rem;">        
                     <!-- add class="card-body" if want border around pic -->
                     <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}
                         {{ page.status }}</a>
@@ -30,7 +30,7 @@
                     {% endif %}     
             </div>
         
-        {% if forloop.counter|divisibleby:4 %}
+        {% if forloop.counter|divisibleby:3 %}
         <div class="row">
             {% endif %}
             {% endfor %}

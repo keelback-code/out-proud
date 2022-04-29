@@ -68,3 +68,32 @@ a,
     text-decoration: none;
     color: #7f4d7e;
 }
+
+
+/* Profile page style */
+
+.profile-link:hover,
+.resource-link:hover {
+    color: black;
+}
+
+.card {
+    background-color:#7f4d7e;
+}
+
+.card-title,
+.card-title:hover {
+    color:#fefedf;
+}
+
+/* Style for forms */
+
+.submit-form {
+    background-color:#7f4d7e;
+    color:#fefedf;
+}
+
+.submit-form:hover {
+    color:#fefedf;
+    text-decoration: underline;
+}
