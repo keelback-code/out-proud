@@ -6,59 +6,51 @@
 
 {% load cloudinary %}
 
-<div class="container">
-    <div class="row">
-        
-            <h2 class="heading">Creator profile</h2>
-            <a href="{% url 'write_page' %}">Link to write page</a>
-
-            {% for page in page_list %}
-            <div class="col-6 col-md-4">
-            <div class="card-body" style="width: 20rem">
-                <div class="card">
-                    <div>
-                        <a href="{% url 'creator_page' page.slug %}">{{ page.title }} {{ page.status }}</a>
-                    </div>
-                    <div>
-                        {% if 'placeholder' in page.image %}
-                        <img class="card-img-top" src="{% static 'media/placeholder-image.png' %}"
-                            alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
-                        {% else %}
-                        <img class="card-img-top" src="{% cloudinary page.image.url width=120 height=80 crop='fill' %}" alt="User provided private image.">
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-            {% if forloop.counter|divisibleby:3 %}
-
-            <div class="row">
-                {% endif %}
-                {% endfor %}
-            </div>
-
-        </div>
-    </div>
-
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
-</div>
-<div class="col-6 col-md-4">
+<div class="text-center m-2">
+    <h2 class="heading">Creator profile</h2>
+    <a href="{% url 'write_page' %}">New Page</a>
+    <br>
     <a href="{% url 'allow_viewer' %}">Allow Viewer</a>
 </div>
 
+<div class="container">
+    <div class="row">
+        {% for page in page_list %}
+            <div class="card col-sm" style="width: 18rem;">        
+                    <!-- add class="card-body" if want border around pic -->
+                    <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}
+                        {{ page.status }}</a>
+
+                    {% if 'placeholder' in page.image %}
+                    <img class="card-img" src="{% static 'media/placeholder-image.png' %}"
+                        alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
+                    {% else %}
+                    <img class="card-img" src="{% cloudinary page.image.url height=100 width=60 crop='fill' %}"
+                        alt="User provided private image.">
+                    {% endif %}     
+            </div>
+        
+        {% if forloop.counter|divisibleby:4 %}
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 
 
 {%endblock%}
