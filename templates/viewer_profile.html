@@ -7,17 +7,10 @@
 {% load cloudinary %}
 
 <div class="text-center m-2">
-    <h2 class="heading">Creator profile</h2>
-    {% if user.is_authenticated %}
-        {% if 'email' in ViewerAccess %}
-        <p>viewer top text here</p>
-        {% else %}
-        <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
-        <br>
-        <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
-        {% endif %}
-    {% endif %}
-
+    <h2 class="heading">Viewer profile</h2>
+    <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
+    <br>
+    <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
 </div>
 
 <div class="container">
