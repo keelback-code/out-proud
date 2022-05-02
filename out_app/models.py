@@ -34,7 +34,6 @@ class ViewerAccess(models.Model):
     first_name = models.CharField("The name of the viewer you are sending this to", max_length=100)
     email = models.EmailField(max_length=100, primary_key=True)
 
-
     def __str__(self):
         return str(self.first_name)
 

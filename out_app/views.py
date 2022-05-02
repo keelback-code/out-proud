@@ -11,6 +11,35 @@ from .forms import WritePageForm, AllowViewerForm
 # from cloudinary.forms import cl_init_js_callbacks  
 
 
+def nav_view(request):
+
+    # page_nav = Page.objects.all()
+    user_logged_in = User.objects.all()
+    viewer_logged_in = ViewerAccess.objects.all()
+    print(user_logged_in)
+    print(viewer_logged_in)
+
+    # if viewer_logged_in == user_logged_in:
+    #     viewer_nav_access = True
+    # else:
+    #     viewer_nav_access = False
+
+    if User == ViewerAccess:
+        viewer_nav_access = True
+    else:
+        viewer_nav_access = False
+
+        return render(
+            request,
+            "viewer_profile.html",
+            {
+                "viewer_logged_in": viewer_logged_in,
+                "user_logged_in": user_logged_in,
+                "viewer_nav_access": viewer_nav_access
+            }
+        )
+
+
 # view for creator's profile
 class CreatorProfile(generic.ListView):
 
@@ -20,13 +49,13 @@ class CreatorProfile(generic.ListView):
     ordering = ['title']
 
 
-class ViewerProfile(generic.ListView):
+# class ViewerProfile(generic.ListView):
 
-    queryset = ViewerAccess.objects.all()
-    # ViewerAccess.objects.filter(pk='id').exists()
-    template_name = "viewer_profile.html"
-    # paginate_by = 3
-    # ordering = ['title']
+#     queryset = ViewerAccess.objects.all()
+#     # ViewerAccess.objects.filter(pk='id').exists()
+#     template_name = "viewer_profile.html"
+#     # paginate_by = 3
+#     # ordering = ['title']
 
 
 class WritePage(generic.CreateView):
@@ -36,7 +65,9 @@ class WritePage(generic.CreateView):
         return render(
             request,
             "write_page.html",
-            {"page_form": WritePageForm}
+            {
+                "page_form": WritePageForm
+            }
         )
 
     def post(self, request, *args, **kwargs):

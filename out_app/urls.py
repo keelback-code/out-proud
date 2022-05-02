@@ -3,9 +3,11 @@ from . import views
 
 
 urlpatterns = [
+    # path('base.html', views.nav_view, name='base_html'),
+    path('viewer_profile/', views.nav_view, name='viewer_profile'),
     path('', views.landing_page, name='landing_page'),
     path('creator_profile/', views.CreatorProfile.as_view(), name='creator_profile'),
-    path('viewer_profile/', views.ViewerProfile.as_view(), name='viewer_profile'),
+    # path('viewer_profile/', views.ViewerProfile.as_view(), name='viewer_profile'),
     path('write_page/', views.WritePage.as_view(), name='write_page'),
     path('creator_page/<slug:slug>/', views.creator_page, name='creator_page'),
     path('allow_viewer/', views.AllowViewer.as_view(), name='allow_viewer'),
