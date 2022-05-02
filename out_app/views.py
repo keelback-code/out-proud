@@ -12,13 +12,21 @@ from .forms import WritePageForm, AllowViewerForm
 
 
 # view for creator's profile
-class CreatorView(generic.ListView):
+class CreatorProfile(generic.ListView):
 
-    # model = Page
     queryset = Page.objects.all()
     template_name = "creator_profile.html"
     paginate_by = 3
     ordering = ['title']
+
+
+class ViewerProfile(generic.ListView):
+
+    queryset = ViewerAccess.objects.all()
+    # ViewerAccess.objects.filter(pk='id').exists()
+    template_name = "viewer_profile.html"
+    # paginate_by = 3
+    # ordering = ['title']
 
 
 class WritePage(generic.CreateView):

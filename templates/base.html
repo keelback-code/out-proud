@@ -52,9 +52,15 @@
                     <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
                 {% endif %}
+                {% if email in vieweraccess.email %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'viewer_profile' %}">Profile</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'creator_profile' %}">Profile</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'resources' %}">Resources</a>
                 </li>

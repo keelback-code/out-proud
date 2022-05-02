@@ -59,8 +59,9 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-LOGIN_REDIRECT = '/'
-LOGOUT_REDIRECT = '/'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'landing_page'
+LOGIN_REDIRECT_URL = 'landing_page'
+LOGOUT_REDIRECT_URL = 'landing_page'
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
