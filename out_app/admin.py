@@ -18,7 +18,7 @@ class SuperuserViewerAccessAdmin(admin.ModelAdmin):
     """
     Class to see viewers in the backend.
     """
-    list_display = ('first_name', 'email',)
+    list_display = ('first_name', 'viewer_email',)
 
 
 

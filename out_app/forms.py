@@ -17,7 +17,7 @@ class WritePageForm(forms.ModelForm):
 class AllowViewerForm(forms.ModelForm):
     class Meta:
         model = ViewerAccess
-        fields = ('allowed_page', 'first_name', 'email', 'shown_name',)
+        fields = ('allowed_page', 'first_name', 'viewer_email', 'shown_name',)
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user

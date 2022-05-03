@@ -13,31 +13,32 @@ from .forms import WritePageForm, AllowViewerForm
 
 def nav_view(request):
 
-    # page_nav = Page.objects.all()
-    user_logged_in = User.objects.all()
-    viewer_logged_in = ViewerAccess.objects.all()
+    user_logged_in = request.user.email
+    # viewer_logged_in = ViewerAccess.objects.get(id=viewer_email)
+    viewer_db = ViewerAccess.objects.filter(viewer_email=user_logged_in)
     print(user_logged_in)
-    print(viewer_logged_in)
+    print(viewer_db[0])
+    
+    # print(viewer_logged_in)
 
-    # if viewer_logged_in == user_logged_in:
-    #     viewer_nav_access = True
-    # else:
-    #     viewer_nav_access = False
-
-    if User == ViewerAccess:
+    # for viewer in viewer_db:
+    if user_logged_in == viewer_db[0]:
         viewer_nav_access = True
+        print("reached true")
     else:
         viewer_nav_access = False
+        print("reached false")
 
         return render(
             request,
             "viewer_profile.html",
             {
-                "viewer_logged_in": viewer_logged_in,
-                "user_logged_in": user_logged_in,
+                # "viewer_logged_in": viewer_logged_in,
+                # "user_logged_in": user_logged_in,
                 "viewer_nav_access": viewer_nav_access
             }
         )
+        
 
 
 # view for creator's profile
