@@ -52,7 +52,7 @@
                     <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
                 {% endif %}
-                {% if viewer_nav_access %}
+                {% if viewer_access %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'viewer_profile' %}">Profile</a>
                 </li>
@@ -101,7 +101,7 @@
     <footer class="container">
         <div class="row">
             <div class="col mt-2">
-                Hit Ctrl+W to quickly leave the site
+                Hit Ctrl+W/Cmd+W to quickly close this tab
             </div>
             <div class="col">
                 <a class="justify-content-end nav-link" href="{% url 'account_logout' %}">Contact us on Instagram</a>
