@@ -20,9 +20,10 @@ class Page(models.Model):
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
-
-    def __str__(self):
-        return self.title
+    
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class ViewerAccess(models.Model):
