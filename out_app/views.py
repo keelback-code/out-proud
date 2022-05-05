@@ -11,34 +11,6 @@ from .forms import WritePageForm, AllowViewerForm
 # from cloudinary.forms import cl_init_js_callbacks  
 
 
-def nav_view(request):
-
-    user_logged_in = request.user.email
-    viewer_logged_in = ViewerAccess.objects.get(viewer_email=user_logged_in)
-    print(user_logged_in)
-    print(viewer_logged_in)
-
-    if user_logged_in == viewer_logged_in:
-        viewer_access = True
-        print("reached true")
-    else:
-        viewer_access = False
-        print("reached false")
-
-        return render(
-            request,
-            "viewer_profile.html",
-            {
-                # "viewer_logged_in": viewer_logged_in,
-                # "user_logged_in": user_logged_in,
-                "viewer_access": viewer_access
-            }
-        )
-    
-       
-        
-
-
 # view for creator's profile
 class CreatorProfile(generic.ListView):
 
@@ -179,6 +151,29 @@ def creator_page(request, slug):
         "creator_page.html",
         {
             "page": page
+        }
+    )
+
+
+def nav_view(request):
+
+    user_logged_in = str(request.user.email)
+    viewers = ViewerAccess.objects.all()
+
+    for viewer in viewers:
+        viewer_logged_in = str(viewer)
+        if user_logged_in == viewer_logged_in:
+            viewer_access = True
+        else:
+            viewer_access = False
+
+    return render(
+        request,
+        "viewer_profile.html",
+        {
+            "viewer_logged_in": viewer_logged_in,
+            "user_logged_in": user_logged_in,
+            "viewer_access": viewer_access
         }
     )
 
