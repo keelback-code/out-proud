@@ -14,19 +14,19 @@
         <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
     </form>
 
-    <script>
+    <!-- <script>
         emailjs.send("service_0muuuls", "template_xx57dpj", ".viewer-form")
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
             }, function (error) {
                 console.log('FAILED...', error);
             });
-    </script>
+    </script> -->
 
-    <script>
+    <!-- <script>
         emailjs.send("service_0muuuls", "template_xx57dpj", {
-                "first_name": viewer-form.name.value,
-                "email": viewer-form.email.value,
+                "first_name": viewer-form.first_name.value,
+                "viewer_email": viewer-form.viewer_email.value,
                 "shown_name": viewer-form.shown_name.value
             })
             .then(
@@ -38,7 +38,19 @@
                 }
             );
         return false;
-    </script>
+    </script> -->
+    <!-- <script>
+        emailjs.sendForm('service_0muuuls', 'template_xx57dpj', '.viewer-form', {
+                "first_name": viewer - form.first_name.value,
+                "viewer_email": viewer - form.viewer_email.value,
+                "shown_name": viewer - form.shown_name.value
+            })
+            .then(function (response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function (error) {
+                console.log('FAILED...', error);
+            });
+    </script> -->
 
 
 </div>

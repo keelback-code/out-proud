@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 
 
 <div class="text-center m-2">
@@ -15,6 +16,9 @@
     {% endif %}
     
 </div>
+{% else %}
+<p>You do not have permission to see this page.</p>
+{% endif %}
 
 
 

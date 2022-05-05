@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
 from django.views import generic, View
 # from django.views.generic import TemplateView, ListView
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,15 +19,6 @@ class CreatorProfile(generic.ListView):
     template_name = "creator_profile.html"
     paginate_by = 3
     ordering = ['title']
-
-
-# class ViewerProfile(generic.ListView):
-
-#     queryset = ViewerAccess.objects.all()
-#     # ViewerAccess.objects.filter(pk='id').exists()
-#     template_name = "viewer_profile.html"
-#     # paginate_by = 3
-#     # ordering = ['title']
 
 
 class WritePage(generic.CreateView):
@@ -80,12 +72,16 @@ class AllowViewer(View):
         if viewer_form.is_valid():
             form = viewer_form.save(commit=False)
             form.creator = request.user
+            viewer_email = request.POST['viewer_email']
+            first_name = request.POST['first_name']
+            shown_name = request.POST['shown_name']
             form.save()
-            # send_mail(
-            #     request.POST['first_name'],
-            #     request.POST['email'],
-            #     request.POST['shown_name']
-            # )
+            send_mail(
+                'Message from' + first_name,
+                shown_name,
+                viewer_email,
+                ['outproudproject@gmail.com'],
+            )
         else:
             viewer_form = AllowViewerForm()
         
@@ -155,7 +151,7 @@ def creator_page(request, slug):
     )
 
 
-def nav_view(request):
+def viewer_profile_access(request):
 
     user_logged_in = str(request.user.email)
     viewers = ViewerAccess.objects.all()
@@ -171,8 +167,6 @@ def nav_view(request):
         request,
         "viewer_profile.html",
         {
-            "viewer_logged_in": viewer_logged_in,
-            "user_logged_in": user_logged_in,
             "viewer_access": viewer_access
         }
     )
