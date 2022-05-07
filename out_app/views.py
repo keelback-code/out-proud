@@ -72,22 +72,29 @@ class AllowViewer(View):
         if viewer_form.is_valid():
             form = viewer_form.save(commit=False)
             form.creator = request.user
+            form.save()
             viewer_email = request.POST['viewer_email']
             first_name = request.POST['first_name']
             shown_name = request.POST['shown_name']
-            form.save()
+            
+
             send_mail(
                 'Message from' + first_name,
                 shown_name,
                 viewer_email,
-                ['outproudproject@gmail.com'],
+                ['outproudproject@gmail.com']
             )
+            return redirect("creator_profile.html")
         else:
             viewer_form = AllowViewerForm()
         
-        return redirect(
-            "creator_profile",
-            )
+        return render(
+            request,
+            "allow_viewer.html",
+            {
+                "viewer_form": viewer_form
+            }
+        )
 
 
 class EditPage(View):
@@ -126,7 +133,6 @@ class DeletePage(View):
                 "delete_form": delete_form
             }
         ) 
-
 
     def post(self, request, slug):
 
