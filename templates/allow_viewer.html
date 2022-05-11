@@ -4,55 +4,34 @@
 
 {% load crispy_forms_tags %}
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+    (function () {
+        emailjs.init("z4V96jMbCXKPuaPWE");
+    })();
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('viewer-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            emailjs.sendForm('service_0muuuls', 'viewer_form', this)
+                .then(function() {
+                    console.log('SUCCESS!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
+        });
+    }
+</script>
 
 <div class="container-fluid col-md-4">
     <h2 class="heading">Form to allow viewer.</h2>
-
-    <form class="viewer-form" method="post">
+    <form id="viewer-form" method="post">
         {{ viewer_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
     </form>
-
-    <!-- <script>
-        emailjs.send("service_0muuuls", "template_xx57dpj", ".viewer-form")
-            .then(function (response) {
-                console.log('SUCCESS!', response.status, response.text);
-            }, function (error) {
-                console.log('FAILED...', error);
-            });
-    </script> -->
-
-    <!-- <script>
-        emailjs.send("service_0muuuls", "template_xx57dpj", {
-                "first_name": viewer-form.first_name.value,
-                "viewer_email": viewer-form.viewer_email.value,
-                "shown_name": viewer-form.shown_name.value
-            })
-            .then(
-                function (response) {
-                    console.log("SUCCESS", response);
-                },
-                function (error) {
-                    console.log("FAILED", error);
-                }
-            );
-        return false;
-    </script> -->
-    <!-- <script>
-        emailjs.sendForm('service_0muuuls', 'template_xx57dpj', '.viewer-form', {
-                "first_name": viewer - form.first_name.value,
-                "viewer_email": viewer - form.viewer_email.value,
-                "shown_name": viewer - form.shown_name.value
-            })
-            .then(function (response) {
-                console.log('SUCCESS!', response.status, response.text);
-            }, function (error) {
-                console.log('FAILED...', error);
-            });
-    </script> -->
-
-
 </div>
 
 {%endblock%}

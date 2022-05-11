@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.views import generic, View
 # from django.views.generic import TemplateView, ListView
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -73,20 +73,21 @@ class AllowViewer(View):
             form = viewer_form.save(commit=False)
             form.creator = request.user
             form.save()
-            viewer_email = request.POST['viewer_email']
-            first_name = request.POST['first_name']
-            shown_name = request.POST['shown_name']
+            # viewer_email = request.POST['viewer_email']
+            # first_name = request.POST['first_name']
+            # shown_name = request.POST['shown_name']
             
 
-            send_mail(
-                'Message from' + first_name,
-                shown_name,
-                viewer_email,
-                ['outproudproject@gmail.com']
-            )
-            return redirect("creator_profile.html")
-        else:
-            viewer_form = AllowViewerForm()
+        #     send_mail(
+        #         'Zag',
+        #         'Fin',
+        #         'outproudproject@gmail.com',
+        #         ['outproud@outlook.com'],
+        #         fail_silently=False,
+        #     )
+        #     return redirect("creator_profile.html")
+        # else:
+        #     viewer_form = AllowViewerForm()
         
         return render(
             request,
@@ -95,6 +96,9 @@ class AllowViewer(View):
                 "viewer_form": viewer_form
             }
         )
+
+
+
 
 
 class EditPage(View):
