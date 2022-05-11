@@ -54,9 +54,9 @@ class WritePage(generic.CreateView):
         )
 
 
-class AllowViewer(View):
+class AllowViewer(generic.CreateView):
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         return render(
             request,
             "allow_viewer.html",
@@ -65,40 +65,25 @@ class AllowViewer(View):
             }
         )
 
-    def post(self, request):
-        
-        viewer_form = AllowViewerForm(request.POST)
-
-        if viewer_form.is_valid():
-            form = viewer_form.save(commit=False)
-            form.creator = request.user
-            form.save()
-            # viewer_email = request.POST['viewer_email']
-            # first_name = request.POST['first_name']
-            # shown_name = request.POST['shown_name']
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            viewer_form = AllowViewerForm(request.POST)
+            if viewer_form.is_valid():
+                form = viewer_form.save(commit=False)
+                form.user = request.user
+                form.save()
+                return redirect('creator_profile')
+            else:
+                viewer_form = AllowViewerForm()
+                return redirect('allow_viewer')
             
-
-        #     send_mail(
-        #         'Zag',
-        #         'Fin',
-        #         'outproudproject@gmail.com',
-        #         ['outproud@outlook.com'],
-        #         fail_silently=False,
-        #     )
-        #     return redirect("creator_profile.html")
-        # else:
-        #     viewer_form = AllowViewerForm()
-        
         return render(
-            request,
-            "allow_viewer.html",
-            {
-                "viewer_form": viewer_form
+             request,
+             "allow_viewer.html",
+             {
+                 "viewer_form": viewer_form
             }
         )
-
-
-
 
 
 class EditPage(View):
@@ -123,6 +108,7 @@ class EditPage(View):
                 return redirect('creator_profile')
             else:
                 return redirect('creator_profile')
+
 
 class DeletePage(View):
 
