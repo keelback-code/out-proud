@@ -64,6 +64,8 @@ The website allows the user (creator) the ability to create a private page which
 
 * As a creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified viewer.
 
+* As a creator I can create drafts so that I can check how my page looks and be sure of the content before emailing a viewer.
+
 * As a viewer/creator, I can sign in intuitively so that I can use the website easily.
 
 * As a viewer/creator, I can navigate the website easily and intuitively.
@@ -209,6 +211,7 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 
 Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks. DjangoGirls.
 Pixlr for image editing
+Placeholder image from link and used with permission of artist.
 
 ### Credits
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin  # UserPassesTestMixin
+from django.views import generic, View
 from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm 
@@ -83,25 +83,33 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        page_to_edit = get_object_or_404(Page, slug=slug)
-        edit_page_form = WritePageForm(instance=page_to_edit)
-        return render(
-            request,
-            "edit_page.html",
-            {
-                "edit_page_form": edit_page_form
-            }
-        )  
+        editor = Page.objects.filter(creator=request.user.username).count() > 0
+        if editor is True:
+            page_to_edit = get_object_or_404(Page, slug=slug)
+            edit_page_form = WritePageForm(instance=page_to_edit)
+            return render(
+                request,
+                "edit_page.html",
+                {
+                    "edit_page_form": edit_page_form
+                }
+            )
+        else:
+            return redirect('creator_profile')
 
     def post(self, request, slug):
-        if request.method == "POST":
-            page_to_edit = get_object_or_404(Page, slug=slug)
-            edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
-            if edit_page_form.is_valid():
-                edit_page_form.save()
-                return redirect('creator_profile')
-            else:
-                return redirect('creator_profile')
+        
+        if Page.creator == request.user:
+            if request.method == "POST":
+                page_to_edit = get_object_or_404(Page, slug=slug)
+                edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+                if edit_page_form.is_valid():
+                    edit_page_form.save()
+                    return redirect('creator_profile')
+                else:
+                    return redirect('creator_profile')
+        else:
+            return redirect('creator_profile')
 
 
 class DeletePage(LoginRequiredMixin, View):
@@ -145,15 +153,7 @@ def creator_page(request, slug):
 @login_required
 def viewer_profile_access(request):
 
-    user_logged_in = str(request.user.email)
-    viewers = ViewerAccess.objects.all()
-
-    for viewer in viewers:
-        viewer_logged_in = str(viewer)
-        if user_logged_in == viewer_logged_in:
-            viewer_access = True
-        else:
-            viewer_access = False
+    viewer_access = ViewerAccess.objects.filter(viewer_email=request.user.email).count() > 0
 
     return render(
         request,

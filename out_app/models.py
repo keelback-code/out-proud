@@ -10,7 +10,7 @@ STATUS = ((0, "Draft"), (1, "Ready to Send"))
 
 class Page(models.Model):
     """
-    Class for modelling posts made by creators.
+    Class for modelling pages made by creators.
     """
     slug = models.SlugField("Page code", max_length=12, unique=True, primary_key=True)
     title = models.CharField(max_length=250)

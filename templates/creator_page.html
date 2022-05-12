@@ -26,7 +26,7 @@ if viewer email in db and connected to creator, then authenticated -->
     {% else %}
     {% cloudinary page.image %}
     {% endif %}
-    
+
     <div>
         <a href="{% url 'edit_page' page.slug %}">Edit page</a>
     </div>
