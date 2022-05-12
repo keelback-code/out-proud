@@ -23,11 +23,9 @@
                         {{ page.status }}</a>
 
                     {% if 'placeholder' in page.image %}
-                    <img class="card-img" src="{% static 'media/placeholder-image.png' %}"
-                        alt="Placeholder image of a small froglike creature wearing a large wizard hat.">
+                    {% cloudinary page.image.placeholder.png %}
                     {% else %}
-                    <img class="card-img" src="{% cloudinary page.image.url height=100 width=60 crop='fill' %}"
-                        alt="User provided private image.">
+                    {% cloudinary page.image %}
                     {% endif %}     
             </div>
         
