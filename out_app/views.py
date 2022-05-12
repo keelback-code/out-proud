@@ -1,9 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.mail import send_mail, EmailMessage
+from django.contrib.auth.decorators import login_required
 from django.views import generic, View
-# from django.views.generic import TemplateView, ListView
-# from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin  # UserPassesTestMixin
 from django import forms
 from .models import Page, User, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
@@ -12,8 +10,7 @@ from .forms import WritePageForm, AllowViewerForm
 # from cloudinary.forms import cl_init_js_callbacks  
 
 
-# view for creator's profile
-class CreatorProfile(generic.ListView):
+class CreatorProfile(LoginRequiredMixin, generic.ListView):
 
     queryset = Page.objects.all()
     template_name = "creator_profile.html"
@@ -21,7 +18,7 @@ class CreatorProfile(generic.ListView):
     ordering = ['title']
 
 
-class WritePage(generic.CreateView):
+class WritePage(LoginRequiredMixin, generic.CreateView):
     
     def get(self, request, *args, **kwargs):
 
@@ -54,7 +51,7 @@ class WritePage(generic.CreateView):
         )
 
 
-class AllowViewer(generic.CreateView):
+class AllowViewer(LoginRequiredMixin, generic.CreateView):
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -86,7 +83,7 @@ class AllowViewer(generic.CreateView):
         )
 
 
-class EditPage(View):
+class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
         page_to_edit = Page.objects.get(slug=slug)
@@ -110,7 +107,7 @@ class EditPage(View):
                 return redirect('creator_profile')
 
 
-class DeletePage(View):
+class DeletePage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
         page_to_delete = Page.objects.get(slug=slug)
@@ -135,6 +132,7 @@ class DeletePage(View):
             return redirect('creator_profile')
 
 
+@login_required
 def creator_page(request, slug):
     page = get_object_or_404(Page, slug=slug)
 
@@ -147,6 +145,7 @@ def creator_page(request, slug):
     )
 
 
+@login_required
 def viewer_profile_access(request):
 
     user_logged_in = str(request.user.email)

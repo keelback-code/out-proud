@@ -13,7 +13,7 @@
 </script>
 <script type="text/javascript">
     window.onload = function() {
-        document.getElementById('viewer-form').addEventListener('POST', function(event) {
+        document.getElementById('viewer-form').addEventListener('submit', function(event) {
             event.preventDefault();
             emailjs.sendForm('service_0muuuls', 'viewer_form_template', this)
                 .then(function() {
