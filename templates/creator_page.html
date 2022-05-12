@@ -10,7 +10,7 @@ if viewer email in db and connected to creator, then authenticated -->
 
 <div>
     <h2 class="heading">Creator blog page.</h2>
-    
+
     <div>
         <h3>{{ page.title }}</h3>
     </div>
@@ -18,11 +18,15 @@ if viewer email in db and connected to creator, then authenticated -->
         <p> {{ page.text_content | safe }} </p>
     </div>
     <div>
-         {{ page.status }} 
+        {{ page.status }}
     </div>
 
-    <img src="{% cloudinary page.image.url format='jpg' width=240 height=160 crop='fill' %}"
-                            alt="User provided private image.">
+    {% if 'placeholder' in page.image %}
+    {% cloudinary page.image.placeholder.png %}
+    {% else %}
+    {% cloudinary page.image %}
+    {% endif %}
+    
     <div>
         <a href="{% url 'edit_page' page.slug %}">Edit page</a>
     </div>

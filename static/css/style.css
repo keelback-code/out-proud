@@ -86,6 +86,11 @@ a,
     color:#fefedf;
 }
 
+.pagination-btn {
+    background-color: #fefedf;
+    border: none;
+}
+
 /* Style for forms */
 
 .submit-form {

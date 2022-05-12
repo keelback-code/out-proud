@@ -4,10 +4,7 @@ from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin  # UserPassesTestMixin
 from django import forms
 from .models import Page, User, ViewerAccess
-from .forms import WritePageForm, AllowViewerForm
-
-# from django.http import HttpResponse
-# from cloudinary.forms import cl_init_js_callbacks  
+from .forms import WritePageForm, AllowViewerForm 
 
 
 class CreatorProfile(LoginRequiredMixin, generic.ListView):
@@ -86,7 +83,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        page_to_edit = Page.objects.get(slug=slug)
+        page_to_edit = get_object_or_404(Page, slug=slug)
         edit_page_form = WritePageForm(instance=page_to_edit)
         return render(
             request,
@@ -98,7 +95,7 @@ class EditPage(LoginRequiredMixin, View):
 
     def post(self, request, slug):
         if request.method == "POST":
-            page_to_edit = Page.objects.get(slug=slug)
+            page_to_edit = get_object_or_404(Page, slug=slug)
             edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
             if edit_page_form.is_valid():
                 edit_page_form.save()
@@ -110,7 +107,7 @@ class EditPage(LoginRequiredMixin, View):
 class DeletePage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        page_to_delete = Page.objects.get(slug=slug)
+        page_to_delete = get_object_or_404(Page, slug=slug)
         delete_form = WritePageForm(instance=page_to_delete)
 
         return render(
@@ -124,7 +121,7 @@ class DeletePage(LoginRequiredMixin, View):
     def post(self, request, slug):
 
         if request.method == "POST":
-            page_to_delete = Page.objects.get(slug=slug)
+            page_to_delete = get_object_or_404(Page, slug=slug)
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
             page_to_delete.delete()
             return redirect('creator_profile')

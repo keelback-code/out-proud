@@ -18,6 +18,7 @@
             emailjs.sendForm('service_0muuuls', 'viewer_form_template', this)
                 .then(function() {
                     console.log('SUCCESS!', response.status, response.text);
+                    this.submit();
                 }, function(error) {
                     console.log('FAILED...', error);
                 });

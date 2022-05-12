@@ -208,6 +208,7 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 ### Resources
 
 Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks. DjangoGirls.
+Pixlr for image editing
 
 ### Credits
 
