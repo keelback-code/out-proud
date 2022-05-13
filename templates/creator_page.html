@@ -22,9 +22,9 @@ if viewer email in db and connected to creator, then authenticated -->
     </div>
 
     {% if 'placeholder' in page.image %}
-    {% cloudinary page.image.placeholder.png %}
+    {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
     {% else %}
-    {% cloudinary page.image %}
+    {% cloudinary page.image width=600 height=600 crop="limit" %}
     {% endif %}
 
     <div>

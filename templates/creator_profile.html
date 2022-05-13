@@ -17,16 +17,17 @@
 <div class="container">
     <div class="row">
         {% for page in page_list %}
-            <div class="card col-sm m-2" style="width: 18rem;">        
-                    <!-- add class="card-body" if want border around pic -->
-                    <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}
-                        {{ page.status }}</a>
+        
+            
+                <div class="card card-body col-sm m-2" style="width: 240px;">
+                <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}
+                    {{ page.status }}</a>
 
-                    {% if 'placeholder' in page.image %}
-                    {% cloudinary page.image.placeholder.png %}
-                    {% else %}
-                    {% cloudinary page.image %}
-                    {% endif %}     
+                {% if 'placeholder' in page.image %}
+                {% cloudinary page.image.placeholder.png width=240 height=240 crop="limit" %}
+                {% else %}
+                {% cloudinary page.image width=240 height=240 crop="limit" %}
+                {% endif %}     
             </div>
         
         {% if forloop.counter|divisibleby:3 %}

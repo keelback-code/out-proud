@@ -211,11 +211,12 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 
 Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks. DjangoGirls.
 Pixlr for image editing
-Placeholder image from link and used with permission of artist.
+
+Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
 
 ### Credits
 
-
+Placeholder image from artist [Bee](https://beebeedibapbeediboop.tumblr.com/); used with permission from the artist.
 
 ### Acknowledgements
 

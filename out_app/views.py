@@ -69,6 +69,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
                 return redirect('creator_profile')
             else:
                 viewer_form = AllowViewerForm()
+                print("else reached")
                 return redirect('allow_viewer')
             
         return render(
