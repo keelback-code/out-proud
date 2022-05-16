@@ -2,16 +2,21 @@
 
 {% block content %}
 
+{% load cloudinary %}
+
 <div class="container">
-        <div class="row">
-          <div class="col">
-                <h2>Landing page.</h2>
-          </div>
-          <div class="col">
-                <p>Opening paragraph here.</p>
+      <div class="row">
+        <div class="col text-center">
+                <h1 class="landing-heading mb-4">Out.</h1>
+                <p>Out is a website for coming out to your friends and family.</p>
+                <p>Login and create a private page with text, pictures and links to helpful sites. Be your true self.</p>
+                <p>Then choose who can see the page. The viewer will receive an email with instructions on how to view your page.</p>
+                <p>There's no rush to email viewers right away, you can work on drafts for as long as you like.</p>
+                <p>Check out the Resources tab for helpful sites and videos.</p>
+                <p>If you have any questions just get in touch on <a href="https://www.instagram.com/out.proud/" target="_blank" rel="noopener" aria-label="Opens in a new tab">Instagram</a>, you're always welcome here.</p>
+                {% cloudinary image.purpleheart.png %}
           </div>
         </div>
       </div>
-
 
 {%endblock%}
