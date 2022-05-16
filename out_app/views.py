@@ -21,6 +21,15 @@ from .forms import WritePageForm, AllowViewerForm
 #         else:
 #             viewer_access = False
 
+# def get_user_pages(Klass, request):
+#     """
+#     Global function for retrieving pages belonging to a creator.
+#     """
+#     user = request.user
+#     page_list = Klass.objects.filter(user=user).values_list('title', flat=True)
+#     return Klass.objects.filter(title__in=page_list)
+
+
 class CreatorProfile(LoginRequiredMixin, generic.ListView):
 
     queryset = Page.objects.all()
@@ -117,7 +126,10 @@ class DeletePage(LoginRequiredMixin, View):
 
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
-
+    """
+    Class to allow Viewers; contains get and post functions, as well
+    as a function to allow only Pages for the logged in user to be seen in the dropdown.
+    """
     def get(self, request, *args, **kwargs):
 
         return render(
@@ -131,11 +143,10 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
             viewer_form = AllowViewerForm(request.POST)
-            queryset = ViewerAccess.objects.all()
 
-            # Code for lines 81-88, for use in assessing if viewer exists in db, from:
+            # Code for lines 139-145, for use in assessing if viewer exists in db, from:
             # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
-            
+
             if viewer_form.is_valid():
                 viewer_email = viewer_form.cleaned_data['viewer_email']
                 if ViewerAccess.objects.filter(viewer_email=viewer_email).exists():
@@ -151,6 +162,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
                  "viewer_form": viewer_form
             }
         )
+
 
 
 @login_required

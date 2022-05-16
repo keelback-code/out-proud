@@ -13,6 +13,10 @@ class WritePageForm(forms.ModelForm):
 
 
 class AllowViewerForm(forms.ModelForm):
+    """ 
+    Model form for the Creator to allow a Viewer to see their Page.
+    """
+
     class Meta:
         model = ViewerAccess
         fields = ('allowed_page', 'first_name', 'viewer_email', 'shown_name',)
