@@ -43,7 +43,6 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         page_form = WritePageForm(request.POST, request.FILES)
-
         if page_form.is_valid():
             write_page = page_form.save(commit=False)
             write_page.user = request.user
@@ -57,41 +56,6 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             "write_page.html",
             {
                 "page_form": page_form
-            }
-        )
-
-
-class AllowViewer(LoginRequiredMixin, generic.CreateView):
-
-    def get(self, request, *args, **kwargs):
-        return render(
-            request,
-            "allow_viewer.html",
-            {
-                "viewer_form": AllowViewerForm()
-            }
-        )
-
-    def post(self, request, *args, **kwargs):
-        if request.method == "POST":
-            viewer_form = AllowViewerForm(request.POST)
-            queryset = ViewerAccess.objects.all()
-
-            # Code for lines 81-88, for use in assessing if viewer exists in db, from https://stackoverflow.com/questions/41374782/django-check-if-object-exists
-
-            if viewer_form.is_valid():
-                viewer_email = viewer_form.cleaned_data['viewer_email']
-                if ViewerAccess.objects.filter(viewer_email=viewer_email).exists():
-                    messages.error(request, 'already exists')
-                else:
-                    instance = viewer_form.save()
-                    return redirect('creator_profile')
-            
-        return render(
-             request,
-             "allow_viewer.html",
-             {
-                 "viewer_form": viewer_form
             }
         )
 
@@ -143,7 +107,6 @@ class DeletePage(LoginRequiredMixin, View):
         ) 
 
     def post(self, request, slug):
-
         if request.method == "POST":
             page_to_delete = get_object_or_404(Page, slug=slug)
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
@@ -151,6 +114,43 @@ class DeletePage(LoginRequiredMixin, View):
             return redirect('creator_profile')
         else:
             return redirect('creator_profile')
+
+
+class AllowViewer(LoginRequiredMixin, generic.CreateView):
+
+    def get(self, request, *args, **kwargs):
+
+        return render(
+            request,
+            "allow_viewer.html",
+            {
+                "viewer_form": AllowViewerForm()
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            viewer_form = AllowViewerForm(request.POST)
+            queryset = ViewerAccess.objects.all()
+
+            # Code for lines 81-88, for use in assessing if viewer exists in db, from:
+            # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
+            
+            if viewer_form.is_valid():
+                viewer_email = viewer_form.cleaned_data['viewer_email']
+                if ViewerAccess.objects.filter(viewer_email=viewer_email).exists():
+                    messages.error(request, 'already exists')
+                else:
+                    instance = viewer_form.save()
+                    return redirect('creator_profile')
+            
+        return render(
+             request,
+             "allow_viewer.html",
+             {
+                 "viewer_form": viewer_form
+            }
+        )
 
 
 @login_required
@@ -169,13 +169,8 @@ def creator_page(request, slug):
 @login_required
 def viewer_profile_access(request):
 
-    # user_logged_in = str(request.user.email)
-    # viewer_logged_in = ViewerAccess.objects.filter(viewer_email=user_logged_in).count() > 0
-    # viewer_access = str(viewer_logged_in)
-
     user_logged_in = str(request.user.email)
     viewers = ViewerAccess.objects.all()
-
     for viewer in viewers:
         viewer_logged_in = str(viewer)
         if user_logged_in == viewer_logged_in:
