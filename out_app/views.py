@@ -7,6 +7,20 @@ from .models import Page, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm 
 
 
+# def check_viewers(request):
+#     """
+#     Global function to check if viewer exists in database.
+#     """
+#     viewer_requested = str(request.user.email)
+#     viewers = ViewerAccess.objects.all()
+
+#     for viewer in viewers:
+#         viewer_logged_in = str(viewer)
+#         if user_logged_in == viewer_logged_in:
+#             viewer_access = True
+#         else:
+#             viewer_access = False
+
 class CreatorProfile(LoginRequiredMixin, generic.ListView):
 
     queryset = Page.objects.all()
@@ -43,7 +57,6 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             "write_page.html",
             {
                 "page_form": page_form
-                # "images": image
             }
         )
 
@@ -62,15 +75,17 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
             viewer_form = AllowViewerForm(request.POST)
+            queryset = ViewerAccess.objects.all()
+
+            # Code for lines 81-88, for use in assessing if viewer exists in db, from https://stackoverflow.com/questions/41374782/django-check-if-object-exists
+
             if viewer_form.is_valid():
-                form = viewer_form.save(commit=False)
-                form.user = request.user
-                form.save()
-                return redirect('creator_profile')
-            else:
-                viewer_form = AllowViewerForm()
-                print("else reached")
-                return redirect('allow_viewer')
+                viewer_email = viewer_form.cleaned_data['viewer_email']
+                if ViewerAccess.objects.filter(viewer_email=viewer_email).exists():
+                    messages.error(request, 'already exists')
+                else:
+                    instance = viewer_form.save()
+                    return redirect('creator_profile')
             
         return render(
              request,
@@ -84,7 +99,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        editor = Page.objects.filter(creator=request.user.username).count() > 0
+        # editor = Page.objects.filter(creator=request.user.username).count() > 0
         if editor is True:
             page_to_edit = get_object_or_404(Page, slug=slug)
             edit_page_form = WritePageForm(instance=page_to_edit)
@@ -154,7 +169,19 @@ def creator_page(request, slug):
 @login_required
 def viewer_profile_access(request):
 
-    viewer_access = ViewerAccess.objects.filter(viewer_email=request.user.email).count() > 0
+    # user_logged_in = str(request.user.email)
+    # viewer_logged_in = ViewerAccess.objects.filter(viewer_email=user_logged_in).count() > 0
+    # viewer_access = str(viewer_logged_in)
+
+    user_logged_in = str(request.user.email)
+    viewers = ViewerAccess.objects.all()
+
+    for viewer in viewers:
+        viewer_logged_in = str(viewer)
+        if user_logged_in == viewer_logged_in:
+            viewer_access = True
+        else:
+            viewer_access = False
 
     return render(
         request,

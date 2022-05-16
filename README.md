@@ -210,11 +210,16 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 ### Resources
 
 Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks. DjangoGirls.
-Pixlr for image editing
+
+Guidance with updating and deleting Page instances from [GeeksforGeeks](https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/).
+
+Photo editing from [Pixlr](https://pixlr.com/).
 
 Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
 
 ### Credits
+
+
 
 Placeholder image from artist [Bee](https://beebeedibapbeediboop.tumblr.com/); used with permission from the artist.
 
