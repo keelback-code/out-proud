@@ -10,6 +10,10 @@ class WritePageForm(forms.ModelForm):
         def form_valid(self, form):
             form.instance.created_by = self.request.user
             return super().form_valid(form)
+        
+        # def publish(self, status):
+        #     print("reached")
+        #     return self.status
 
 
 class AllowViewerForm(forms.ModelForm):
@@ -29,7 +33,7 @@ class AllowViewerForm(forms.ModelForm):
             if AllowViewerForm.objects.filter(viewer_email=viewer_email).exists():
                 raise forms.ValidationError('The email [%s] already exists' % viewer_email)    
             return viewer_email
-
+        
         def form_valid(self, form):
             form.instance.created_by = self.request.user
             return super().form_valid(form)

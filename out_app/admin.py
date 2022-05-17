@@ -20,16 +20,3 @@ class SuperuserViewerAccessAdmin(admin.ModelAdmin):
     """
     list_display = ('first_name', 'viewer_email',)
 
-
-
-
-
-# class PageAdmin(admin.ModelAdmin):
-#     """
-#     Admin Class for pre-filling slugs.
-#     """
-#     model = Page
-    # prepopulated_fields = {'creator': ('User',)}  # logged in user? should be editable tho
-    # prepopulated_fields = {'slug': (get_random_string)}
-
-

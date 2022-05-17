@@ -27,6 +27,11 @@ if viewer email in db and connected to creator, then authenticated -->
     {% cloudinary page.image width=600 height=600 crop="limit" %}
     {% endif %}
 
+
+
+    {% if viewer_access %}
+    <p>no viewer access to buttons</p>
+    {% else %}
     <div>
         <a href="{% url 'edit_page' page.slug %}">Edit page</a>
     </div>
@@ -34,7 +39,7 @@ if viewer email in db and connected to creator, then authenticated -->
         <a href="{% url 'delete_page' page.slug %}">Delete page</a>
     </div>
 </div>
-
+{% endif %}
 
 
 {%endblock%}

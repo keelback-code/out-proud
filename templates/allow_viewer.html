@@ -25,6 +25,7 @@
         });
     }
 </script>
+{% if user.is_authenticated %}
 
 <div class="container-fluid col-md-4">
     <h2 class="heading">Form to allow viewer.</h2>
@@ -35,4 +36,7 @@
     </form>
 </div>
 
+{% else %}
+ <p>You do not have permission to see this page.</p>
+{% endif %}
 {%endblock%}

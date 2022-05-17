@@ -31,13 +31,19 @@ class Page(models.Model):
         super().save(*args, **kwargs) 
     
     def __str__(self):
-        return self.title     
+        return self.title 
+
+    # def creator_check(self):
+    #     creator_obj = str(self.creator)
+    #     return creator_obj
 
 
 class ViewerAccess(models.Model):
     """
     Class for assigning pages to viewers.
     """
+    # def form_choices():
+    #     return { 'allowed_page': Page.objects.filter(creator=request.user) }
 
     allowed_page = models.ForeignKey(Page, on_delete=models.CASCADE, verbose_name="Page you would like the recipient to see")
     shown_name = models.CharField("Your name (as it will appear to viewer)", max_length=100)
