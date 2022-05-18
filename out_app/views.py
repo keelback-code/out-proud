@@ -54,6 +54,16 @@ class CreatorProfile(LoginRequiredMixin, generic.ListView):
         paginate_by = 3
         ordering = ['title']
 
+        # add viewer_access context
+
+        # return render(
+        #     request,
+        #     "creator_profile.html",
+        #     {
+        #         "viewer_access": viewer_access
+        #     }
+        # )
+
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
     

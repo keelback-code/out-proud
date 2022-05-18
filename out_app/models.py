@@ -15,8 +15,6 @@ class Page(models.Model):
     """
     Class for modelling pages made by creators.
     """
-    STATUS = [(0, "Draft"), (1, "Ready to Send"),]
-
     slug = models.SlugField("Page code", unique=True, primary_key=True)
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="allowed_page")
@@ -24,7 +22,6 @@ class Page(models.Model):
     image = CloudinaryField(blank=True, default="placeholder")
     link = models.TextField(blank=True)
     link_title = models.CharField(max_length=250, blank=True)
-    status = models.IntegerField(choices=STATUS, default=0)
     
     def save(self, *args, **kwargs):
         self.slug = random_str_generator()

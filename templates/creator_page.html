@@ -4,9 +4,7 @@
 
 {% load cloudinary %}
 
-<!-- if user is auth code here, add endif
-if viewer email in db and connected to creator, then authenticated -->
-
+{% if user.is_authenticated %}
 
 <div>
     <h2 class="heading">Creator blog page.</h2>
@@ -17,9 +15,7 @@ if viewer email in db and connected to creator, then authenticated -->
     <div>
         <p> {{ page.text_content | safe }} </p>
     </div>
-    <div>
-        {{ page.status }}
-    </div>
+
 
     {% if 'placeholder' in page.image %}
     {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
@@ -39,6 +35,7 @@ if viewer email in db and connected to creator, then authenticated -->
         <a href="{% url 'delete_page' page.slug %}">Delete page</a>
     </div>
 </div>
+{% endif %}
 {% endif %}
 
 

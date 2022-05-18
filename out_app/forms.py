@@ -5,15 +5,11 @@ from django import forms
 class WritePageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ('creator', 'title', 'text_content', 'image', 'link', 'link_title', 'status',)
+        fields = ('creator', 'title', 'text_content', 'image', 'link', 'link_title',)
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user
             return super().form_valid(form)
-        
-        # def publish(self, status):
-        #     print("reached")
-        #     return self.status
 
 
 class AllowViewerForm(forms.ModelForm):

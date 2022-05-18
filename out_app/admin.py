@@ -9,8 +9,7 @@ class SuperuserPageAdmin(admin.ModelAdmin):
     """
     Class to see pages in the backend.
     """
-    list_display = ('title', 'status',)
-    list_filter = ('status',)
+    list_display = ('title', 'creator',)
 
 
 @admin.register(ViewerAccess)

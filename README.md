@@ -10,6 +10,8 @@
 
 [Features](#features)
 
+[Future Implementations](#future-implementations)
+
 [Technologies](#technologies)
 
 [Testing ](#testing)
@@ -64,8 +66,6 @@ The website allows the user (creator) the ability to create a private page which
 
 * As a creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified viewer.
 
-* As a creator I can create drafts so that I can check how my page looks and be sure of the content before emailing a viewer.
-
 * As a viewer/creator, I can sign in intuitively so that I can use the website easily.
 
 * As a viewer/creator, I can navigate the website easily and intuitively.
@@ -105,6 +105,13 @@ Resources page - card view of links to external resources.
 
 Create new page - new form with accessible fields including title/author, photo/video/s, any extra text, any link/s, link to resources page, title for link, url for link. All fields are optional. Submit button and once submitted the page will have an edit button, both will have user feedback.
 
+### Future Implementations
+
+check if this section should go here
+viewer email - more than one allowed per viewer
+chat - separate for viewers and creators
+ability for creators to suggest resources
+video upload
 
 ### Technologies
 
