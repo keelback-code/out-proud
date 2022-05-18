@@ -3,6 +3,9 @@ from django import forms
 
 
 class WritePageForm(forms.ModelForm):
+    """ 
+    Model form for the Creator to create, edit and delete Pages.
+    """
     class Meta:
         model = Page
         fields = ('creator', 'title', 'text_content', 'image', 'link', 'link_title',)

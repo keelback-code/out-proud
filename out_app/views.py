@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin  # UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic, View
 from django import forms
 from .models import Page, ViewerAccess, User
@@ -49,20 +49,16 @@ def check_viewer_exists(request):
 
 class CreatorProfile(LoginRequiredMixin, generic.ListView):
 
-        queryset = Page.objects.all()
+        # queryset = Page.objects.all()
+        model = Page
         template_name = "creator_profile.html"
         paginate_by = 3
         ordering = ['title']
 
-        # add viewer_access context
-
-        # return render(
-        #     request,
-        #     "creator_profile.html",
-        #     {
-        #         "viewer_access": viewer_access
-        #     }
-        # )
+        # def get_context_data(self, **kwargs):
+        #     context = super().get_context_data(**kwargs)
+        #     context["viewer_access"] = check_viewer_exists
+        #     return context
 
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
@@ -99,10 +95,9 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        # editor = Page.objects.filter(creator=request.user.username).count() > 0
-        if Page.creator == request.user:  # not working yet
-            page_to_edit = get_object_or_404(Page, slug=slug)
-            edit_page_form = WritePageForm(instance=page_to_edit)
+        page_to_edit = get_object_or_404(Page, slug=slug)
+        edit_page_form = WritePageForm(instance=page_to_edit)
+        if page_to_edit.creator == request.user:
             return render(
                 request,
                 "edit_page.html",
@@ -114,11 +109,10 @@ class EditPage(LoginRequiredMixin, View):
             return redirect('creator_profile')
 
     def post(self, request, slug):
-        
-        if Page.creator == request.user:  # not working yet
+        page_to_edit = get_object_or_404(Page, slug=slug)
+        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+        if page_to_edit.creator == request.user:  
             if request.method == "POST":
-                page_to_edit = get_object_or_404(Page, slug=slug)
-                edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
                 if edit_page_form.is_valid():
                     edit_page_form.save()
                     return redirect('creator_profile')
@@ -159,7 +153,8 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
     """
 
     def get(self, request, *args, **kwargs):
-       # only ready to send should show eg status=1
+
+        
         # preferred_dropdown = Page.objects.filter(creator=request.user)
 
         # viewer_form = AllowViewerForm(initial=Page.objects.filter(creator=request.user))
@@ -222,20 +217,11 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 @login_required
 def viewer_profile_access(request):
 
-    user_logged_in = str(request.user.email)
-    viewers = ViewerAccess.objects.all()
-    for viewer in viewers:
-        viewer_logged_in = str(viewer)  # change str to be around == line?
-        if user_logged_in == viewer_logged_in:
-            viewer_access = True
-        else:
-            viewer_access = False
-
     return render(
         request,
         "viewer_profile.html",
         {
-            "viewer_access": viewer_access
+            "viewer_access": check_viewer_exists
         }
     )
 
