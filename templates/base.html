@@ -22,11 +22,13 @@
 
     <nav class="navbar navbar-expand-md mx-4">
         <div>
-            <a class="navbar navbar-brand" href="{% url 'landing_page' %}" aria-label="Landing page.">Out<p class="fullstop heading mt-3">.</p></a>
+            <a class="navbar navbar-brand" href="{% url 'landing_page' %}" aria-label="Landing page.">Out<p
+                    class="fullstop heading mt-3">.</p></a>
         </div>
         <div>
-            <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -64,20 +66,17 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                {% for message in messages %}
-                <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                    {{ message | safe }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                        aria-label="Close message."></button>
-                </div>
-                {% endfor %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show col-md-4 offset-4" id="msg" role="alert">
+                {{ message | safe }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close message."></button>
             </div>
+            {% endfor %}
         </div>
     </div>
 
     <!-- Ctrl w alert for later - needs to go over page -->
-    <!-- <div class="container-fluid">
+    <!-- <div class="container-fluid esc-popup">
         <div class="col-md-4 offset-4">
             <div class="alert alert-info" id="msg" role="alert">
                 Type Ctrl + W or Cmd + W to close this tab quickly.
@@ -97,11 +96,10 @@
                 Hit Ctrl+W/Cmd+W to quickly close this tab
             </div>
             <div class="col">
-                <a class="justify-content-end nav-link" href="https://www.instagram.com/out.proud/" target="_blank" rel="noopener" aria-label="Opens in a new tab">Contact us on Instagram</a>
+                <a class="justify-content-end nav-link" href="https://www.instagram.com/out.proud/" target="_blank"
+                    rel="noopener" aria-label="Opens in a new tab">Contact us on Instagram</a>
             </div>
-            
         </div>
-
     </footer>
 
     <script>
@@ -109,9 +107,8 @@
             let messages = document.getElementById("msg");
             let alert = new bootstrap.Alert(messages);
             alert.close();
-        }, 3000)
+        }, 3500)
     </script>
-
 
 </body>
 

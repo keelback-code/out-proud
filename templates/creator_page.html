@@ -15,15 +15,15 @@
     <div>
         <p> {{ page.text_content | safe }} </p>
     </div>
-
-
+    <div>
+        <a class="resource-link" href="{{ page.link }}" target="_blank" rel="noopener" aria-label="User provided resource.">{{ page.link_title }}</a>
+    </div>
+    
     {% if 'placeholder' in page.image %}
     {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
     {% else %}
     {% cloudinary page.image width=600 height=600 crop="limit" %}
     {% endif %}
-
-
 
     {% if viewer_access %}
     <p>no viewer access to buttons</p>
