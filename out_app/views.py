@@ -110,11 +110,11 @@ class EditPage(LoginRequiredMixin, View):
 
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
-        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)  # in here somewhere?
         if page_to_edit.creator == request.user:  
             if request.method == "POST":
                 if edit_page_form.is_valid():
-                    edit_page_form.save()
+                    edit_page_form.save()  # duplicate pages?
                     return redirect('creator_profile')
                 else:
                     return redirect('creator_profile')
@@ -154,34 +154,34 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 
     def get(self, request, *args, **kwargs):
 
-        
-        # preferred_dropdown = Page.objects.filter(creator=request.user)
-
         # viewer_form = AllowViewerForm(initial=Page.objects.filter(creator=request.user))
+       
+        viewer_form = AllowViewerForm()
 
-        # related_page = Page.objects.filter(creator=request.user)
+        
+        # related_page = viewer_form['allowed_page'](initial=Page.objects.filter(creator=request.user))
 
-     
-        # print(related_page)
-        # # for x in related_creator:
-        # if related_page in related_creator:
-        #     print("here")
-        # else:
-        #     print("not here")
-            # print(x)
-            # print(related_creator)
-            # st_x = str(x)
-            # if related_page == st_x:
-            #     print("yup")
-            # else:
-            #     print("nope")
-            
+        # viewer_form = AllowViewerForm(instance=related_page)
+
+        page_options = viewer_form['allowed_page']
+        print(page_options)
+        creator_pages = Page.objects.filter(creator=request.user)
+        print(creator_pages)
+        
+        for options in creator_pages:
+            if str(page_options) == str(options):
+                print("true")
+            else:
+                print("false")
+        
+            # return viewer_access
+
 
         return render(
             request,
             "allow_viewer.html",
             {
-                "viewer_form": AllowViewerForm()
+                "viewer_form": viewer_form
                 # "page_dropdown": page_dropdown
             }
         )

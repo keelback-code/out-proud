@@ -23,8 +23,9 @@ class AllowViewerForm(forms.ModelForm):
     class Meta:
         model = ViewerAccess
         fields = ('allowed_page', 'first_name', 'viewer_email', 'shown_name',)
+        # print(fields[0])
 
-        # Code for lines 21-25, for use in assessing if viewer exists in db, from:
+        # Code for lines 30-34, for use in assessing if viewer exists in db, from:
         # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
         
         def clean_viewer_email(self):

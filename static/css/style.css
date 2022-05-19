@@ -67,6 +67,10 @@ a:hover,
     font-size: xxx-large;
 }
 
+.heart {
+    max-height: 200px;
+}
+
 /* Resources page style */
 
 a,
