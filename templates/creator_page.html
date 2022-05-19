@@ -5,38 +5,43 @@
 {% load cloudinary %}
 
 {% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col text-center m-2">
+            <h2 class="heading">Creator blog page.</h2>
+            <div>
+                <h3>{{ page.title }}</h3>
+            </div>
+            <div>
+                <p> {{ page.text_content | safe }} </p>
+            </div>
+            <div>
+                <a class="resource-link" href="{{ page.link }}" target="_blank" rel="noopener"
+                    aria-label="User provided resource.">{{ page.link_title }}</a>
+            </div>
+            <br>
+            <div>
+                {% if 'placeholder' in page.image %}
+                {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
+                {% else %}
+                {% cloudinary page.image width=600 height=600 crop="limit" %}
+                {% endif %}
+            </div>
 
-<div>
-    <h2 class="heading">Creator blog page.</h2>
+            {% if viewer_access %}
 
-    <div>
-        <h3>{{ page.title }}</h3>
-    </div>
-    <div>
-        <p> {{ page.text_content | safe }} </p>
-    </div>
-    <div>
-        <a class="resource-link" href="{{ page.link }}" target="_blank" rel="noopener" aria-label="User provided resource.">{{ page.link_title }}</a>
+            {% else %}
+            <div>
+                <a href="{% url 'edit_page' page.slug %}">Edit page</a>
+            </div>
+            <div>
+                <a href="{% url 'delete_page' page.slug %}">Delete page</a>
+            </div>
+            {% endif %}
+            </div>
+        </div>
     </div>
     
-    {% if 'placeholder' in page.image %}
-    {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
-    {% else %}
-    {% cloudinary page.image width=600 height=600 crop="limit" %}
     {% endif %}
 
-    {% if viewer_access %}
-    <p>no viewer access to buttons</p>
-    {% else %}
-    <div>
-        <a href="{% url 'edit_page' page.slug %}">Edit page</a>
-    </div>
-    <div>
-        <a href="{% url 'delete_page' page.slug %}">Delete page</a>
-    </div>
-</div>
-{% endif %}
-{% endif %}
-
-
-{%endblock%}
+    {%endblock%}

@@ -95,6 +95,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
+        # needs to check for ownership
         page_to_edit = get_object_or_404(Page, slug=slug)
         edit_page_form = WritePageForm(instance=page_to_edit)
         if page_to_edit.creator == request.user:
@@ -123,7 +124,7 @@ class EditPage(LoginRequiredMixin, View):
 
 
 class DeletePage(LoginRequiredMixin, View):
-
+    # needs to check for ownership
     def get(self, request, slug):
         page_to_delete = get_object_or_404(Page, slug=slug)
         delete_form = WritePageForm(instance=page_to_delete)
