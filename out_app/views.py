@@ -149,46 +149,22 @@ class DeletePage(LoginRequiredMixin, View):
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
     """
     Class to allow Viewers; contains get and post functions, as well
-    as a function to allow only Pages for the logged in user to be seen in the dropdown.
+    as a function to check for existing emails in the Viewer db.
     """
-
-    def get(self, request, *args, **kwargs):
-
-        # viewer_form = AllowViewerForm(initial=Page.objects.filter(creator=request.user))
-       
-        viewer_form = AllowViewerForm()
-
-        
-        # related_page = viewer_form['allowed_page'](initial=Page.objects.filter(creator=request.user))
-
-        # viewer_form = AllowViewerForm(instance=related_page)
-
-        page_options = viewer_form['allowed_page']
-        print(page_options)
-        creator_pages = Page.objects.filter(creator=request.user)
-        print(creator_pages)
-        
-        for options in creator_pages:
-            if str(page_options) == str(options):
-                print("true")
-            else:
-                print("false")
-        
-            # return viewer_access
-
+    def get(self, request, *args, **kwargs):      
+        viewer_form = AllowViewerForm(request)
 
         return render(
             request,
             "allow_viewer.html",
             {
                 "viewer_form": viewer_form
-                # "page_dropdown": page_dropdown
             }
         )
 
     def post(self, request, *args, **kwargs):
         if request.method == "POST":
-            viewer_form = AllowViewerForm(request.POST)
+            viewer_form = AllowViewerForm(request, request.POST)
 
             # Code for lines 139-145, for use in assessing if viewer exists in db, from:
             # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
@@ -208,10 +184,6 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
                  "viewer_form": viewer_form
             }
         )
-
-
-
-
 
 
 @login_required
