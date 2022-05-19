@@ -189,11 +189,17 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 @login_required
 def viewer_profile_access(request):
 
+    # x = Page.objects.filter(title=request.user.allowed_page)
+    # print(x)
+    # y = ViewerAccess.objects.filter(viewer_email=request.user.email)
+    # print(str(y))
+
+
     return render(
         request,
         "viewer_profile.html",
         {
-            "viewer_access": check_viewer_exists
+            "viewer_access": check_viewer_exists(request)
         }
     )
 

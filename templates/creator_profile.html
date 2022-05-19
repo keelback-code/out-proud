@@ -2,8 +2,6 @@
 
 {% block content %}
 
-{% load static %}
-
 {% load cloudinary %}
 
 {% if user.is_authenticated %}
@@ -20,28 +18,24 @@
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         {% for page in page_list %}
-
-
-        <div class="card card-body col-sm m-2" style="width: 240px;">
+        <div class="card m-2">
             <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
-
             {% if 'placeholder' in page.image %}
-            {% cloudinary page.image.placeholder.png width=240 height=240 crop="limit" %}
+            {% cloudinary page.image.placeholder.png %}
             {% else %}
-            {% cloudinary page.image width=240 height=240 crop="limit" %}
+            {% cloudinary page.image %}
             {% endif %}
         </div>
-
         {% if forloop.counter|divisibleby:3 %}
         <div class="row">
             {% endif %}
-
             {% endfor %}
         </div>
     </div>
 </div>
+
 
 {% if is_paginated %}
 <nav aria-label="Page navigation">
@@ -49,16 +43,12 @@
         {% if page_obj.has_previous %}
         <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link pagination-btn">&laquo; PREV </a></li>
         {% endif %}
-
         {% if page_obj.has_next %}
         <li><a href="?page={{ page_obj.next_page_number }}" class="page-link pagination-btn"> NEXT &raquo;</a></li>
-
         {% endif %}
-
     </ul>
 </nav>
 {% endif %}
-
 
 {% else %}
 <p>You do not have permission to see this page.</p>

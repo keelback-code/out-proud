@@ -101,6 +101,10 @@ a,
     border: none;
 }
 
+.card {
+    width: 18rem;
+}
+
 /* Style for forms */
 
 .submit-form {
