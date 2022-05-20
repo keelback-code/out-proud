@@ -2,25 +2,38 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+{% load cloudinary %}
 
+{% if user.is_authenticated %}
 
 <div class="text-center m-2">
     <h2 class="heading">Viewer profile</h2>
-
-    {% if viewer_access %}
-        
-    <p>if reached</p>
-    {% else %}
-    <p>else reached</p>
-    {% endif %}
-    
+    <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
+    <br>
+    <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
 </div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        {% for page in viewer_page_list %}
+        <div class="card m-2">
+            <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
+            {% if 'placeholder' in page.image %}
+            {% cloudinary page.image.placeholder.png %}
+            {% else %}
+            {% cloudinary page.image %}
+            {% endif %}
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% else %}
 <p>You do not have permission to see this page.</p>
 {% endif %}
-
-
-
 
 {%endblock%}

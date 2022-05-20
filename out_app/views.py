@@ -57,6 +57,8 @@ class CreatorProfile(LoginRequiredMixin, View):
         def get(self, request):
             creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
             creator_page_list = Page.objects.filter(title__in=creator_pages)
+            print(creator_pages)
+            print(creator_page_list)
 
             return render(
                 request,
@@ -67,6 +69,24 @@ class CreatorProfile(LoginRequiredMixin, View):
             )
             
 
+class ViewerProfile(LoginRequiredMixin, View):
+
+        def get(self, request):
+            viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
+            # viewer_page_list = ViewerAccess.objects.filter(allowed_page__in=viewer_pages) # just gets emails
+            viewer_page_list = Page.objects.filter(slug__in=viewer_pages) 
+            print(viewer_pages)
+            print(viewer_page_list)
+            # page = get_object_or_404(Page, slug=slug)
+
+            return render(
+                request,
+                "viewer_profile.html",
+                {
+                    "viewer_page_list": viewer_page_list
+                    # "page": page
+                }
+            )
 
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
@@ -201,29 +221,6 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
             }
         )
 
-
-@login_required
-def viewer_profile_access(request):
-
-    creator_page_list = Page.objects.filter(creator=request.user).values_list('title', flat=True)
-    creator_pages = Page.objects.filter(title__in=creator_page_list)
-    print(creator_pages)
-
-   
-    viewer_page_list = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True) # gets viewer pages assocuated with logged in viewer
-    # viewer_pages = ViewerAccess.objects.filter(allowed_page__in=viewer_page_list) # just gets emails
-    # print(viewer_pages)
-    print(viewer_page_list)
-
-
-
-    return render(
-        request,
-        "viewer_profile.html",
-        {
-            "viewer_access": check_viewer_exists(request)
-        }
-    )
 
 @login_required
 def creator_page(request, slug):

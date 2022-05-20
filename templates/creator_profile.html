@@ -8,16 +8,12 @@
 
 <div class="text-center m-2">
     <h2 class="heading">Creator profile</h2>
-    {% if viewer_access %}
-    <p>no viewer access to buttons</p>
-    {% else %}
     <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
     <br>
     <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
-    {% endif %}
 </div>
 
-<div class="container">
+
     <div class="row justify-content-center">
         {% for page in creator_page_list %}
         <div class="card m-2">
@@ -34,7 +30,7 @@
             {% endfor %}
         </div>
     </div>
-</div>
+
 
 
 
