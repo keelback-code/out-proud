@@ -46,19 +46,27 @@ def check_viewer_exists(request):
 #     page_list = Klass.objects.filter(user=user).values_list('title', flat=True)
 #     return Klass.objects.filter(title__in=page_list)
 
+    # viewer_page_list = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True) # gets viewer pages assocuated with logged in viewer
+    # # viewer_pages = ViewerAccess.objects.filter(allowed_page__in=viewer_page_list) # just gets emails
+    # # print(viewer_pages)
+    # print(viewer_page_list)
 
-class CreatorProfile(LoginRequiredMixin, generic.ListView):
 
-        # queryset = Page.objects.all()
-        model = Page
-        template_name = "creator_profile.html"
-        paginate_by = 3
-        ordering = ['title']
+class CreatorProfile(LoginRequiredMixin, View):
 
-        # def get_context_data(self, **kwargs):
-        #     context = super().get_context_data(**kwargs)
-        #     context["viewer_access"] = check_viewer_exists
-        #     return context
+        def get(self, request):
+            creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
+            creator_page_list = Page.objects.filter(title__in=creator_pages)
+
+            return render(
+                request,
+                "creator_profile.html",
+                {
+                    "creator_page_list": creator_page_list
+                }
+            )
+            
+
 
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
@@ -174,7 +182,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
         if request.method == "POST":
             viewer_form = AllowViewerForm(request, request.POST)
 
-            # Code for lines 139-145, for use in assessing if viewer exists in db, from:
+            # Code for lines 180-186, for use in assessing if viewer exists in db, from:
             # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
 
             if viewer_form.is_valid():
@@ -197,10 +205,16 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 @login_required
 def viewer_profile_access(request):
 
-    # x = Page.objects.filter(title=request.user.allowed_page)
-    # print(x)
-    # y = ViewerAccess.objects.filter(viewer_email=request.user.email)
-    # print(str(y))
+    creator_page_list = Page.objects.filter(creator=request.user).values_list('title', flat=True)
+    creator_pages = Page.objects.filter(title__in=creator_page_list)
+    print(creator_pages)
+
+   
+    viewer_page_list = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True) # gets viewer pages assocuated with logged in viewer
+    # viewer_pages = ViewerAccess.objects.filter(allowed_page__in=viewer_page_list) # just gets emails
+    # print(viewer_pages)
+    print(viewer_page_list)
+
 
 
     return render(
