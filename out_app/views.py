@@ -23,18 +23,21 @@ from .forms import WritePageForm, AllowViewerForm
 #         return creator_access 
 
 
-def check_viewer_exists(request):  # do I need this???? if it's only for viewer profile and login is sorted by mixins...
+def check_viewer_exists(request):
     """
     Global function to check if viewer exists in database.
     """
+    # check if there is a user active, then run this code?
     viewer_requested = request.user.email
     viewers = ViewerAccess.objects.filter(viewer_email=request.user.email)
 
     for viewer in viewers:
         if str(viewer_requested) == str(viewer):
             viewer_access = True
-        else:
+        elif str(viewer_requested) != str(viewer):
             viewer_access = False
+        else:
+            print("error handling here")
     
         return viewer_access
 
@@ -51,7 +54,8 @@ class CreatorProfile(LoginRequiredMixin, View):
             request,
             "creator_profile.html",
             {
-                "creator_page_list": creator_page_list
+                "creator_page_list": creator_page_list,
+                "viewer_access": check_viewer_exists(request)
             }
         )
             
@@ -84,7 +88,8 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             request,
             "write_page.html",
             {
-                "page_form": WritePageForm
+                "page_form": WritePageForm,
+                "viewer_access": check_viewer_exists(request)
             }
         )
 
@@ -102,7 +107,8 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             request,
             "write_page.html",
             {
-                "page_form": page_form
+                "page_form": page_form,
+                "viewer_access": check_viewer_exists(request)
             }
         )
 
@@ -119,7 +125,8 @@ class EditPage(LoginRequiredMixin, View):
                 request,
                 "edit_page.html",
                 {
-                    "edit_page_form": edit_page_form
+                    "edit_page_form": edit_page_form,
+                    "viewer_access": check_viewer_exists(request)
                 }
             )
         else:
@@ -155,7 +162,8 @@ class DeletePage(LoginRequiredMixin, View):
                 request,
                 "delete_page.html",
                 {
-                    "delete_form": delete_form
+                    "delete_form": delete_form,
+                    "viewer_access": check_viewer_exists(request)
                 }
             ) 
         else:
@@ -184,7 +192,8 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
             request,
             "allow_viewer.html",
             {
-                "viewer_form": viewer_form
+                "viewer_form": viewer_form,
+                "viewer_access": check_viewer_exists(request)
             }
         )
 
@@ -207,7 +216,8 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
              request,
              "allow_viewer.html",
              {
-                 "viewer_form": viewer_form
+                 "viewer_form": viewer_form,
+                 "viewer_access": check_viewer_exists(request)
             }
         )
 
@@ -223,7 +233,8 @@ def creator_page(request, slug):
         request,
         "creator_page.html",
         {
-            "page": page
+            "page": page,
+            "viewer_access": check_viewer_exists(request)
         }
     )
 
@@ -238,5 +249,12 @@ def landing_page(request):
     """
     Function to retrieve the Resources page.
     """
-    return render(request, "index.html")
+    # return render(request, "index.html")
+    return render(
+        request,
+        "index.html",
+        {
+            "viewer_access": check_viewer_exists(request)
+        }
+    )
 

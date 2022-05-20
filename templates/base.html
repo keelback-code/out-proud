@@ -77,9 +77,10 @@
 
     <!-- Ctrl w alert for later - needs to go over page -->
     <!-- <div class="container-fluid esc-popup">
-        <div class="col-md-4 offset-4">
-            <div class="alert alert-info" id="msg" role="alert">
+        <div class="row">
+            <div class="alert alert-dismissible alert-info col-md-4 offset-4" id="msg" role="alert">
                 Type Ctrl + W or Cmd + W to close this tab quickly.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close message."></button>
             </div>
         </div>
     </div> -->
@@ -107,7 +108,7 @@
             let messages = document.getElementById("msg");
             let alert = new bootstrap.Alert(messages);
             alert.close();
-        }, 3500)
+        }, 3000)
     </script>
 
 </body>

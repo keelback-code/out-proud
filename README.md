@@ -202,6 +202,25 @@ Once you have connected, you have the option to deploy automatically (the app wi
 
 After the first push/update, your app will be ready to go!
 
+As of the publishing of this site (May 2022) Heroku is not currently allowing automatic deployment from Github. In order to deploy manually, the steps are (courtesy of Jim Morel from the Code Institute):
+
+1. Open the terminal.
+If you are using MFA/2FA: please scroll down to see the additional steps required.
+Otherwise:
+2. Enter 'heroku login -i' in the terminal and enter your own login details. 
+3. Enter 'heroku apps' in the terminal.
+4. Set the Heroku remote. Enter the following command in the terminal: 'heroku git:remote -a out_app'
+5. Enter the following command in the terminal: 'git add . && git commit -m "Deploy to Heroku via CLI"'
+6. Push to both GitHub and Heroku with the two followig commands:
+Enter the following command in the terminal: 'git push origin main'
+Enter the following command in the terminal: 'git push heroku main'
+
+*Do you have MFA/2FA enabled?* If so, please:
+Click on Account Settings (under the avatar menu) on the Heroku Dashboard.
+Scroll down to the API Key section and click Reveal. Copy the key.
+In the Gitpod workspace, enter the following command in the terminal: 'heroku_config' , and enter your API key that you copied when prompted.
+Continue from step 3 above. If you get prompted to log in at any point enter your username and the API key you copied.
+
 ### Forking and Cloning
  
 To save a copy of the code and work on it yourself, here are the steps for forking and cloning using Github:
