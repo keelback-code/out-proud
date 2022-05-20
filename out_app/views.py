@@ -95,7 +95,6 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
 class EditPage(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        # needs to check for ownership
         page_to_edit = get_object_or_404(Page, slug=slug)
         edit_page_form = WritePageForm(instance=page_to_edit)
         if page_to_edit.creator == request.user:
@@ -111,16 +110,20 @@ class EditPage(LoginRequiredMixin, View):
 
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
-        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)  # in here somewhere?
+        print(page_to_edit.slug)
+        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
         if page_to_edit.creator == request.user:  
             if request.method == "POST":
                 if edit_page_form.is_valid():
-                    edit_page_form.save()  # duplicate pages?
+                    final_save = edit_page_form.save(commit=False)
+                    final_save.slug = page_to_edit.slug
+                    print(page_to_edit.slug)
+                    # print(edit_page_form.slug)
+                    print(final_save.slug)
+                    final_save.save()
                     return redirect('creator_profile')
                 else:
                     return redirect('creator_profile')
-        else:
-            return redirect('creator_profile')
 
 
 class DeletePage(LoginRequiredMixin, View):
@@ -128,23 +131,27 @@ class DeletePage(LoginRequiredMixin, View):
     def get(self, request, slug):
         page_to_delete = get_object_or_404(Page, slug=slug)
         delete_form = WritePageForm(instance=page_to_delete)
+        if page_to_delete.creator == request.user: 
 
-        return render(
-            request,
-            "delete_page.html",
-            {
-                "delete_form": delete_form
-            }
-        ) 
+            return render(
+                request,
+                "delete_page.html",
+                {
+                    "delete_form": delete_form
+                }
+            ) 
+        else:
+            return redirect('creator_profile')
 
     def post(self, request, slug):
         if request.method == "POST":
             page_to_delete = get_object_or_404(Page, slug=slug)
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
-            page_to_delete.delete()
-            return redirect('creator_profile')
-        else:
-            return redirect('creator_profile')
+            if page_to_delete.creator == request.user: 
+                page_to_delete.delete()
+                return redirect('creator_profile')
+            else:
+                return redirect('creator_profile')
 
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
