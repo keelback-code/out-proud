@@ -21,9 +21,9 @@
             </div>
             <div class="m-2">
                 {% if 'placeholder' in page.image %}
-                {% cloudinary page.image.placeholder.png width=600 height=600 crop="limit" %}
+                {% cloudinary page.image.placeholder.png width=400 height=400 crop="limit" %}
                 {% else %}
-                {% cloudinary page.image width=600 height=600 crop="limit" %}
+                {% cloudinary page.image width=400 height=400 crop="limit" %}
                 {% endif %}
             </div>
 

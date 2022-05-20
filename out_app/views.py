@@ -57,8 +57,6 @@ class CreatorProfile(LoginRequiredMixin, View):
         def get(self, request):
             creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
             creator_page_list = Page.objects.filter(title__in=creator_pages)
-            print(creator_pages)
-            print(creator_page_list)
 
             return render(
                 request,
@@ -73,11 +71,7 @@ class ViewerProfile(LoginRequiredMixin, View):
 
         def get(self, request):
             viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
-            # viewer_page_list = ViewerAccess.objects.filter(allowed_page__in=viewer_pages) # just gets emails
             viewer_page_list = Page.objects.filter(slug__in=viewer_pages) 
-            print(viewer_pages)
-            print(viewer_page_list)
-            # page = get_object_or_404(Page, slug=slug)
 
             return render(
                 request,
@@ -105,7 +99,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
         page_form = WritePageForm(request.POST, request.FILES)
         if page_form.is_valid():
             write_page = page_form.save(commit=False)
-            write_page.user = request.user
+            write_page.creator = request.user
             write_page.save()
             return redirect('creator_profile')
         else:

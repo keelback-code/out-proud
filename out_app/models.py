@@ -24,12 +24,13 @@ class Page(models.Model):
     link_title = models.CharField(max_length=250, blank=True)
     
     def __str__(self):
-        return self.title 
+        return self.title
 
     def save(self, *args, **kwargs):
         self.slug = random_str_generator()
-        super().save(*args, **kwargs) 
-    
+        # self.creator = User
+        super().save(*args, **kwargs)
+
 
 class ViewerAccess(models.Model):
     """

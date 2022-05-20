@@ -8,7 +8,7 @@ class WritePageForm(forms.ModelForm):
     """
     class Meta:
         model = Page
-        fields = ('creator', 'title', 'text_content', 'image', 'link', 'link_title',)
+        fields = ('title', 'text_content', 'image', 'link', 'link_title',)
 
         def form_valid(self, form):
             form.instance.created_by = self.request.user
