@@ -28,7 +28,6 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = random_str_generator()
-        # self.creator = User
         super().save(*args, **kwargs)
 
 

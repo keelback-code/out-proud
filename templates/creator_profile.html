@@ -13,9 +13,10 @@
     <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
 </div>
 
-
-    <div class="row justify-content-center">
-        {% for page in creator_page_list %}
+<div class="row justify-content-center">
+{% for page in creator_page_list %}
+    
+      
         <div class="card m-2">
             <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
             {% if 'placeholder' in page.image %}
@@ -25,14 +26,11 @@
             {% endif %}
         </div>
         {% if forloop.counter|divisibleby:3 %}
-        <div class="row">
+        <div class="row justify-content-center">
             {% endif %}
             {% endfor %}
         </div>
     </div>
-
-
-
 
 
 {% else %}

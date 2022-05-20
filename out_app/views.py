@@ -23,7 +23,7 @@ from .forms import WritePageForm, AllowViewerForm
 #         return creator_access 
 
 
-def check_viewer_exists(request):
+def check_viewer_exists(request):  # do I need this???? if it's only for viewer profile and login is sorted by mixins...
     """
     Global function to check if viewer exists in database.
     """
@@ -38,50 +38,40 @@ def check_viewer_exists(request):
     
         return viewer_access
 
-# def get_user_pages(Klass, request):
-#     """
-#     Global function for retrieving pages belonging to a creator.
-#     """
-#     user = request.user
-#     page_list = Klass.objects.filter(user=user).values_list('title', flat=True)
-#     return Klass.objects.filter(title__in=page_list)
-
-    # viewer_page_list = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True) # gets viewer pages assocuated with logged in viewer
-    # # viewer_pages = ViewerAccess.objects.filter(allowed_page__in=viewer_page_list) # just gets emails
-    # # print(viewer_pages)
-    # print(viewer_page_list)
-
 
 class CreatorProfile(LoginRequiredMixin, View):
+    """
+    Class to display pages belonging to logged in creator.
+    """
+    def get(self, request):
+        creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
+        creator_page_list = Page.objects.filter(title__in=creator_pages)
 
-        def get(self, request):
-            creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
-            creator_page_list = Page.objects.filter(title__in=creator_pages)
-
-            return render(
-                request,
-                "creator_profile.html",
-                {
-                    "creator_page_list": creator_page_list,
-                    "viewer_access": check_viewer_exists(request)
-                }
-            )
+        return render(
+            request,
+            "creator_profile.html",
+            {
+                "creator_page_list": creator_page_list
+            }
+        )
             
 
 class ViewerProfile(LoginRequiredMixin, View):
+    """
+    Class to display pages belonging to logged in creator.
+    """
+    def get(self, request):
+        viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
+        viewer_page_list = Page.objects.filter(slug__in=viewer_pages) 
 
-        def get(self, request):
-            viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
-            viewer_page_list = Page.objects.filter(slug__in=viewer_pages) 
-
-            return render(
-                request,
-                "viewer_profile.html",
-                {
-                    "viewer_page_list": viewer_page_list,
-                    "viewer_access": check_viewer_exists(request)
-                }
-            )
+        return render(
+            request,
+            "viewer_profile.html",
+            {
+                "viewer_page_list": viewer_page_list,
+                "viewer_access": check_viewer_exists(request)
+            }
+        )
 
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
@@ -92,8 +82,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             request,
             "write_page.html",
             {
-                "page_form": WritePageForm,
-                "viewer_access": check_viewer_exists(request)
+                "page_form": WritePageForm
             }
         )
 
@@ -103,7 +92,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             write_page = page_form.save(commit=False)
             write_page.creator = request.user
             write_page.save()
-            return redirect('creator_profile')
+            return redirect('landing_page')
         else:
             page_form = WritePageForm()
         
@@ -111,8 +100,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             request,
             "write_page.html",
             {
-                "page_form": page_form,
-                "viewer_access": check_viewer_exists(request)
+                "page_form": page_form
             }
         )
 
@@ -127,12 +115,11 @@ class EditPage(LoginRequiredMixin, View):
                 request,
                 "edit_page.html",
                 {
-                    "edit_page_form": edit_page_form,
-                    "viewer_access": check_viewer_exists(request)
+                    "edit_page_form": edit_page_form
                 }
             )
         else:
-            return redirect('creator_profile')
+            return redirect('landing_page')
 
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
@@ -147,9 +134,9 @@ class EditPage(LoginRequiredMixin, View):
                     # print(edit_page_form.slug)
                     print(final_save.slug)
                     final_save.save()
-                    return redirect('creator_profile')
+                    return redirect('landing_page')
                 else:
-                    return redirect('creator_profile')
+                    return redirect('landing_page')
 
 
 class DeletePage(LoginRequiredMixin, View):
@@ -161,12 +148,11 @@ class DeletePage(LoginRequiredMixin, View):
                 request,
                 "delete_page.html",
                 {
-                    "delete_form": delete_form,
-                    "viewer_access": check_viewer_exists(request)
+                    "delete_form": delete_form
                 }
             ) 
         else:
-            return redirect('creator_profile')
+            return redirect('landing_page')
 
     def post(self, request, slug):
         if request.method == "POST":
@@ -174,9 +160,9 @@ class DeletePage(LoginRequiredMixin, View):
             delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
             if page_to_delete.creator == request.user: 
                 page_to_delete.delete()
-                return redirect('creator_profile')
+                return redirect('landing_page')
             else:
-                return redirect('creator_profile')
+                return redirect('landing_page')
 
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
@@ -191,8 +177,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
             request,
             "allow_viewer.html",
             {
-                "viewer_form": viewer_form,
-                "viewer_access": check_viewer_exists(request)
+                "viewer_form": viewer_form
             }
         )
 
@@ -209,14 +194,13 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
                     messages.error(request, 'already exists')
                 else:
                     instance = viewer_form.save()
-                    return redirect('creator_profile')
+                    return redirect('landing_page')
             
         return render(
              request,
              "allow_viewer.html",
              {
-                 "viewer_form": viewer_form,
-                 "viewer_access": check_viewer_exists(request)
+                 "viewer_form": viewer_form
             }
         )
 
@@ -224,22 +208,19 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 @login_required
 def creator_page(request, slug):
     page = get_object_or_404(Page, slug=slug)
-    # viewer_profile_access(request)
-    # check_viewer_exists(request)
 
     return render(
         request,
         "creator_page.html",
         {
-            "page": page,
-            "viewer_access": check_viewer_exists(request)
+            "page": page
         }
     )
 
 def resources(request):
-    return render(request, "resources.html", {"viewer_access": check_viewer_exists(request)})
+    return render(request, "resources.html")
 
 
 def landing_page(request):
-    return render(request, "index.html", {"viewer_access": check_viewer_exists(request)})
+    return render(request, "index.html")
 

@@ -89,6 +89,7 @@ a,
 
 .card {
     background-color:#7f4d7e;
+    max-width: 20rem;
 }
 
 .card-title,
@@ -101,9 +102,6 @@ a,
     border: none;
 }
 
-.card {
-    width: 18rem;
-}
 
 /* Style for forms */
 
