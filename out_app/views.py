@@ -58,7 +58,7 @@ class CreatorProfile(LoginRequiredMixin, View):
 
 class ViewerProfile(LoginRequiredMixin, View):
     """
-    Class to display pages belonging to logged in creator.
+    Class to display pages assigned to logged in viewer.
     """
     def get(self, request):
         viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
@@ -75,7 +75,9 @@ class ViewerProfile(LoginRequiredMixin, View):
 
 
 class WritePage(LoginRequiredMixin, generic.CreateView):
-    
+    """
+    Class to allow users to create a page and commit it to the db.
+    """
     def get(self, request, *args, **kwargs):
 
         return render(
@@ -106,7 +108,9 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
 
 
 class EditPage(LoginRequiredMixin, View):
-
+    """
+    Class to allow users to update a page.
+    """
     def get(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
         edit_page_form = WritePageForm(instance=page_to_edit)
@@ -140,6 +144,9 @@ class EditPage(LoginRequiredMixin, View):
 
 
 class DeletePage(LoginRequiredMixin, View):
+    """
+    Class to allow users to delete a page.
+    """
     def get(self, request, slug):
         page_to_delete = get_object_or_404(Page, slug=slug)
         delete_form = WritePageForm(instance=page_to_delete)
@@ -167,8 +174,8 @@ class DeletePage(LoginRequiredMixin, View):
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
     """
-    Class to allow Viewers; contains get and post functions, as well
-    as a function to check for existing emails in the Viewer db.
+    Class to give a Viewer access to a creator's page; also contains
+    a function to check for existing emails in the Viewer db.
     """
     def get(self, request, *args, **kwargs):      
         viewer_form = AllowViewerForm(request)
@@ -207,6 +214,9 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
 
 @login_required
 def creator_page(request, slug):
+    """
+    Function to retrieve a creator's page dynamically.
+    """
     page = get_object_or_404(Page, slug=slug)
 
     return render(
@@ -218,9 +228,15 @@ def creator_page(request, slug):
     )
 
 def resources(request):
+    """
+    Function to retrieve the Resources page.
+    """
     return render(request, "resources.html")
 
 
 def landing_page(request):
+    """
+    Function to retrieve the Resources page.
+    """
     return render(request, "index.html")
 

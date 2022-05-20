@@ -4,28 +4,18 @@
 
 {% load crispy_forms_tags %}
 
-{% load cloudinary %}
-
-
-
 <div class="container-fluid col-md-4">
-    <h2 class="heading">Write page.</h2>
+    <h2 class="heading">Create your Page.</h2>
     <div>
-        <!-- add user auth perm here, add endif after form -->
         <form method="post" action="{% url 'write_page' %}" enctype="multipart/form-data">
-            <h4>test blog form</h4>
             <div>
-                <a href="{% url 'resources' %}">Suggested links</a>
+                <h5 class="m-2"><a href="{% url 'resources' %}">Suggested links</a></h5>
             </div>
             {{ page_form | crispy }}
-            
             {% csrf_token %}
-
-            
             <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
         </form>
     </div>
 </div>
-
 
 {%endblock%}

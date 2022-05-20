@@ -6,7 +6,6 @@ from . import views
 
 
 urlpatterns = [
-    # path('', views.viewer_profile_access, name='base_html'),
     path('', views.landing_page, name='landing_page'),
     path('creator_profile/', views.CreatorProfile.as_view(), name='creator_profile'),
     path('viewer_profile/', views.ViewerProfile.as_view(), name='viewer_profile'),

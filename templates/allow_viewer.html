@@ -26,19 +26,14 @@
     }
 </script>
 {% if user.is_authenticated %}
-
-
 <div class="container-fluid col-md-4">
-    <h2 class="heading">Form to allow viewer.</h2>
-    
+    <h2 class="heading">Allow someone to see your Page.</h2>
     <form id="viewer-form" method="POST">  
         {{ viewer_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
     </form>
-  
 </div>
-
 {% else %}
  <p>You do not have permission to see this page.</p>
 {% endif %}

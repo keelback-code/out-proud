@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}
 
 <div class="text-center m-2">
-    <h2 class="heading">Creator profile</h2>
+    <h2 class="heading">Creator Profile.</h2>
     <a class="profile-link" href="{% url 'write_page' %}">New Page</a>
     <br>
     <a class="profile-link" href="{% url 'allow_viewer' %}">Allow Viewer</a>
@@ -15,8 +15,6 @@
 
 <div class="row justify-content-center">
 {% for page in creator_page_list %}
-    
-      
         <div class="card m-2">
             <a class="card-title" href="{% url 'creator_page' page.slug %}">{{ page.title }}</a>
             {% if 'placeholder' in page.image %}
