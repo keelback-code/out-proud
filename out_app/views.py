@@ -27,11 +27,9 @@ def check_viewer_exists(request):
     """
     Global function to check if viewer exists in database.
     """
-    # check if there is a user active, then run this code?
     if request.user.is_active:
         viewer_requested = request.user.email
         viewers = ViewerAccess.objects.filter(viewer_email=request.user.email)
-
         for viewer in viewers:
             if str(viewer_requested) == str(viewer):
                 viewer_access = True
@@ -39,6 +37,8 @@ def check_viewer_exists(request):
                 viewer_access = False
         
             return viewer_access
+    else:
+        return redirect('accounts/signup/')
 
 
 class CreatorProfile(LoginRequiredMixin, View):
@@ -237,18 +237,24 @@ def creator_page(request, slug):
         }
     )
 
+
 def resources(request):
     """
     Function to retrieve the Resources page.
     """
-    return render(request, "resources.html")
+    return render(
+        request,
+        "resources.html",
+        {
+            "viewer_access": check_viewer_exists(request)
+        }
+    )
 
 
 def landing_page(request):
     """
-    Function to retrieve the Resources page.
+    Function to retrieve the Landing page.
     """
-    # return render(request, "index.html")
     return render(
         request,
         "index.html",
