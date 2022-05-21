@@ -28,18 +28,17 @@ def check_viewer_exists(request):
     Global function to check if viewer exists in database.
     """
     # check if there is a user active, then run this code?
-    viewer_requested = request.user.email
-    viewers = ViewerAccess.objects.filter(viewer_email=request.user.email)
+    if request.user.is_active:
+        viewer_requested = request.user.email
+        viewers = ViewerAccess.objects.filter(viewer_email=request.user.email)
 
-    for viewer in viewers:
-        if str(viewer_requested) == str(viewer):
-            viewer_access = True
-        elif str(viewer_requested) != str(viewer):
-            viewer_access = False
-        else:
-            print("error handling here")
-    
-        return viewer_access
+        for viewer in viewers:
+            if str(viewer_requested) == str(viewer):
+                viewer_access = True
+            else:
+                viewer_access = False
+        
+            return viewer_access
 
 
 class CreatorProfile(LoginRequiredMixin, View):
