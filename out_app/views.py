@@ -129,24 +129,26 @@ class EditPage(LoginRequiredMixin, View):
                 }
             )
         else:
-            return redirect('landing_page')
+            return redirect('user_error')
 
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
         print(page_to_edit.slug)
         edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+        # edit_page_form.slug = page_to_edit.slug
+        # print(edit_page_form.slug)
         if page_to_edit.creator == request.user:  
             if request.method == "POST":
                 if edit_page_form.is_valid():
-                    final_save = edit_page_form.save(commit=False)
-                    final_save.slug = page_to_edit.slug
-                    print(page_to_edit.slug)
-                    # print(edit_page_form.slug)
-                    print(final_save.slug)
-                    final_save.save()
+                    edit_page_form.save()
+                    # final_save = edit_page_form.save(commit=False)
+                    # final_save.slug = page_to_edit.slug
+                    # print(page_to_edit.slug)
+                    # print(final_save.slug)
+                    # final_save.save()
                     return redirect('landing_page')
                 else:
-                    return redirect('landing_page')
+                    return redirect('user_error')
 
 
 class DeletePage(LoginRequiredMixin, View):
@@ -166,7 +168,7 @@ class DeletePage(LoginRequiredMixin, View):
                 }
             ) 
         else:
-            return redirect('landing_page')
+            return redirect('user_error')
 
     def post(self, request, slug):
         if request.method == "POST":
@@ -176,7 +178,7 @@ class DeletePage(LoginRequiredMixin, View):
                 page_to_delete.delete()
                 return redirect('landing_page')
             else:
-                return redirect('landing_page')
+                return redirect('user_error')
 
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
@@ -263,3 +265,15 @@ def landing_page(request):
         }
     )
 
+
+def error_page(request):
+    """
+    Function to retrieve the error page.
+    """
+    return render(
+        request,
+        "user_error.html",
+        {
+            "viewer_access": check_viewer_exists(request)
+        }
+    )

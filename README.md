@@ -209,8 +209,8 @@ If you are using MFA/2FA: please scroll down to see the additional steps require
 Otherwise:
 2. Enter 'heroku login -i' in the terminal and enter your own login details. 
 3. Enter 'heroku apps' in the terminal.
-4. Set the Heroku remote. Enter the following command in the terminal: 'heroku git:remote -a out_app'
-5. Enter the following command in the terminal: 'git add . && git commit -m "Deploy to Heroku via CLI"'
+4. Set the Heroku remote. Enter the following command in the terminal: 'heroku git:remote -a out-proud'
+5. Enter the following command in the terminal: 'git add . && git commit -m "Deploy to Heroku via CLI" '
 6. Push to both GitHub and Heroku with the two followig commands:
 Enter the following command in the terminal: 'git push origin main'
 Enter the following command in the terminal: 'git push heroku main'

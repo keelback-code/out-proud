@@ -15,5 +15,6 @@ urlpatterns = [
     path('resources/', views.resources, name='resources'),
     path('creator_page/edit_page/<slug:slug>/', views.EditPage.as_view(), name='edit_page'),
     path('creator_page/delete_page/<slug:slug>/', views.DeletePage.as_view(), name='delete_page'),
+    path('user_error/', views.error_page, name='user_error'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('favicon.ico')),),
 ]

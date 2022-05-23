@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="landing-heading mb-4">Oops!</h1>
+      <p>How did you end up here? Head back to the <a href="{% url 'landing_page' %}">home page</a></p>
+      <p>or use the navigation to head elsewhere.</p>
+      <div>
+        <img class="heart" src="{% static 'images/purple-heart-landing.png' %}" alt="A purple heart.">
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

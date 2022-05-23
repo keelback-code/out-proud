@@ -15,7 +15,7 @@ class Page(models.Model):
     """
     Class for modelling pages made by creators.
     """
-    slug = models.SlugField("Page code", unique=True, primary_key=True)
+    slug = models.SlugField(unique=True, primary_key=True)
     title = models.CharField(max_length=250)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="allowed_page")
     text_content = models.TextField()
@@ -25,6 +25,10 @@ class Page(models.Model):
     
     def __str__(self):
         return self.title
+    
+    # def slug_gen(self):
+    #     slug = random_str_generator()
+    #     return self.slug
 
     def save(self, *args, **kwargs):
         self.slug = random_str_generator()
