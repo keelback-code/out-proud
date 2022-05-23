@@ -80,6 +80,9 @@ The website allows the user (creator) the ability to create a private page which
 
 ### Design and UX
 
+The design for Out has been kept simple, partially as not to overwhelm the user, but also out of practicality. Django was a huge learning curve and I thought it was best to stick with a simple design so I could spend my time on the areas that were going to be more difficult for me.
+I chose a muted yellow for the background and a dark purple for highlights; the main choice for these colours is that it subtly hints at the colours of the nonbinary flag. This is fundamentally a queer website but many of the users may be using it around people they are not out to, so it is very important that the website doesn't use any queer imagery, such as rainbows. Nonetheless, it's important to me to have a subtle nod in there.
+
 ### Wireframes
 
 ### Database model

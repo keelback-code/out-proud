@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic, View
-from django import forms
-from .models import Page, ViewerAccess, User
-from .forms import WritePageForm, AllowViewerForm 
+from .models import Page, ViewerAccess
+from .forms import WritePageForm, AllowViewerForm
 
 
 # def check_creator_exists(request):  # what do I need this for?
@@ -19,8 +18,8 @@ from .forms import WritePageForm, AllowViewerForm
 #             creator_access = True
 #         else:
 #             creator_access = False
-    
-#         return creator_access 
+
+#         return creator_access
 
 
 def check_viewer_exists(request):
@@ -35,7 +34,7 @@ def check_viewer_exists(request):
                 viewer_access = True
             else:
                 viewer_access = False
-        
+
             return viewer_access
     else:
         return redirect('accounts/signup/')
@@ -46,7 +45,8 @@ class CreatorProfile(LoginRequiredMixin, View):
     Class to display pages belonging to logged in creator.
     """
     def get(self, request):
-        creator_pages = Page.objects.filter(creator=request.user).values_list('title', flat=True)
+        creator_pages = Page.objects.filter(creator=request.user) \
+                        .values_list('title', flat=True)
         creator_page_list = Page.objects.filter(title__in=creator_pages)
 
         return render(
@@ -57,15 +57,16 @@ class CreatorProfile(LoginRequiredMixin, View):
                 "viewer_access": check_viewer_exists(request)
             }
         )
-            
+
 
 class ViewerProfile(LoginRequiredMixin, View):
     """
     Class to display pages assigned to logged in viewer.
     """
     def get(self, request):
-        viewer_pages = ViewerAccess.objects.filter(viewer_email=request.user.email).values_list('allowed_page', flat=True)
-        viewer_page_list = Page.objects.filter(slug__in=viewer_pages) 
+        v_pages = ViewerAccess.objects.filter(viewer_email=request.user.email)\
+                  .values_list('allowed_page', flat=True)
+        viewer_page_list = Page.objects.filter(slug__in=v_pages)
 
         return render(
             request,
@@ -101,7 +102,7 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             return redirect('landing_page')
         else:
             page_form = WritePageForm()
-        
+
         return render(
             request,
             "write_page.html",
@@ -134,10 +135,11 @@ class EditPage(LoginRequiredMixin, View):
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
         print(page_to_edit.slug)
-        edit_page_form = WritePageForm(request.POST, request.FILES, instance=page_to_edit)
+        edit_page_form = WritePageForm(
+                         request.POST, request.FILES, instance=page_to_edit)
         # edit_page_form.slug = page_to_edit.slug
         # print(edit_page_form.slug)
-        if page_to_edit.creator == request.user:  
+        if page_to_edit.creator == request.user:
             if request.method == "POST":
                 if edit_page_form.is_valid():
                     edit_page_form.save()
@@ -166,15 +168,16 @@ class DeletePage(LoginRequiredMixin, View):
                     "delete_form": delete_form,
                     "viewer_access": check_viewer_exists(request)
                 }
-            ) 
+            )
         else:
             return redirect('user_error')
 
     def post(self, request, slug):
         if request.method == "POST":
             page_to_delete = get_object_or_404(Page, slug=slug)
-            delete_form = WritePageForm(request.POST, request.FILES, instance=page_to_delete)
-            if page_to_delete.creator == request.user: 
+            delete_form = WritePageForm(
+                          request.POST, request.FILES, instance=page_to_delete)
+            if page_to_delete.creator == request.user:
                 page_to_delete.delete()
                 return redirect('landing_page')
             else:
@@ -186,7 +189,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
     Class to give a Viewer access to a creator's page; also contains
     a function to check for existing emails in the Viewer db.
     """
-    def get(self, request, *args, **kwargs):      
+    def get(self, request, *args, **kwargs):
         viewer_form = AllowViewerForm(request)
 
         return render(
@@ -202,24 +205,25 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
         if request.method == "POST":
             viewer_form = AllowViewerForm(request, request.POST)
 
-            # Code for lines 180-186, for use in assessing if viewer exists in db, from:
+            # Code for lines 211-217, to see if viewer exists in db, from:
             # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
 
             if viewer_form.is_valid():
                 viewer_email = viewer_form.cleaned_data['viewer_email']
-                if ViewerAccess.objects.filter(viewer_email=viewer_email).exists():
+                if ViewerAccess.objects.filter(
+                        viewer_email=viewer_email).exists():
                     messages.error(request, 'already exists')
                 else:
                     instance = viewer_form.save()
                     return redirect('landing_page')
-            
+
         return render(
              request,
              "allow_viewer.html",
              {
                  "viewer_form": viewer_form,
                  "viewer_access": check_viewer_exists(request)
-            }
+             }
         )
 
 
