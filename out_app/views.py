@@ -1,25 +1,10 @@
+# import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic, View
 from .models import Page, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
-
-
-# def check_creator_exists(request):  # what do I need this for?
-#     """
-#     Global function to check if creator exists in database.
-#     """
-#     creator_requested = request.user
-#     creators = Page.objects.filter(creator=request.user)
-
-#     for creator in creators:
-#         if str(creator_requested) == str(creator):
-#             creator_access = True
-#         else:
-#             creator_access = False
-
-#         return creator_access
 
 
 def check_viewer_exists(request):
@@ -175,8 +160,8 @@ class DeletePage(LoginRequiredMixin, View):
     def post(self, request, slug):
         if request.method == "POST":
             page_to_delete = get_object_or_404(Page, slug=slug)
-            delete_form = WritePageForm(
-                          request.POST, request.FILES, instance=page_to_delete)
+            # delete_form = WritePageForm(
+            #               request.POST, request.FILES, instance=page_to_delete)
             if page_to_delete.creator == request.user:
                 page_to_delete.delete()
                 return redirect('landing_page')
@@ -205,7 +190,7 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
         if request.method == "POST":
             viewer_form = AllowViewerForm(request, request.POST)
 
-            # Code for lines 211-217, to see if viewer exists in db, from:
+            # Code for lines 195-202, to see if viewer exists in db, from:
             # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
 
             if viewer_form.is_valid():

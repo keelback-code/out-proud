@@ -18,8 +18,10 @@ class Page(models.Model):
     """
     slug = models.SlugField(unique=True, primary_key=True)
     title = models.CharField(max_length=250)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE,
-                                related_name="allowed_page")
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="allowed_page")
     text_content = models.TextField()
     image = CloudinaryField(blank=True, default="placeholder")
     link = models.TextField(blank=True)
@@ -33,7 +35,8 @@ class Page(models.Model):
     #     return self.slug
 
     def save(self, *args, **kwargs):
-        self.slug = random_str_generator()
+        if self.slug:
+            self.slug = random_str_generator()
         super().save(*args, **kwargs)
 
 
