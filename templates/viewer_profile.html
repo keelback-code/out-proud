@@ -33,7 +33,7 @@
 </div>
 
 {% else %}
-<p>You do not have permission to see this page.</p>
+ <p>You do not have permission to see this page. Please login <a class="nav-link" href="{% url 'account_login' %}">here.</a></p>
 {% endif %}
 
 {%endblock%}

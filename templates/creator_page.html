@@ -5,6 +5,7 @@
 {% load cloudinary %}
 
 {% if user.is_authenticated %}
+
 <div class="container">
     <div class="row">
         <div class="col text-center">
@@ -27,13 +28,7 @@
             </div>
 
             {% if viewer_access %}
-            <!-- <div class="container-fluid esc-popup">
-                <div class="col-md-4 offset-4">
-                    <div class="alert alert-info" id="msg" role="alert">
-                        You do not have permission to edit this page.
-                    </div>
-                </div>
-            </div> -->
+
             {% else %}
             <div>
                 <a href="{% url 'edit_page' page.slug %}">Edit page</a>
@@ -46,6 +41,8 @@
     </div>
 </div>
 
+{% else %}
+ <p>You do not have permission to see this page. Please login <a class="nav-link" href="{% url 'account_login' %}">here.</a></p>
 {% endif %}
 
 {%endblock%}

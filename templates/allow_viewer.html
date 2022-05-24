@@ -4,6 +4,8 @@
 
 {% load crispy_forms_tags %}
 
+{% if user.is_authenticated %}
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
 </script>
 <script type="text/javascript">
@@ -25,7 +27,7 @@
         });
     }
 </script>
-{% if user.is_authenticated %}
+
 <div class="container-fluid col-md-4">
     <h2 class="heading">Allow someone to see your Page.</h2>
     <form id="viewer-form" method="POST">  
@@ -34,7 +36,9 @@
         <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
     </form>
 </div>
+
 {% else %}
- <p>You do not have permission to see this page.</p>
+ <p>You do not have permission to see this page. Please login <a class="nav-link" href="{% url 'account_login' %}">here.</a></p>
 {% endif %}
+
 {%endblock%}
