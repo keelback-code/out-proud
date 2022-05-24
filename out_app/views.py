@@ -222,7 +222,6 @@ def creator_page(request, slug):
     Function to retrieve a creator's page dynamically.
     """
     page = get_object_or_404(Page, slug=slug)
-
     return render(
         request,
         "creator_page.html",

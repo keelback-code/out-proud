@@ -34,7 +34,7 @@ class Page(models.Model):
     #     slug = random_str_generator()
     #     return self.slug
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):  # add docstring for this later
         # if self.slug:
         self.slug = random_str_generator()
         super().save(*args, **kwargs)

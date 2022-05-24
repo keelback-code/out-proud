@@ -20,6 +20,10 @@ class AllowViewerForm(forms.ModelForm):
     Model form for the Creator to allow a Viewer to see their Page.
     """
     def __init__(self, request, *args, **kwargs):
+        """
+        Function to restrict the form to only display
+        pages belonging to the logged in Creator.
+        """
         super().__init__(*args, **kwargs)
         self.fields['allowed_page'].queryset = Page.objects.filter(
                                                creator=request.user)
