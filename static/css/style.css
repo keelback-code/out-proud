@@ -69,7 +69,13 @@ a:hover,
 
 .heart {
     max-height: 200px;
+} 
+
+.heart:hover {
+    transform: scale(1.25, 1.25);
+    transition: width 2s, height 2s, transform 2s;
 }
+
 
 /* Resources page style */
 
