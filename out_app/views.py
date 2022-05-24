@@ -127,17 +127,19 @@ class EditPage(LoginRequiredMixin, View):
         # edit_page_form.slug = page_to_edit.slug
         # print(edit_page_form.slug)
         if page_to_edit.creator == request.user:
-            if request.method == "POST":
-                if edit_page_form.is_valid():
-                    edit_page_form.save()
-                    # final_save = edit_page_form.save(commit=False)
-                    # final_save.slug = page_to_edit.slug
-                    # print(page_to_edit.slug)
-                    # print(final_save.slug)
-                    # final_save.save()
-                    return redirect('landing_page')
-                else:
-                    return redirect('user_error')
+            if edit_page_form.is_valid():
+                edit_page_form.save()
+                # final_save = edit_page_form.save(commit=False)
+                # final_save.slug = page_to_edit.slug
+                # print(page_to_edit.slug)
+                # print(final_save.slug)
+                # final_save.save()
+                messages.success(request, 'Page updated successfully.')
+                return redirect('landing_page')
+            else:
+                messages.error(request,
+                               'Update unsuccessful, please try again.')
+                return redirect('user_error')
 
 
 class DeletePage(LoginRequiredMixin, View):
@@ -160,15 +162,16 @@ class DeletePage(LoginRequiredMixin, View):
             return redirect('user_error')
 
     def post(self, request, slug):
-        if request.method == "POST":
-            page_to_delete = get_object_or_404(Page, slug=slug)
-            # delete_form = WritePageForm(
-            #               request.POST, request.FILES, instance=page_to_delete)
-            if page_to_delete.creator == request.user:
-                page_to_delete.delete()
-                return redirect('landing_page')
-            else:
-                return redirect('user_error')
+        page_to_delete = get_object_or_404(Page, slug=slug)
+        delete_form = WritePageForm(request.POST,
+                                    request.FILES, instance=page_to_delete)
+        if page_to_delete.creator == request.user:
+            page_to_delete.delete()
+            messages.success(request, 'Page deleted successfully.')
+            return redirect('landing_page')
+        else:
+            messages.error(request, 'Delete unsuccessful, please try again.')
+            return redirect('user_error')
 
 
 class AllowViewer(LoginRequiredMixin, generic.CreateView):
@@ -178,7 +181,6 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
     """
     def get(self, request, *args, **kwargs):
         viewer_form = AllowViewerForm(request)
-
         return render(
             request,
             "allow_viewer.html",
@@ -189,20 +191,20 @@ class AllowViewer(LoginRequiredMixin, generic.CreateView):
         )
 
     def post(self, request, *args, **kwargs):
-        if request.method == "POST":
-            viewer_form = AllowViewerForm(request, request.POST)
+        viewer_form = AllowViewerForm(request, request.POST)
 
-            # Code for lines 195-202, to see if viewer exists in db, from:
-            # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
+        # Code for lines 199-207, to see if viewer exists in db, from:
+        # https://stackoverflow.com/questions/41374782/django-check-if-object-exists
 
-            if viewer_form.is_valid():
-                viewer_email = viewer_form.cleaned_data['viewer_email']
-                if ViewerAccess.objects.filter(
-                        viewer_email=viewer_email).exists():
-                    messages.error(request, 'already exists')
-                else:
-                    instance = viewer_form.save()
-                    return redirect('landing_page')
+        if viewer_form.is_valid():
+            viewer_email = viewer_form.cleaned_data['viewer_email']
+            if ViewerAccess.objects.filter(
+                    viewer_email=viewer_email).exists():
+                messages.error(request, 'already exists')
+            else:
+                viewer_form.save()
+                messages.success(request, 'Viewer emailed successfully.')
+                return redirect('landing_page')
 
         return render(
              request,
