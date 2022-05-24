@@ -35,8 +35,8 @@ class Page(models.Model):
     #     return self.slug
 
     def save(self, *args, **kwargs):
-        if self.slug:
-            self.slug = random_str_generator()
+        # if self.slug:
+        self.slug = random_str_generator()
         super().save(*args, **kwargs)
 
 

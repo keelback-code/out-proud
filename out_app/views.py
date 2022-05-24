@@ -1,7 +1,7 @@
-# import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.views import generic, View
 from .models import Page, ViewerAccess
 from .forms import WritePageForm, AllowViewerForm
@@ -84,8 +84,10 @@ class WritePage(LoginRequiredMixin, generic.CreateView):
             write_page = page_form.save(commit=False)
             write_page.creator = request.user
             write_page.save()
+            messages.success(request, 'Page created successfully.')
             return redirect('landing_page')
         else:
+            messages.error(request, 'Page not saved, please try again.')
             page_form = WritePageForm()
 
         return render(
