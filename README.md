@@ -1,8 +1,6 @@
 ### Table of contents:
 
-[Purpose](#purpose)
-
-[User Stories](#user-stories) 
+[Theme, Epic and User Stories](#theme-epic-and-user-stories) 
 
 [Design and UX](#design-and-ux) 
 * [Wireframes](#wireframes)
@@ -10,7 +8,7 @@
 
 [Features](#features)
 
-[Future Implementations](#future-implementations)
+[Future Features](#future-features)
 
 [Technologies](#technologies)
 
@@ -32,17 +30,13 @@
 
 [Acknowledgements](#acknowledgements)
 
-### Purpose
-
-
-
 Live link:
-[]()
+[Out.](https://out-proud.herokuapp.com/)
 
 Screenshot:
 ![]()
 
-### User Stories
+### Theme, Epic and User Stories
 
 **Theme**
 
@@ -82,63 +76,74 @@ The website allows the user/creator the ability to create a private page which c
 
 The design for Out has been kept simple, primarily as not to overwhelm the user, but also out of practicality. Django was a huge learning curve and I thought it was best to stick with a simple design so I could spend my time on the areas that were going to be the most difficult for me.
 I chose a muted yellow for the background and a dark purple for highlights; the main choice for these colours is that it subtly hints at the colours of the nonbinary flag. This is fundamentally a queer website but many of the users may be using it around people they are not out to, so it is very important that the website doesn't use any queer imagery, such as rainbows. Nonetheless, it's important to me to have a subtle nod in there.
+The bulk of the pages are in the lighter colour with a darker text, as this is easier to focus on. For large amount of text it can be difficult to read light text on a dark background: there is a chance that some of the user made pages could have large amounts of text, so readability is paramount.
 
 ### Wireframes
 
 ### Database model
 
+![]()
 
 ### Features
 
-Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site.
+Navigation bar - logo, signup, login/logout, profile and resources. Signup/Login changes dependent on active user status. Profile link changes dependent on whether logged in user is a creator or a viewer.
 
-Landing page - viewer and creator login links.
+![]()
 
-Creator login page - email and password required.
+Footer - social/contact information and tip to close page quickly if user in danger of being found out
 
-Viewer login page - email, password and specific creator code required.
+Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Public page.
 
-Navigation bar - logo, login/logout, profile and resources.
+Creator profile - personal page/s, can only see own pages. Link to create new page and allow Viewers. Login required.
 
-Creator profile - personal page/s with associated code/s. Link to create new page.
+Viewer profile - page/s they have been given permission to view. Login required.
 
-Viewer profile - page/s they have been given permission to view.
+Creator page Creator view - page content, plus buttons to edit or delete. Login required.
 
-Resources page - card view of links to external resources.
+Creator page Viewer view - page content, edit/del button cannot be accessed. Login required.
 
-Create new page - new form with accessible fields including title/author, photo/video/s, any extra text, any link/s, link to resources page, title for link, url for link. All fields are optional. Submit button and once submitted the page will have an edit button, both will have user feedback.
+Resources page - view of links to external resources. Public page.
 
-### Future Implementations
+Create new page - form with accessible fields including title, photo, text content, title for link, url for link. Link to resources page at top of form. Submit button with user feedback. Login required.
 
-check if this section should go here
-viewer email - more than one allowed per viewer
-chat - separate for viewers and creators
-ability for creators to suggest resources
-video upload
+Randomised slugs - urls do not betray any private information.
+
+Edit page - prefilled with selected page, edits (and replaces??) selected page with user feedback. Login required.
+
+Delete page - prefilled with selected page, deletes information with user feedback. Login required.
+
+User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's page via the url.
+
+Allow Viewer form - form to allow a Viewer to see a Creator's page. Can only choose from logged in Creator's own pages, and will check if email already exists in Viewer model. Login required.
+
+Viewer email - viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
+
+Signup/Login/Logout - functionality built by allauth, formed styled for use on site
+
+### Future Features
+
+Chat function in site -one for Viewers and one for Creators - for Creators it is an opportunity to get to know your community and for Viewers it could be an opportunity to better understand your loved ones by talking to other people who are having the same experience.
+Form/DB for users to suggest resources.
+Ability to uploads videos.
+Pop-up message when first visiting site with ctrl+w/cmd+w information that is currently in footer.
+
 
 ### Technologies
 
 Languages used:
-
 Python 3
-
 HTML5
-
 CSS
-
 Javascript
 
 Frameworks, Libraries and Programs Used:
-Django/allauth/summernote
+Django/allauth
 Bootstrap
 Cloudinary
 SQLite (default Django database)
 EmailJS
-
 GitHub - for hosting the site
-
 Heroku - for the deployment of the site
-
 Gitpod - for editing the files
 
 ### Testing 
@@ -180,8 +185,6 @@ Performance testing was conducted using [Lighthouse](https://developers.google.c
 I conducted manual testing and recorded the results as follows:
 
 ![Manual testing](assets/readme-files/images/manual-testing-rhubarb-witch.jpg)
-
-### Automated Testing
 
 ### User Stories Testing
 
@@ -248,10 +251,8 @@ Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
 
 ### Credits
 
-
-
 Placeholder image from artist [Bee](https://beebeedibapbeediboop.tumblr.com/); used with permission from the artist.
 
 ### Acknowledgements
 
-
+Many thanks to my mentor Brian Macharia and my cohort facilitator Kasia Bogucka for their help.
