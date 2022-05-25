@@ -141,11 +141,11 @@ CSS
 Javascript
 
 Frameworks, Libraries and Programs Used:
-Django/allauth
-Bootstrap
-Cloudinary
+Django/allauth - Python framework
+Bootstrap - CSS package
+Cloudinary - for hosting the images
 SQLite (default Django database)
-EmailJS
+EmailJS - for sending the personalised/automated emails
 GitHub - for hosting the site
 Heroku - for the deployment of the site
 Gitpod - for editing the files
@@ -155,6 +155,9 @@ Gitpod - for editing the files
 ### Code Validation
 
 [Python validator](http://pep8online.com/) - 
+
+
+The settings.py file was not tested - some of the lines are longer than 79 characters but they are required for functionality of the website (Password validators and staticfiles_storage). I have tested using standard Python practises to break up the lines and the site does not work, so I have left those lines as is. All other Python files pass.
 
 [Javascript validator](https://jshint.com/) - 
 
@@ -245,7 +248,10 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 
 ### Resources
 
-Mention all official documentation referenced in code here eg django, cloudinary, bootstrap, look through bookmarks. DjangoGirls.
+[Django 3.2](https://docs.djangoproject.com/en/3.2/)
+[Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+[Cloudinary/Django](https://cloudinary.com/documentation/django_image_and_video_upload#django_forms_and_models)
+[EmailJS](https://www.emailjs.com/docs/)
 
 Guidance with updating and deleting Page instances from [GeeksforGeeks](https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/).
 
@@ -256,6 +262,8 @@ Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
 ### Credits
 
 Placeholder image from artist [Bee](https://beebeedibapbeediboop.tumblr.com/); used with permission from the artist.
+
+All other images from [Pexels](https://www.pexels.com/).
 
 ### Acknowledgements
 
