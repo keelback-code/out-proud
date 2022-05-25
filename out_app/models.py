@@ -24,7 +24,7 @@ class Page(models.Model):
         related_name="allowed_page")
     text_content = models.TextField()
     image = CloudinaryField(blank=True, default="placeholder")
-    link = models.TextField(blank=True)
+    link = models.TextField(max_length=500, blank=True)
     link_title = models.CharField(max_length=250, blank=True)
 
     def __str__(self):

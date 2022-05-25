@@ -86,39 +86,43 @@ The bulk of the pages are in the lighter colour with a darker text, as this is e
 
 ### Features
 
-Navigation bar - logo, signup, login/logout, profile and resources. Signup/Login changes dependent on active user status. Profile link changes dependent on whether logged in user is a creator or a viewer.
+Navigation bar - site logo, signup, login/logout, profile and resources. Signup/Login changes dependent on active user status. Profile link (not word, as this would be confusing to user) changes dependent on whether logged in user is a creator or a viewer.
 
 ![]()
 
 Footer - social/contact information and tip to close page quickly if user in danger of being found out
 
-Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Public page.
+Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Small css transformation on image for added interaction on very minimal page. Public page.
 
-Creator profile - personal page/s, can only see own pages. Link to create new page and allow Viewers. Login required.
+Creator profile - personal Page/s, can only see own Pages. Link to create new Page and allow Viewers. Login required.
 
-Viewer profile - page/s they have been given permission to view. Login required.
+Viewer profile - Page/s they have been given permission to view. Login required.
 
-Creator page Creator view - page content, plus buttons to edit or delete. Login required.
+Creator Page Creator view - Page content, plus buttons to edit or delete. Login required.
 
-Creator page Viewer view - page content, edit/del button cannot be accessed. Login required.
+Creator Page Viewer view - Page content, edit/del button cannot be accessed. Login required.
 
 Resources page - view of links to external resources. Public page.
 
-Create new page - form with accessible fields including title, photo, text content, title for link, url for link. Link to resources page at top of form. Submit button with user feedback. Login required.
+Create new Page - form with accessible fields including title, photo, text content, title for link, url for link. Link to resources page at top of form. Submit button with user feedback. Login required.
 
-Randomised slugs - urls do not betray any private information.
+Page images - hosted on Cloudinary, used for page preview on Profile and on Page.
 
-Edit page - prefilled with selected page, edits (and replaces??) selected page with user feedback. Login required.
+Page links - title field included to avoid Page being cluttered by bulky URLs.
 
-Delete page - prefilled with selected page, deletes information with user feedback. Login required.
+Randomised slugs - urls do not betray any private information, such as the Creator or title of the Page.
 
-User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's page via the url.
+Edit page - prefilled with selected Page, edits (and replaces??) selected Page with user feedback. Login required.
 
-Allow Viewer form - form to allow a Viewer to see a Creator's page. Can only choose from logged in Creator's own pages, and will check if email already exists in Viewer model. Login required.
+Delete page - prefilled with selected Page, deletes information with user feedback. Login required.
 
-Viewer email - viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
+User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's Page via the url.
 
-Signup/Login/Logout - functionality built by allauth, formed styled for use on site
+Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Login required.
+
+Viewer email - Viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
+
+Signup/Login/Logout - functionality built by allauth, forms styled for use on site
 
 ### Future Features
 
