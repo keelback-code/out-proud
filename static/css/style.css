@@ -117,16 +117,24 @@ a,
 }
 
 
-/* Style for resources page */
-
-@media screen and (max-width: 700px) {
-    video-resources {
-      max-width: 75%;
-    }
-  }
-
 /* Style for email example page */
 
 .email-image {
     max-height: 300px;
 }
+
+
+/* Media Queries */
+
+/* Style for resources page */
+
+
+
+@media screen and (max-width: 600px) {
+    .video-resources {
+        max-width: 90vw;
+    }
+}
+
+
+

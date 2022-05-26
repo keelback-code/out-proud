@@ -124,7 +124,7 @@ Email Example page - image of example email, accessed from Allow Viewer page - t
 
 Viewer email - Viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
 
-Signup/Login/Logout - functionality built by allauth, forms styled for use on site
+Signup/Login/Logout - functionality built by allauth
 
 ### Future Features
 
@@ -177,9 +177,10 @@ Chrome - &#9745;
 
 Opera - &#9745;
 
-Safari - &#9745;
-
 Microsoft Edge - &#9745;
+
+Due to Bootstrap the styling is not ideal on some browser/OS combinations - this is as per the Bootstrap documentation below. All systems still function as needed.
+[Bootstrap Browser Compatibility](https://getbootstrap.com/docs/5.0/getting-started/browsers-devices/)
 
 ### Performance Testing
 
