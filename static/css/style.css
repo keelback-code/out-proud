@@ -120,3 +120,10 @@ a,
     color:#fefedf;
     text-decoration: underline;
 }
+
+
+/* Style for email example page */
+
+.email-image {
+    max-height: 300px;
+}

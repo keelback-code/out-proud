@@ -41,14 +41,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                 </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                </li>
-                {% endif %}
                 {% if viewer_access %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'viewer_profile' %}">Profile</a>
@@ -57,6 +49,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'creator_profile' %}">Profile</a>
                 </li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                </li>
+                
+          
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'resources' %}">Resources</a>

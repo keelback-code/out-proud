@@ -118,7 +118,9 @@ Delete page - prefilled with selected Page, deletes information with user feedba
 
 User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's Page via the url.
 
-Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Login required.
+Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Explanatory text to reassure Creator of what will happen after the form is filled in. Login required.
+
+Email Example page - image of example email, accessed from Allow Viewer page - to reassure Creator of exactly what will be sent to Viewer.
 
 Viewer email - Viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
 
