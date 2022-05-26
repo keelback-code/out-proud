@@ -33,13 +33,16 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-    # def slug_gen(self):
-    #     slug = random_str_generator()
-    #     return self.slug
-
-    def save(self, *args, **kwargs):  # add docstring for this later
-        # if self.slug:
-        self.slug = random_str_generator()
+    def save(self, *args, **kwargs):
+        """
+        Save function for checking slugs and generating new ones to new pages
+        or reassigning existing ones. Assistence from my mentor Brian
+        Macharia very much appreciated.
+        """
+        if not self.slug:
+            self.slug = random_str_generator()
+        else:
+            self.slug = self.slug
         super().save(*args, **kwargs)
 
 

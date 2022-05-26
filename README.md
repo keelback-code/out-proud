@@ -108,7 +108,7 @@ Create new Page - form with accessible fields including title, photo, text conte
 
 Page images - hosted on Cloudinary, used for page preview on Profile and on Page.
 
-Page links - title field included to avoid Page being cluttered by bulky URLs.
+Page links - title field included to avoid Page being cluttered by bulky URLs. If no URL is provided, only the Creator's Page will open.
 
 Randomised slugs - urls do not betray any private information, such as the Creator or title of the Page.
 

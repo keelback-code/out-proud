@@ -121,19 +121,11 @@ class EditPage(LoginRequiredMixin, View):
 
     def post(self, request, slug):
         page_to_edit = get_object_or_404(Page, slug=slug)
-        print(page_to_edit.slug)
         edit_page_form = WritePageForm(
                          request.POST, request.FILES, instance=page_to_edit)
-        # edit_page_form.slug = page_to_edit.slug
-        # print(edit_page_form.slug)
         if page_to_edit.creator == request.user:
             if edit_page_form.is_valid():
                 edit_page_form.save()
-                # final_save = edit_page_form.save(commit=False)
-                # final_save.slug = page_to_edit.slug
-                # print(page_to_edit.slug)
-                # print(final_save.slug)
-                # final_save.save()
                 messages.success(request, 'Page updated successfully.')
                 return redirect('landing_page')
             else:
