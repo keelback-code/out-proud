@@ -86,7 +86,7 @@ The bulk of the pages are in the lighter colour with a darker text, as this is e
 
 ### Features
 
-Navigation bar - site logo, signup, login/logout, profile and resources. Signup/Login changes dependent on active user status. Profile link (not word, as this would be confusing to user) changes dependent on whether logged in user is a creator or a viewer.
+Navigation bar - site logo, signup, login/logout, profile and resources. Signup/Login/Profile changes dependent on active user status. Profile link changes dependent on whether logged in user is a creator or a viewer.
 
 ![]()
 

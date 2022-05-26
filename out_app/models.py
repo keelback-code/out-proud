@@ -36,7 +36,7 @@ class Page(models.Model):
     def save(self, *args, **kwargs):
         """
         Save function for checking slugs and generating new ones to new pages
-        or reassigning existing ones. Assistence from my mentor Brian
+        or reassigning existing ones. Assistance from my mentor Brian
         Macharia very much appreciated.
         """
         if not self.slug:

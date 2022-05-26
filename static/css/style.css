@@ -103,11 +103,6 @@ a,
     color:#fefedf;
 }
 
-.pagination-btn {
-    background-color: #fefedf;
-    border: none;
-}
-
 
 /* Style for forms */
 
@@ -121,6 +116,14 @@ a,
     text-decoration: underline;
 }
 
+
+/* Style for resources page */
+
+@media screen and (max-width: 700px) {
+    video-resources {
+      max-width: 75%;
+    }
+  }
 
 /* Style for email example page */
 
