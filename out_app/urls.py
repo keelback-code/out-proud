@@ -20,6 +20,7 @@ urlpatterns = [
     path('creator_page/delete_page/<slug:slug>/', views.DeletePage.as_view(),
          name='delete_page'),
     path('user_error/', views.error_page, name='user_error'),
+    path('email_example/', views.email_example_page, name='email_example'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url(
          'favicon.ico')),),
 ]

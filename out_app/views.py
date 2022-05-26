@@ -261,3 +261,16 @@ def error_page(request):
             "viewer_access": check_viewer_exists(request)
         }
     )
+
+
+def email_example_page(request):
+    """
+    Function to retrieve the email example page.
+    """
+    return render(
+        request,
+        "email_example.html",
+        {
+            "viewer_access": check_viewer_exists(request)
+        }
+    )

@@ -9,19 +9,19 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
 </script>
 <script type="text/javascript">
-    (function() {
+    (function () {
         emailjs.init("z4V96jMbCXKPuaPWE");
     })();
 </script>
 <script type="text/javascript">
-    window.onload = function() {
-        document.getElementById('viewer-form').addEventListener('submit', function(event) {
+    window.onload = function () {
+        document.getElementById('viewer-form').addEventListener('submit', function (event) {
             event.preventDefault();
             emailjs.sendForm('service_0muuuls', 'viewer_form_template', this)
-                .then(function() {
+                .then(function () {
                     document.getElementById('viewer-form').submit();
                     console.log('SUCCESS!', response.status, response.text);
-                }, function(error) {
+                }, function (error) {
                     console.log('FAILED...', error);
                 });
         });
@@ -30,7 +30,13 @@
 
 <div class="container-fluid col-md-4">
     <h2 class="heading">Allow someone to see your Page.</h2>
-    <form id="viewer-form" method="POST">  
+    <p>The person you email will receive an email that looks like
+        <a class="resource-link" href="{% url 'email_example' %}" target="_blank" rel="noopener"
+            aria-label="Example of the email that will be sent when the following form is filled out.">this.</a>
+        They won't be able to see your page without an account, and they will only be able to see your page
+        if you give them access by filling in this form. They will not be able to see any of your other pages.
+    </p>
+    <form id="viewer-form" method="POST">
         {{ viewer_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-md submit-form mt-2">Submit</button>
@@ -38,7 +44,8 @@
 </div>
 
 {% else %}
- <p>You do not have permission to see this page. Please login <a class="nav-link" href="{% url 'account_login' %}">here.</a></p>
+<p>You do not have permission to see this page. Please login <a class="nav-link"
+        href="{% url 'account_login' %}">here.</a></p>
 {% endif %}
 
 {%endblock%}
