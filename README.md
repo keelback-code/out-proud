@@ -179,22 +179,23 @@ Opera - &#9745;
 
 Microsoft Edge - &#9745;
 
-Due to Bootstrap the styling is not ideal on some browser/OS combinations - this is as per the Bootstrap documentation below. All systems still function as needed.
+Due to Bootstrap the styling is not ideal on some browser/OS combinations - this is as per the Bootstrap documentation below. All systems still function as needed on all combinations.
 [Bootstrap Browser Compatibility](https://getbootstrap.com/docs/5.0/getting-started/browsers-devices/)
 
 ### Performance Testing
 
 Performance testing was conducted using [Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools). The results are:
 
-![Lighthouse results]()
+![Lighthouse results](static/images/readme-images/out-lighthouse.jpg)
 
 ### Manual Testing
 
-
+I sent the live link to friends and family members for testing and feedback. The site was received positively; design and usability suggestions were considered and acted on. The site was also put up in the Code Institute Slack community for feedback.
 
 I conducted manual testing and recorded the results as follows:
 
-![Manual testing](assets/readme-files/images/manual-testing-rhubarb-witch.jpg)
+![Accessibility results](static/images/readme-images/accessibility-out.jpg)
+From: [Accessibility Test.org](https://accessibilitytest.org/)
 
 ### User Stories Testing
 
@@ -208,9 +209,7 @@ The project was deployed using Heroku. The process is as follows:
 
 Once you have signed up to Heroku, on the top right of the dashboard there is a button labelled 'New'. This will open a dropdown; please select 'Create new app'. On the next page you can choose your region and a name for the project. Then click 'Create app'.
 
-On the next page there is a menu along the top. Navigate to 'Settings', where you will find the config vars. Scroll down to the section named 'Config vars' and click on the button labelled 'Reveal config vars'.
-
-CONFIG VAR INFO HERE AND CORRESPONDING GITPOD CHANGES NEEDED
+On the next page there is a menu along the top. Navigate to 'Settings', where you will find the config vars. Scroll down to the section named 'Config vars' and click on the button labelled 'Reveal config vars'. Cloudinary and Postgres will both need config vars as per your own details. You will also need to set a secret key. Once the config vars are saved, back in Gitpod save them in an env.py file. Make sure to add env.py to your .gitignore list so that your config vars do not become publically available on Github.
 
 If you scroll back to the top of the page you will find the 'Deploy' tab, which has multiple options for deployment. I used Github for this project. When you click on the Github button a bar will come up for you to search for the repo you wish to connect to.
 
