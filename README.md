@@ -30,6 +30,8 @@
 
 [Acknowledgements](#acknowledgements)
 
+## Out.
+
 Live link:
 [Out.](https://out-proud.herokuapp.com/)
 
@@ -335,7 +337,7 @@ I conducted manual testing and recorded the results as follows:
 
 *As a Creator, I can securely share a page with specified Viewer/s so that I can come out to them without being in the same physical space, be that for emotional reasons or physical safety needs.*
 
-* 'Allow Viewer' form to submit Viewer's information to database as well as send them a personalised email with instructions on how to sign up and view the page. 
+* 'Allow Viewer' form to submit Viewer's information to database as well as send them a personalised email with instructions on how to sign up and view the page. Emails are sent using EmailJS.
 
 *As a Creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified Viewer.*
 
@@ -367,13 +369,13 @@ I conducted manual testing and recorded the results as follows:
 
 ### Debugging and known bugs
 
-removed listview/pagination from profiles in order to have proper association as that is more important and users unlikely to have large number of pages. Rows still exist and styled, which IS important.
+The site originally had pagination for the profile pages, which used Django's class based ListView. In the process of building separate and dynamic Creator and Viewer profiles I needed options which conflicted with the ListView system. Ultimately, for this website pagination is not as important as the profile pages having added functionality. Creators are unlikely to have more than a few Pages, if that many, and if they do it will still be styled nicely and orderly.
 
-randomised slug caused difficulties, nearly went with title for simplicity but it's important to security
+The randomised slug caused difficulties in editing; originally it would create a new slug for each edit and create a new entry. It would have been simpler to go with a title for a slug but for this site it's important to have a random slug. Thankfully my mentor, Brian Macharia, helped me find the solution.
 
-emailjs form - email and commit to db at same time, js kept overridding the python, went to mentor and friends, eventually sorted it by moving the js around!
+The AllowViewer form was more difficult than I had anticipated - in the end it had to check for the Pages the Creator owns, check for existing Viewers, submit the info to the database and send a personalised email to the Viewer. The EmailJS form kept overriding the Python but, after some help from my mentor, I moved the JS around a bit and got it to work.
 
-currently no known bugs, just features that could be implemented in the future.
+There are currently no known bugs, just features that could be implemented in the future. If you come across any please let me know at outproudproject@gmail.com
 
 ### Deployment
 
