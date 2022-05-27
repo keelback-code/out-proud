@@ -311,11 +311,17 @@ Performance testing was conducted using [Lighthouse](https://developers.google.c
 
 ### Manual Testing
 
-I sent the live link to friends and family members for testing and feedback. The site was received positively; design and usability suggestions were considered and acted on. The site was also put up in the Code Institute Slack community for feedback. Ultimately there were 8 people, not including myself, who made at multiple accounts and tested the site.
+I sent the live link to friends and family members for testing and feedback. The site was received positively; design and usability suggestions were considered and acted on. The site was also put up in the Code Institute Slack community for feedback.
 
 I conducted manual testing and recorded the results as follows:
 
-![Spreadsheet with test results]()
+![Global testing](static/images/readme-images/global-testing.jpg)
+
+![Creator testing part one](static/images/readme-images/creator-testing-1.jpg)
+
+![Creator testing part two](static/images/readme-images/creator-testing-2.jpg)
+
+![Viewer testing](static/images/readme-images/viewer-testing.jpg)
 
 ### User Stories Testing
 
