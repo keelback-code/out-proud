@@ -117,47 +117,101 @@ As mentioned above, this was my first time working with the backend of databases
 
 ### Features
 
-Navigation bar - site logo, signup, login/logout, profile and resources. Signup/Login/Profile changes dependent on active user status. Profile link changes dependent on whether logged in user is a creator or a viewer.
+Navigation bar - site logo, signup, login/logout, profile and resources. Signup/Login/Profile changes dependent on active user status. Profile link changes dependent on whether logged in user is a creator or a viewer. Switches to hamburger on smaller viewports.
 
-![]()
+![Navigation bar view 1](static/images/readme-images/features/nav-bar-1.jpg)
+
+![Navigation bar view 2](static/images/readme-images/features/nav-bar-2.jpg)
+
+Link interaction - all links are either a different colour to highlight their existence, or if their placement implies a link (nav bar, footer), then the colour changes when the word is interacted with to confirm that the word is a link.
+
+![Link interaction view 1](static/images/readme-images/features/link-1.jpg)
+
+![Link interaction view 2](static/images/readme-images/features/link-2.jpg)
 
 Footer - social/contact information and tip to close page quickly if user in danger of being found out
 
+![Footer](static/images/readme-images/features/footer.jpg)
+
 Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Small css transformation on image for added interaction on very minimal page. Public page.
+
+![Landing page](static/images/readme-images/features/landing-snip.jpg)
 
 Creator profile - personal Page/s, can only see own Pages. Link to create new Page and allow Viewers. Login required.
 
+![Creator profile](static/images/readme-images/features/creator-profile-snip.jpg)
+
 Viewer profile - Page/s they have been given permission to view. Login required.
+
+![Viewer profile](static/images/readme-images/features/viewer-profile-snip.jpg)
 
 Creator Page Creator view - Page content, plus buttons to edit or delete. Login required.
 
-Creator Page Viewer view - Page content, edit/del button cannot be accessed. Login required.
+![Creator page](static/images/readme-images/features/creator-page-snip.jpg)
+
+Creator Page Viewer view - Page content, edit/delete button cannot be accessed. Login required.
+
+![Viewer page](static/images/readme-images/features/viewer-page.jpg)
 
 Resources page - view of links to external resources. Public page.
 
+![Resources](static/images/readme-images/features/resources-snip.jpg)
+
 Create new Page - form with accessible fields including title, photo, text content, title for link, url for link. Link to resources page at top of form. Submit button with user feedback. Login required.
+
+![New page](static/images/readme-images/features/write-page-snip.jpg)
+
+![New page feedback](static/images/readme-images/features/write-page-feedback.jpg)
 
 Page images - hosted on Cloudinary, used for page preview on Profile and on Page.
 
-Page links - title field included to avoid Page being cluttered by bulky URLs. If no URL is provided, only the Creator's Page will open.
+ - As seen in Profile and Page screenshots
 
-Randomised slugs - urls do not betray any private information, such as the Creator or title of the Page.
+Page link/link titles - title field included to avoid Page being cluttered by bulky URLs. If no URL is provided, only the Creator's Page will open.
 
-Edit page - prefilled with selected Page, edits (and replaces??) selected Page with user feedback. Login required.
+![Links in pages](static/images/readme-images/features/link-link-title.jpg)
+
+Randomised slugs - urls do not betray any private information, such as the Creator or title of the Page. Login still required to see Creator Pages.
+
+![Slugs](static/images/readme-images/features/slug-snip.jpg)
+
+Edit page - prefilled with selected Page, edits selected Page with user feedback. Login required.
+
+![Edit page](static/images/readme-images/features/edit-page-snip.jpg)
+
+![Edit page feedback](static/images/readme-images/features/edit.jpg)
 
 Delete page - prefilled with selected Page, deletes information with user feedback. Login required.
 
+![Delete page](static/images/readme-images/features/delete-page.jpg)
+
+![Delete page feedback](static/images/readme-images/features/delete.jpg)
+
 User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's Page via the url.
 
-Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Explanatory text to reassure Creator of what will happen after the form is filled in. Login required.
+![Error page](static/images/readme-images/features/error.jpg)
+
+Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Explanatory text to reassure Creator of what will happen after the form is filled in. User feedback provided. Login required.
+
+![Allow Viewer form](static/images/readme-images/features/allow-viewer-form.jpg)
+
+![Allow Viewer dropdown](static/images/readme-images/features/allow-viewer-dropdown.jpg)
+
+![Allow Viewer email check](static/images/readme-images/features/allow-viewer-email-check.jpg)
+
+![Allow Viewer feedback](static/images/readme-images/features/allow-viewer-feedback.jpg)
 
 Email Example page - image of example email, accessed from Allow Viewer page - to reassure Creator of exactly what will be sent to Viewer. Opens in new tab so that Creator does not have to navigate away from the form. 
+
+![Email Example page](static/images/readme-images/features/email-snip.jpg)
 
 Viewer email - Viewer receives an email using EmailJS. Variables taken from the form, contains instructions for the Viewer on what to do next.
 
 ![Viewer EmailJS example](static/images/email-example-image.png)
 
 Signup/Login/Logout - functionality built by allauth. Signup contains extra text added by me to encourage Viewer to use the same email they were registered by the Creator with.
+
+![Signup text](static/images/readme-images/features/sign-up.jpg)
 
 ### Future Features
 
