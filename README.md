@@ -95,7 +95,7 @@ Creator profile
 
 Viewer profile
 
-![Viewer profile](static/images/readme-images/wireframes/viewer-profile-wframe.jpg)
+![Viewer profile](static/images/readme-images/wireframes/viewer-profile.jpg)
 
 New page
 
@@ -151,15 +151,17 @@ User error page - comes up if Viewer tries to bypass authorisation and manually 
 
 Allow Viewer form - form to allow a Viewer to see a Creator's Page. Can only choose from logged in Creator's own Pages, and will check if email already exists in Viewer model. Explanatory text to reassure Creator of what will happen after the form is filled in. Login required.
 
-Email Example page - image of example email, accessed from Allow Viewer page - to reassure Creator of exactly what will be sent to Viewer.
+Email Example page - image of example email, accessed from Allow Viewer page - to reassure Creator of exactly what will be sent to Viewer. Opens in new tab so that Creator does not have to navigate away from the form. 
 
-Viewer email - Viewer receives an email using EmailJS. Variables inserted by Creator, contains instructions for the Viewer on what to do next.
+Viewer email - Viewer receives an email using EmailJS. Variables taken from the form, contains instructions for the Viewer on what to do next.
 
-Signup/Login/Logout - functionality built by allauth
+![Viewer EmailJS example](static/images/email-example-image.png)
+
+Signup/Login/Logout - functionality built by allauth. Signup contains extra text added by me to encourage Viewer to use the same email they were registered by the Creator with.
 
 ### Future Features
 
-Chat function in site -one for Viewers and one for Creators - for Creators it is an opportunity to get to know your community and for Viewers it could be an opportunity to better understand your loved ones by talking to other people who are having the same experience.
+Chat function in site - one for Viewers and one for Creators - for Creators it is an opportunity to get to know your community and for Viewers it could be an opportunity to better understand your loved ones by talking to other people who are having the same experience.
 
 Form/DB for users to suggest resources.
 
