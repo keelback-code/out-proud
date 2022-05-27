@@ -34,7 +34,7 @@ Live link:
 [Out.](https://out-proud.herokuapp.com/)
 
 Screenshot:
-![]()
+![Screenshot from amiresponsive](static/images/readme-images/responsive.jpg)
 
 ### Theme, Epic and User Stories
 
@@ -48,6 +48,8 @@ The website allows the user, going forward known as the Creator, the ability to 
 
 **User stories**
 
+The User Stories have been mapped out in Github Projects using the Kanban board format. Each one has acceptance criteria, tasks, and comments. The User Stories are:
+
 * As a Creator, I can securely sign into the website so that my information is kept private.
 
 * As a Creator, I can create a private page with a personal photo, video or text so that I can personalise my coming-out.
@@ -56,11 +58,11 @@ The website allows the user, going forward known as the Creator, the ability to 
 
 * As a Creator, I can edit my page so that I can make changes if they are needed.
 
-* As a Creator, I can securely share a page with specified Viewer/s so that I can come out to them without being in the same physical space.
+* As a Creator, I can securely share a page with specified Viewer/s so that I can come out to them without being in the same physical space, be that for emotional reasons or physical safety needs.
 
 * As a Creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified Viewer.
 
-* As a Viewer/Creator, I can sign in intuitively so that I can use the website easily.
+* As a Viewer/Creator, I can sign in and out intuitively so that I can use the website easily.
 
 * As a Viewer/Creator, I can navigate the website easily and intuitively.
 
@@ -70,16 +72,17 @@ The website allows the user, going forward known as the Creator, the ability to 
 
 * As a site owner, I can provide access to educational/explanatory resources that could be useful to Creators and Viewers so that the user does not have to do their own research if they don’t want to.
 
-* As a site owner, I can provide a secure and private platform so that creators can come out on their own terms.
+* As a site owner, I can provide a secure and private platform so that Creators can come out on their own terms.
 
 ### Design and UX
 
 I chose a muted yellow for the background and a dark purple for highlights; the main choice for these colours is that it subtly hints at the colours of the nonbinary flag. This is fundamentally a queer website but many of the users may be using it around people they are not out to, so it is very important that the website doesn't use any typically queer imagery, such as rainbows. Nonetheless, it's important to have a subtle nod in there.
 The bulk of the pages are in the lighter colour with a darker text, as this is easier for users to focus on. For large amounts of text it can be difficult to read light text on a dark background: there is a chance that some of the user-made pages could have large amounts of text, so readability is paramount.
+The website deliberately does not have any comment functionality for the Pages. Have you ever been worried about logging into a website or opening your email because you were expecting something negative? The Creators have the possibility to be sending news which might not be received positively, so I didn't want to create a site where someone can log in and see something negative about themselves.
 
 ### Wireframes
 
-This was my first time building a site of this type, so the design of the site changed as I worked. I made these wireframes in advance but some of them changed signifigantly; some became more complicated and some became simpler in order to give me time to work on the more complicated things. Ultimately I had to focus on functionality.
+This was my first time building a site of this type, so the design of the site changed as I worked. I made these wireframes in advance but some of them changed significantly; some became more complicated and some became simpler in order to give me time to work on the more complicated things. Ultimately I had to focus on functionality.
 
 Landing page
 
@@ -141,7 +144,7 @@ Creator profile - personal Page/s, can only see own Pages. Link to create new Pa
 
 ![Creator profile](static/images/readme-images/features/creator-profile-snip.jpg)
 
-Viewer profile - Page/s they have been given permission to view. Login required.
+Viewer profile - Page/s they have been given permission to view. Login required. 'Profile' link redirects based on if user is logged in as Creator or Viewer based on internal checks.
 
 ![Viewer profile](static/images/readme-images/features/viewer-profile-snip.jpg)
 
@@ -207,7 +210,7 @@ Email Example page - image of example email, accessed from Allow Viewer page - t
 
 Viewer email - Viewer receives an email using EmailJS. Variables taken from the form, contains instructions for the Viewer on what to do next.
 
-![Viewer EmailJS example](static/images/email-example-image.png)
+ - As above
 
 Signup/Login/Logout - functionality built by allauth. Signup contains extra text added by me to encourage Viewer to use the same email they were registered by the Creator with.
 
@@ -224,7 +227,6 @@ Ability to uploads videos.
 Pop-up message when first visiting site with ctrl+w/cmd+w information that is currently in footer.
 
 A couple of these are still on the kanban board for use next time.
-
 
 ### Technologies
 
@@ -307,15 +309,64 @@ Performance testing was conducted using [Lighthouse](https://developers.google.c
 
 ### Manual Testing
 
-I sent the live link to friends and family members for testing and feedback. The site was received positively; design and usability suggestions were considered and acted on. The site was also put up in the Code Institute Slack community for feedback.
+I sent the live link to friends and family members for testing and feedback. The site was received positively; design and usability suggestions were considered and acted on. The site was also put up in the Code Institute Slack community for feedback. Ultimately there were 8 people, not including myself, who made at multiple accounts and tested the site.
 
 I conducted manual testing and recorded the results as follows:
 
-
+![Spreadsheet with test results]()
 
 ### User Stories Testing
 
+*As a Creator, I can securely sign into the website so that my information is kept private.*
+
+* Django-allauth package installed for full signup/login/logout functionality. Almost all pages unavilable without signing in.
+
+*As a Creator, I can create a private page with a personal photo, video or text so that I can personalise my coming-out.*
+
+* Form to create new Page with title, text, optional photo and optional link. Cloudinary installed for photo uploads. User feedback provided.
+
+*As a Creator, I can add resources to my page so that I can educate the Viewer if needed.*
+
+* When Creator makes a new Page there is an optional form element to add link/link title, and the Resources tab is available in the nav bar as well as referred to above and within the form.
+
+*As a Creator, I can edit my page so that I can make changes if they are needed.*
+
+* Form to edit Page and update entry in the database. User feedback provided.
+
+*As a Creator, I can securely share a page with specified Viewer/s so that I can come out to them without being in the same physical space, be that for emotional reasons or physical safety needs.*
+
+* 'Allow Viewer' form to submit Viewer's information to database as well as send them a personalised email with instructions on how to sign up and view the page. 
+
+*As a Creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified Viewer.*
+
+* Viewers need to be registered in the database and also need to be signed up to the website. Slugs are completely randomised so that URLs do not betray any information. Login mixins and decorations used throughout, as well as templating.
+
+*As a Viewer/Creator, I can sign in and out intuitively so that I can use the website easily.*
+
+* Django-allauth package installed for full signup/login/logout functionality. Clear signup/login/logout links in nav bar that change with active user status.
+
+*As a Viewer/Creator, I can navigate the website easily and intuitively.*
+
+* Navigation bar with useful elements that change based on user's status (signup/login vs logout/profile and profile leading to viewer_profile or creator_profile). On smaller viewports the nav bar becomes a hamburger menu with aria labels.
+
+*As a Viewer, I can view a Creator’s page so that I can learn about the Creator.*
+
+* When Viewer logs in the page they have been given access to is already in their profile. Data models and logic is designed so that they can only see a page they have been allowed to see.
+
+*As a Viewer, I can follow resource links so that I can learn more about the Creator’s sexuality/gender identity and find out how to be supportive.*
+
+* On Creator's individual Page the link is defined by colour and opens in a new tab so that Viewer will not be taken away from Creator's page. If the Creator provided a link title that will be provided in place of a URL to neaten the page and so that Viewer is aware of where they are going before clicking.
+
+*As a site owner, I can provide access to educational/explanatory resources that could be useful to Creators and Viewers so that the user does not have to do their own research if they don’t want to.*
+
+* Clear and informative Resources section of the website, referred to in the nav bar and the new Page form. Available without signing in.
+
+*As a site owner, I can provide a secure and private platform so that Creators can come out on their own terms.*
+
+* Certain features not included - eg ability to comment on page - in order to prioritise Creators, who are at higher risk in this exchange. Creators can delete Pages and Admin can delete accounts when requested.
+
 ### Debugging and known bugs
+
 removed listview/pagination from profiles in order to have proper association as that is more important and users unlikely to have large number of pages. Rows still exist and styled, which IS important.
 
 randomised slug caused difficulties, nearly went with title for simplicity but it's important to security
