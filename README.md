@@ -15,9 +15,9 @@
 [Testing ](#testing)
 * [Code Validation](#code-validation)
 * [Browser Compatibility](#browser-compatibility)
+* [Accessibility Testing](#accessibility-testing)
 * [Performance Testing](#performance-testing)
 * [Manual Testing](#manual-testing)
-* [Automated Testing](#automated-testing)
 * [User Stories Testing](#user-stories-testing)
 
 [Debugging and known bugs](#debugging-and-known-bugs)
@@ -40,49 +40,78 @@ Screenshot:
 
 **Theme**
 
-A website to assist individuals in coming out as LGBTQ+ safely.
+A website to assist individuals in safely coming out as LGBTQ+.
 
 **Epic**
 
-The website allows the user/creator the ability to create a private page which can securely be sent to individuals/viewers. Only specified viewers can see the page, and the creator controls the content and access of the page. Content may include: personal photos/text and educational/explanatory resources for viewers who may need them.
+The website allows the user, going forward known as the Creator, the ability to create a private page which can securely be sent to other users, known as Viewers. Only specified Viewers can see the page, and the Creator controls the content and access of the page. Content may include: personal photos/text and educational/explanatory resources for viewers who may need them.
 
 **User stories**
 
-* As a creator, I can securely sign into the website so that my information is kept private.
+* As a Creator, I can securely sign into the website so that my information is kept private.
 
-* As a creator, I can create a private page with a personal photo, video or text so that I can personalise my coming-out.
+* As a Creator, I can create a private page with a personal photo, video or text so that I can personalise my coming-out.
 
-* As a creator, I can add resources to my page so that I can educate the viewer if needed.
+* As a Creator, I can add resources to my page so that I can educate the Viewer if needed.
 
-* As a creator, I can edit my page so that I can make changes if they are needed.
+* As a Creator, I can edit my page so that I can make changes if they are needed.
 
-* As a creator, I can securely share a page with specified viewers so that I can come out to them without being in the same physical space.
+* As a Creator, I can securely share a page with specified Viewer/s so that I can come out to them without being in the same physical space.
 
-* As a creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified viewer.
+* As a Creator, I can privately share a page so that I can come out without my private information being freely available on the web to anyone other than the specified Viewer.
 
-* As a viewer/creator, I can sign in intuitively so that I can use the website easily.
+* As a Viewer/Creator, I can sign in intuitively so that I can use the website easily.
 
-* As a viewer/creator, I can navigate the website easily and intuitively.
+* As a Viewer/Creator, I can navigate the website easily and intuitively.
 
-* As a viewer, I can view a creator’s page so that I can learn about the creator.
+* As a Viewer, I can view a Creator’s page so that I can learn about the Creator.
 
-* As a viewer, I can follow resource links so that I can learn more about the creator’s sexuality/gender identity and find out how to be supportive.
+* As a Viewer, I can follow resource links so that I can learn more about the Creator’s sexuality/gender identity and find out how to be supportive.
 
-* As a site owner, I can provide access to educational/explanatory resources that could be useful to creators and viewers so that the user does not have to do their own research if they don’t want to.
+* As a site owner, I can provide access to educational/explanatory resources that could be useful to Creators and Viewers so that the user does not have to do their own research if they don’t want to.
 
 * As a site owner, I can provide a secure and private platform so that creators can come out on their own terms.
 
 ### Design and UX
 
-The design for Out has been kept simple, primarily as not to overwhelm the user, but also out of practicality. Django was a huge learning curve and I thought it was best to stick with a simple design so I could spend my time on the areas that were going to be the most difficult for me.
-I chose a muted yellow for the background and a dark purple for highlights; the main choice for these colours is that it subtly hints at the colours of the nonbinary flag. This is fundamentally a queer website but many of the users may be using it around people they are not out to, so it is very important that the website doesn't use any queer imagery, such as rainbows. Nonetheless, it's important to me to have a subtle nod in there.
-The bulk of the pages are in the lighter colour with a darker text, as this is easier to focus on. For large amount of text it can be difficult to read light text on a dark background: there is a chance that some of the user made pages could have large amounts of text, so readability is paramount.
+I chose a muted yellow for the background and a dark purple for highlights; the main choice for these colours is that it subtly hints at the colours of the nonbinary flag. This is fundamentally a queer website but many of the users may be using it around people they are not out to, so it is very important that the website doesn't use any typically queer imagery, such as rainbows. Nonetheless, it's important to have a subtle nod in there.
+The bulk of the pages are in the lighter colour with a darker text, as this is easier for users to focus on. For large amounts of text it can be difficult to read light text on a dark background: there is a chance that some of the user-made pages could have large amounts of text, so readability is paramount.
 
 ### Wireframes
 
+This was my first time building a site of this type, so the design of the site changed as I worked. I made these wireframes in advance but some of them changed signifigantly; some became more complicated and some became simpler in order to give me time to work on the more complicated things. Ultimately I had to focus on functionality.
+
+Landing page
+
+![Landing page](static/images/readme-images/wireframes/landing-page-wframe.jpg)
+
+Login page
+
+![Login page](static/images/readme-images/wireframes/login-wframe.jpg)
+
+Creator profile
+
+![Creator profile](static/images/readme-images/wireframes/creator-profile-wframe.jpg)
+
+Viewer profile
+
+![Viewer profile](static/images/readme-images/wireframes/viewer-profile-wframe.jpg)
+
+New page
+
+![New page](static/images/readme-images/wireframes/write-page-wframe.jpg)
+
+Allow Viewer form
+
+![Allow Viewer form](static/images/readme-images/wireframes/allow-viewer-wframe.jpg)
+
+Resources page
+
+![Resources page](static/images/readme-images/wireframes/resources-wframe.jpg)
+
 ### Database model
 
-This is my first time working with the backend of databases so there were a few iterations, but this is the ultimate ERD, made in Lucidchart.
+As mentioned above, this was my first time working with the backend of databases so there were a few iterations, but this is the ultimate ERD, made in Lucidchart.
 
 ![Entity Relationship Diagram for Out](static/images/readme-images/out-erd.jpg)
 
@@ -138,6 +167,8 @@ Ability to uploads videos.
 
 Pop-up message when first visiting site with ctrl+w/cmd+w information that is currently in footer.
 
+A couple of these are still on the kanban board for use next time.
+
 
 ### Technologies
 
@@ -187,7 +218,7 @@ All code validated as per the below form:
 
 ![CSS and Javascript](static/images/readme-images/code-validation-2.jpg)
 
-The settings.py file was not tested - some of the lines are longer than 79 characters but they are required for functionality of the website (Password validators and staticfiles_storage). I have tested using standard Python practises to break up the lines and the site does not work, so I have left those lines as is. All other Python files pass.
+The settings.py file was not tested - some of the lines are longer than 79 characters but they are required for functionality of the website (Password validators and staticfiles_storage). I have tested using standard Python practises to break up the lines and the site does not work, so I have left those lines as is. All other Python files pass without any errors.
 
 Because of the private nature of the site the HTML could only be checked by direct input. Any warnings or errors were directly related to the django templating language. 
 
@@ -206,6 +237,12 @@ Microsoft Edge - &#9745;
 Due to Bootstrap the styling is not ideal on some browser/OS combinations - this is as per the Bootstrap documentation below. All systems still function as needed on all combinations.
 [Bootstrap Browser Compatibility](https://getbootstrap.com/docs/5.0/getting-started/browsers-devices/)
 
+### Accessibility Testing
+
+Accessibility testing was conducted using [Accessibility Test.org](https://accessibilitytest.org/). The results are:
+
+![Accessibility results](static/images/readme-images/accessibility-out.jpg)
+
 ### Performance Testing
 
 Performance testing was conducted using [Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools). The results are:
@@ -218,12 +255,18 @@ I sent the live link to friends and family members for testing and feedback. The
 
 I conducted manual testing and recorded the results as follows:
 
-![Accessibility results](static/images/readme-images/accessibility-out.jpg)
-From: [Accessibility Test.org](https://accessibilitytest.org/)
+
 
 ### User Stories Testing
 
 ### Debugging and known bugs
+removed listview/pagination from profiles in order to have proper association as that is more important and users unlikely to have large number of pages. Rows still exist and styled, which IS important.
+
+randomised slug caused difficulties, nearly went with title for simplicity but it's important to security
+
+emailjs form - email and commit to db at same time, js kept overridding the python, went to mentor and friends, eventually sorted it by moving the js around!
+
+currently no known bugs, just features that could be implemented in the future.
 
 ### Deployment
 
@@ -289,6 +332,8 @@ Photo editing from [Pixlr](https://pixlr.com/).
 Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
 
 ERD made with [Lucidchart](https://www.lucidchart.com/pages/)
+
+Wireframes made with Balsamiq.
 
 ### Credits
 
