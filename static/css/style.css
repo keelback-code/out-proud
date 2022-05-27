@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400&family=Pacifico&display=swap');
 
+
 /* Universal style */
 
 * {
@@ -69,7 +70,7 @@ a:hover,
 
 .heart {
     max-height: 200px;
-} 
+}
 
 .heart:hover {
     transform: scale(1.25, 1.25);
@@ -94,25 +95,25 @@ a,
 }
 
 .card {
-    background-color:#7f4d7e;
-    max-width: 20rem;
+    background-color: #7f4d7e;
+    max-width: 200px;
 }
 
 .card-title,
 .card-title:hover {
-    color:#fefedf;
+    color: #fefedf;
 }
 
 
 /* Style for forms */
 
 .submit-form {
-    background-color:#7f4d7e;
-    color:#fefedf;
+    background-color: #7f4d7e;
+    color: #fefedf;
 }
 
 .submit-form:hover {
-    color:#fefedf;
+    color: #fefedf;
     text-decoration: underline;
 }
 

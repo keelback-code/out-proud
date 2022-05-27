@@ -82,7 +82,9 @@ The bulk of the pages are in the lighter colour with a darker text, as this is e
 
 ### Database model
 
-![]()
+This is my first time working with the backend of databases so there were a few iterations, but this is the ultimate ERD, made in Lucidchart.
+
+![Entity Relationship Diagram for Out](static/images/readme-images/out-erd.jpg)
 
 ### Features
 
@@ -129,43 +131,65 @@ Signup/Login/Logout - functionality built by allauth
 ### Future Features
 
 Chat function in site -one for Viewers and one for Creators - for Creators it is an opportunity to get to know your community and for Viewers it could be an opportunity to better understand your loved ones by talking to other people who are having the same experience.
+
 Form/DB for users to suggest resources.
+
 Ability to uploads videos.
+
 Pop-up message when first visiting site with ctrl+w/cmd+w information that is currently in footer.
 
 
 ### Technologies
 
 Languages used:
+
 Python 3
+
 HTML5
+
 CSS
+
 Javascript
 
 Frameworks, Libraries and Programs Used:
+
 Django/allauth - Python framework
+
 Bootstrap - CSS package
+
 Cloudinary - for hosting the images
+
 SQLite (default Django database)
+
 EmailJS - for sending the personalised/automated emails
+
 GitHub - for hosting the site
+
 Heroku - for the deployment of the site
+
 Gitpod - for editing the files
 
 ### Testing 
 
 ### Code Validation
 
-[Python validator](http://pep8online.com/) - 
+[Python validator](http://pep8online.com/)
 
+[Javascript validator](https://jshint.com/)
+
+[HTML validator](https://validator.w3.org/)
+
+[CSS validator](https://jigsaw.w3.org/css-validator/)
+
+All code validated as per the below form:
+
+![Python and HTML](static/images/readme-images/code-validation-1.jpg)
+
+![CSS and Javascript](static/images/readme-images/code-validation-2.jpg)
 
 The settings.py file was not tested - some of the lines are longer than 79 characters but they are required for functionality of the website (Password validators and staticfiles_storage). I have tested using standard Python practises to break up the lines and the site does not work, so I have left those lines as is. All other Python files pass.
 
-[Javascript validator](https://jshint.com/) - 
-
-[HTML validator](https://validator.w3.org/) - 
-
-[CSS validator](https://jigsaw.w3.org/css-validator/) - 
+Because of the private nature of the site the HTML could only be checked by direct input. Any warnings or errors were directly related to the django templating language. 
 
 ### Browser Compatibility
 
@@ -251,8 +275,11 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 ### Resources
 
 [Django 3.2](https://docs.djangoproject.com/en/3.2/)
+
 [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+
 [Cloudinary/Django](https://cloudinary.com/documentation/django_image_and_video_upload#django_forms_and_models)
+
 [EmailJS](https://www.emailjs.com/docs/)
 
 Guidance with updating and deleting Page instances from [GeeksforGeeks](https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/).
@@ -260,6 +287,8 @@ Guidance with updating and deleting Page instances from [GeeksforGeeks](https://
 Photo editing from [Pixlr](https://pixlr.com/).
 
 Favicon generated from [Favicon.io](https://favicon.io/favicon-converter/)
+
+ERD made with [Lucidchart](https://www.lucidchart.com/pages/)
 
 ### Credits
 
