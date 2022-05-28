@@ -134,11 +134,11 @@ Link interaction - all links are either a different colour to highlight their ex
 
 ![Link interaction view 2](static/images/readme-images/features/link-2.jpg)
 
-Footer - social/contact information and tip to close page quickly if user in danger of being found out
+Footer - social/contact information and tip to close page quickly if user in danger of being found out.
 
 ![Footer](static/images/readme-images/features/footer.jpg)
 
-Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Small css transformation on image for added interaction on very minimal page. Public page.
+Landing page - website title and 'about' text to clearly and briefly explain the purpose of the site. Small CSS transformation on image for added interaction on very minimal page. Public page.
 
 ![Landing page](static/images/readme-images/features/landing-snip.jpg)
 
@@ -162,7 +162,7 @@ Resources page - view of links to external resources. Public page.
 
 ![Resources](static/images/readme-images/features/resources-snip.jpg)
 
-Create new Page - form with accessible fields including title, photo, text content, title for link, url for link. Link to resources page at top of form. Submit button with user feedback. Login required.
+Create new Page - form with accessible fields including title, photo, text content, title for link, URL for link. Link to resources page at top of form. Submit button with user feedback. Login required.
 
 ![New page](static/images/readme-images/features/write-page-snip.jpg)
 
@@ -176,7 +176,7 @@ Page link/link titles - title field included to avoid Page being cluttered by bu
 
 ![Links in pages](static/images/readme-images/features/link-link-title.jpg)
 
-Randomised slugs - urls do not betray any private information, such as the Creator or title of the Page. Login still required to see Creator Pages.
+Randomised slugs - URLs do not betray any private information, such as the Creator or title of the Page. Login still required to see Creator Pages.
 
 ![Slugs](static/images/readme-images/features/slug-snip.jpg)
 
@@ -192,7 +192,7 @@ Delete page - prefilled with selected Page, deletes information with user feedba
 
 ![Delete page feedback](static/images/readme-images/features/delete.jpg)
 
-User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's Page via the url.
+User error page - comes up if Viewer tries to bypass authorisation and manually edit or delete a Creator's Page via the URL.
 
 ![Error page](static/images/readme-images/features/error.jpg)
 
@@ -359,7 +359,7 @@ I conducted manual testing and recorded the results as follows:
 
 *As a Viewer, I can view a Creator’s page so that I can learn about the Creator.*
 
-* When Viewer logs in the page they have been given access to is already in their profile. Data models and logic is designed so that they can only see a page they have been allowed to see.
+* When Viewer logs in the associated Creator's page will already display in their profile. Data models and logic is designed so that they can only see a page they have been allowed to see.
 
 *As a Viewer, I can follow resource links so that I can learn more about the Creator’s sexuality/gender identity and find out how to be supportive.*
 
