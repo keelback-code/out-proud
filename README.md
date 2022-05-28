@@ -432,13 +432,13 @@ In the same 'Code' dropdown, you can opt to open the code with GitHub Desktop an
 
 ### Resources
 
-[Django 3.2](https://docs.djangoproject.com/en/3.2/)
+[Django 3.2 documentation](https://docs.djangoproject.com/en/3.2/)
 
-[Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+[Bootstrap documentation](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
 
-[Cloudinary/Django](https://cloudinary.com/documentation/django_image_and_video_upload#django_forms_and_models)
+[Cloudinary/Django documentation](https://cloudinary.com/documentation/django_image_and_video_upload#django_forms_and_models)
 
-[EmailJS](https://www.emailjs.com/docs/)
+[EmailJS documentation](https://www.emailjs.com/docs/)
 
 Guidance with updating and deleting Page instances from [GeeksforGeeks](https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/).
 
@@ -455,6 +455,8 @@ Wireframes made with Balsamiq.
 Placeholder image from artist [Bee](https://beebeedibapbeediboop.tumblr.com/); used with permission from the artist.
 
 All other images from [Pexels](https://www.pexels.com/).
+
+In code credits as marked.
 
 ### Acknowledgements
 
